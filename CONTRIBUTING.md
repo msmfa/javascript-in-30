@@ -8,7 +8,7 @@ Go to the main repo and add your suggestion to the definitions object in main.js
 
 In topics.md in the definitions section add your name and your github to be credited.
 
-Create a new Pull Request with the name "Definition submitted"
+Create a new Pull Request with the name "Insert your definition"
 and wait for the merge!
 
 License
