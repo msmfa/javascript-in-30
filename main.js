@@ -3,7 +3,8 @@ const listContainer = document.querySelector(".list-container");
 const definitions = [
   {
     title: "variables",
-    text: "Variables are",
+    text:
+      "Variables are containers which hold reusable data. In Javascript we use let and const to declare variables. ",
   },
   {
     title: "opps",

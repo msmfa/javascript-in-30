@@ -7,20 +7,22 @@ ul li {
     list-style-type: none;
 }
 
-body {
-    margin: 1rem;
-}
-
 #display-container {
-    margin-left: 45vw;
+    text-align: center;
     margin-top: 45vh;
+    margin-left: 45vw;
+    width: 40vw;
     position: fixed;
 }
 
 .flex-container {
     display: flex;
+
 }
 
 .list-container {
-    width: 40vw;
+    border-right: 1px solid rgb(202, 202, 202);
+    background-color: rgb(243, 243, 243);
+    padding: 1rem;
+    width: 30vw;
 }
