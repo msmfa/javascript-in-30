@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+body {
+    margin: 1rem;
+}
+
+#display-container {
+    margin-left: 45vw;
+    margin-top: 45vh;
+    position: fixed;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.list-container {
+    width: 40vw;
+}

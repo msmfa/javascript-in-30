@@ -2,8 +2,8 @@ const listContainer = document.querySelector(".list-container");
 
 const definitions = [
   {
-    title: "closure",
-    text: "Closure is",
+    title: "variables",
+    text: "Variables are",
   },
   {
     title: "opps",
@@ -14,6 +14,7 @@ const definitions = [
 listContainer.addEventListener("click", function (e) {
   const display = document.getElementById("display-container");
   display.textContent = definitions
+
     .map((item) => {
       if (item.title === e.target.id) return item.text;
     })

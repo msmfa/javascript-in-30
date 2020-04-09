@@ -12,7 +12,6 @@
 - Functions
 - Arrow Functions
 - Functional Expressions
-- Comments
 - Array Methods
 - String Methods
 - Scope
