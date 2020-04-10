@@ -4,11 +4,12 @@ const definitions = [
   {
     title: "variables",
     text:
-      "Variables are containers which hold reusable data. In Javascript we use let and const to declare variables. ",
+      "Variables are containers that hold reusable data. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
   },
   {
     title: "data-types",
-    text: "Data Types are...",
+    text:
+      "There are six basic data types in JavaScript. String, Number, Boolean, Array, Object, Function. The first three are primitive data types meaning they store only one value.",
   },
 ];
 
