@@ -11,6 +11,11 @@ const definitions = [
     text:
       "There are six basic data types in JavaScript. String, Number, Boolean, Array, Object, Function. The first three are primitive data types meaning they store only one value",
   },
+  {
+    title: "scope",
+    text:
+      "Scope in JavaScript refers to the current context of code, which determines the accessibility of variables to JavaScript. The two types of scope are local and global",
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {

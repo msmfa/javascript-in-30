@@ -6,6 +6,13 @@
   There are six basic data types in JavaScript. String, Number, Boolean, Array, Object, Function. The first three are primitive data types meaning they store only one value.
 - Operators
 - Comparisons
+  Add +
+  Subtract -
+  Multiply \*
+  Divide /
+  Modulus (division remainder)
+  Increment ++
+  Decrement --
 - Conditional Operations
 - Logical Operations
 - For loops
@@ -42,3 +49,7 @@
 - Promises
 - Async and Await
 - Value vs Reference
+
+REF:
+
+Tania Rascia @ Digital Ocean
