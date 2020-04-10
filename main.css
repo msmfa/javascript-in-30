@@ -12,21 +12,26 @@
 
 ul li {
     list-style-type: none;
+    color: rgb(63, 63, 63);
+
+}
+
+.list-container li:hover {
+    color: rgb(101, 180, 226);
+    cursor: pointer;
 }
 
 #display-container {
     font-size: 1.4em;
-    margin-top: 45vh;
     margin-left: 45vw;
     position: fixed;
     text-align: center;
     width: 40vw;
-
 }
 
 .flex-container {
     display: flex;
-
+    align-items: center;
 }
 
 .list-container {
