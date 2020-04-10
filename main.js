@@ -9,7 +9,7 @@ const definitions = [
   {
     title: "data-types",
     text:
-      "There are six basic data types in JavaScript. String, Number, Boolean, Array, Object, Function. The first three are primitive data types meaning they store only one value.",
+      "There are six basic data types in JavaScript. String, Number, Boolean, Array, Object, Function. The first three are primitive data types meaning they store only one value",
   },
 ];
 
