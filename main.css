@@ -27,11 +27,11 @@ ul li {
     position: fixed;
     text-align: center;
     width: 40vw;
+    bottom: 50vh;
 }
 
 .flex-container {
     display: flex;
-    align-items: center;
 }
 
 .list-container {
@@ -39,4 +39,9 @@ ul li {
     background-color: rgb(243, 243, 243);
     padding: 1rem;
     width: 30vw;
+}
+
+.subtitles {
+    color: rgb(61, 61, 61);
+    margin-bottom: .3rem;
 }
