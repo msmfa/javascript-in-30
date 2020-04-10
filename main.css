@@ -1,6 +1,13 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "San Francisco";
+}
+
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 400;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
 
 ul li {
@@ -8,11 +15,13 @@ ul li {
 }
 
 #display-container {
-    text-align: center;
+    font-size: 1.4em;
     margin-top: 45vh;
     margin-left: 45vw;
-    width: 40vw;
     position: fixed;
+    text-align: center;
+    width: 40vw;
+
 }
 
 .flex-container {
