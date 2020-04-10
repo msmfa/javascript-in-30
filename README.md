@@ -1,5 +1,7 @@
 # Javascript in less than 30 words
 
+[Link to Live Demo](https://javascript-in-30-words.netlify.com/)
+
 This projects purpose is to serve as a pre-interview refresher.
 
 It is also my attempt to describe both basic and more advanced Javascript concepts in less than 30 words.
