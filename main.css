@@ -30,6 +30,11 @@ ul li {
     bottom: 45vh;
 }
 
+#display-container a {
+    color: rgb(240, 158, 8);
+    text-decoration: none;
+}
+
 .flex-container {
     display: flex;
 }
