@@ -23,19 +23,19 @@ const definitions = [
   {
     title: "functions",
     text:
-      "A function is a set of instructions for Javascript to implement. It consists of the function keyword followed by: the name of the function, a list of parameters and statements that define the function.",
+      "Functions in Javascript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
 
     image: "IMG/function.png",
   },
   {
     title: "for-loops",
     text: `A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
-    image: "",
+    image: "IMG/forloop.png",
   },
   {
     title: "while-loops",
     text: `A while loop loops through a block of code "while" the condition is true.`,
-    image: "",
+    image: "IMG/whileloop.png",
   },
   {
     title: "switch-statements",
@@ -87,8 +87,8 @@ const definitions = [
   {
     title: "con-operations",
     text:
-      "The condition (before the ?) is evaluated as a boolean. If the condition is true it returns the first expression before the colon. Otherwise it returns the condition after the colon.",
-    image: "",
+      "The condition is evaluated as a boolean. If the condition is true it returns the first expression before the colon. Otherwise it returns the condition after the colon.",
+    image: "IMG/ternarary.png",
   },
   {
     title: "string-methods",
