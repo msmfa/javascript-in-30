@@ -21,7 +21,7 @@ const definitions = [
   {
     title: "functions",
     text:
-      "A function is a set of instructions for Javascript to implement. It consists of the function keyword, followed by:",
+      "A function is a set of instructions for Javascript to implement. It consists of the function keyword followed by:",
     bulletPointItems:
       "The name of the function. A list of parameters to the function. The statements that define the function.",
   },
@@ -39,10 +39,10 @@ const definitions = [
   },
   {
     title: "arrow-functions",
-    text: `A simple and concise syntax for creating functions.
-    If we have only one argument, then parentheses around parameters can be omitted.
-    Arrow functions do not have a "this" context. 
+    text: `A concise syntax for creating functions.
+    If we have only one argument, then parentheses around parameters can be omitted. 
     `,
+    bulletPointItems: "Arrow functions do not have a 'this' context.",
   },
   {
     title: "functional-expressions",
@@ -55,6 +55,11 @@ const definitions = [
     title: "array-methods",
     bulletPointItems: `forEach() -  loop over array's items. map() - new array by calling the provided function in every element. filter() - new array with only elements that pass the condition. 
     `,
+  },
+  {
+    title: "operators",
+    bulletPointItems:
+      "+ Addition. - Subtraction. * Multiply. / Divide. % Modulus. ++ Increment. -- Decrement.",
   },
 ];
 
