@@ -2,14 +2,14 @@
 
 - Variables [X]
 - Data types [X]
-- Functions
+- Functions [X]
 - Comparisons
 - Operators
 - Conditional Operations
 - Logical Operations
-- For loops
-- While Loops
-- Switch Statements
+- For loops [X]
+- While Loops [X]
+- Switch Statements [X]
 - Arrow Functions
 - Functional Expressions
 - Array Methods
@@ -40,7 +40,3 @@
 - Promises
 - Async and Await
 - Value vs Reference
-
-REF:
-
-Tania Rascia @ Digital Ocean

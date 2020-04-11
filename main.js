@@ -26,7 +26,15 @@ const definitions = [
   },
   {
     title: "for-loops",
-    text: `The for statement creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
+    text: `A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
+  },
+  {
+    title: "while-loops",
+    text: `A while loop loops through a block of code "while" the condition is true.`,
+  },
+  {
+    title: "switch-statements",
+    text: `A switch statement is used as an alternative to multiple if .. else statements. Switch statements are a more efficient way to code when testing multiple conditions.`,
   },
 ];
 
