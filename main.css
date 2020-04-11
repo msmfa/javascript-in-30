@@ -25,19 +25,21 @@ ul li {
 }
 
 .def-text {
-  margin: 0.8em;
+  margin: 0.8em 7em;
 }
 .images {
-  width: 100%;
+  width: 80%;
+  border-radius: 3px;
+  margin-top: 2em;
 }
 
 #display-container {
   font-size: 1.4em;
-  margin-left: 45vw;
-  position: fixed;
   text-align: center;
-  width: 40vw;
+  width: 65vw;
   margin-top: -2em;
+  position: fixed;
+  margin-left: 33vw;
 }
 
 #display-container a {
@@ -48,6 +50,7 @@ ul li {
 .flex-container {
   display: flex;
   align-items: center;
+  border: 1px solid black;
 }
 
 .list-container {
