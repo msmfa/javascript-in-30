@@ -47,7 +47,12 @@ const definitions = [
     title: "functional-expressions",
     text: `Function expressions load only when the interpreter reaches that line of code. 
     They're not hoisted, allowing them to retain a copy of the local variables from 
-    the scope where they were defined.
+    the scope where they were defined. They do not polute the global scope.
+    `,
+  },
+  {
+    title: "array-methods",
+    text: `forEach -  loop over array's items, map() - new array by calling the provided function in every element, filter() - new array with only elements that pass the condition, reduce(), sort(), includes()
     `,
   },
 ];

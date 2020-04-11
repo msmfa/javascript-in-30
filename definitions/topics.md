@@ -11,8 +11,8 @@
 - While Loops [X]
 - Switch Statements [X]
 - Arrow Functions [X]
-- Functional Expressions
-- Array Methods
+- Functional Expressions [X]
+- Array Methods [X]
 - String Methods
 - Scope
 - Classes (ES6)
