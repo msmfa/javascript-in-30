@@ -71,6 +71,20 @@ const definitions = [
     text: "There are three logical operators in JavaScript:",
     bulletPointItems: "|| = OR. && = AND. ! = NOT.",
   },
+  {
+    title: "con-operations",
+    text:
+      "The condition (before the ?) is evaluated as a boolean. If the condition is true it returns the first expression before the colon. Otherwise it returns the condition after the colon.",
+  },
+  {
+    title: "string-methods",
+    bulletPointItems: `concat() Combines strings.
+    indexOf()  returns index of character.
+    match() - matches based on REGEXP.
+    slice() Returns a substring based on the “start” and “end” parameters.  
+    split() Splits a string according to the specified delimiter.
+    `,
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {

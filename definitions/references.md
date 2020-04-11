@@ -15,3 +15,6 @@ References/further reading:
 - Classes (ES6)
 
 1. https://thecodebarbarian.com/an-overview-of-es6-classes
+
+- Ternarary Operator:
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
