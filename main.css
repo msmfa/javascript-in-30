@@ -36,10 +36,11 @@ ul li {
 #display-container {
   font-size: 1.4em;
   text-align: center;
-  width: 65vw;
+  width: 62vw;
   margin-top: -2em;
   position: fixed;
   margin-left: 33vw;
+  padding: 1em;
 }
 
 #display-container a {
@@ -50,7 +51,6 @@ ul li {
 .flex-container {
   display: flex;
   align-items: center;
-  border: 1px solid black;
 }
 
 .list-container {

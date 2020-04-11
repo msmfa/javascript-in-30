@@ -6,7 +6,7 @@ const definitions = [
     title: "variables",
     text:
       "Variables are containers that hold reusable data. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
-    image: "",
+    image: "IMG/var2.png",
   },
   {
     title: "data-types",
@@ -26,7 +26,7 @@ const definitions = [
       "A function is a set of instructions for Javascript to implement. It consists of the function keyword followed by:",
     bulletPointItems:
       "The name of the function. A list of parameters to the function. The statements that define the function.",
-    image: "",
+    image: "IMG/function.png",
   },
   {
     title: "for-loops",
