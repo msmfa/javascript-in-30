@@ -1,4 +1,5 @@
 - Add formatting to objects displaying list types
+- Implement unit tests to check length of strings(jest)
 - Add images to support certain descriptions
 
 1. Functions

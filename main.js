@@ -24,6 +24,10 @@ const definitions = [
       - A list of parameters to the function
       - The statements that define the function,`,
   },
+  {
+    title: "for-loops",
+    text: `The for statement creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {
