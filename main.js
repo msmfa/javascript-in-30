@@ -23,9 +23,8 @@ const definitions = [
   {
     title: "functions",
     text:
-      "A function is a set of instructions for Javascript to implement. It consists of the function keyword followed by:",
-    bulletPointItems:
-      "The name of the function. A list of parameters to the function. The statements that define the function.",
+      "A function is a set of instructions for Javascript to implement. It consists of the function keyword followed by: the name of the function, a list of parameters and statements that define the function.",
+
     image: "IMG/function.png",
   },
   {
