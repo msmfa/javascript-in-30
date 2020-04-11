@@ -10,7 +10,7 @@
 - For loops [X]
 - While Loops [X]
 - Switch Statements [X]
-- Arrow Functions
+- Arrow Functions [X]
 - Functional Expressions
 - Array Methods
 - String Methods

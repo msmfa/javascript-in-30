@@ -36,6 +36,13 @@ const definitions = [
     title: "switch-statements",
     text: `A switch statement is used as an alternative to multiple if .. else statements. Switch statements are a more efficient way to code when testing multiple conditions.`,
   },
+  {
+    title: "arrow-functions",
+    text: `A simple and concise syntax for creating functions.
+    If we have only one argument, then parentheses around parameters can be omitted.
+    Arrow functions do not have a "this" context. 
+    `,
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {
