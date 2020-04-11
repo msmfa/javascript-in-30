@@ -6,17 +6,19 @@ const definitions = [
     title: "variables",
     text:
       "Variables are containers that hold reusable data. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
+    image: "",
   },
   {
     title: "data-types",
     text: "There are six basic data types in JavaScript:",
     bulletPointItems: "String. Number. Boolean. Array. Object. Function.",
+    image: "",
   },
   {
     title: "scope",
     text:
       "Scope refers to the current context of code, which determines the accessibility of variables to JavaScript. The two types of scope are local and global",
-    imgFile: "",
+    image: "IMG/testcode.jpg",
   },
   {
     title: "functions",
@@ -24,18 +26,22 @@ const definitions = [
       "A function is a set of instructions for Javascript to implement. It consists of the function keyword followed by:",
     bulletPointItems:
       "The name of the function. A list of parameters to the function. The statements that define the function.",
+    image: "",
   },
   {
     title: "for-loops",
     text: `A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
+    image: "",
   },
   {
     title: "while-loops",
     text: `A while loop loops through a block of code "while" the condition is true.`,
+    image: "",
   },
   {
     title: "switch-statements",
     text: `A switch statement is used as an alternative to multiple if .. else statements. Switch statements are a more efficient way to code when testing multiple conditions.`,
+    image: "",
   },
   {
     title: "arrow-functions",
@@ -43,6 +49,7 @@ const definitions = [
     If we have only one argument, then parentheses around parameters can be omitted. 
     `,
     bulletPointItems: "Arrow functions do not have a 'this' context.",
+    image: "",
   },
   {
     title: "functional-expressions",
@@ -50,31 +57,39 @@ const definitions = [
     They're not hoisted, allowing them to retain a copy of the local variables from 
     the scope where they were defined. They do not polute the global scope.
     `,
+    image: "",
   },
   {
     title: "array-methods",
     bulletPointItems: `forEach() -  loop over array's items. map() - new array by calling the provided function in every element. filter() - new array with only elements that pass the condition. 
     `,
+    image: "",
   },
   {
     title: "operators",
+    text: "",
     bulletPointItems:
       "+ Addition. - Subtraction. * Multiply. / Divide. % Modulus. ++ Increment. -- Decrement.",
+    image: "",
   },
   {
     title: "comparisons",
+    text: "",
     bulletPointItems:
       "== Equal to. === Equal to Value and Type. != Not Equal. !== Not Equal in Value or Type. > Greater. < Smaller.",
+    image: "",
   },
   {
     title: "logical-opp",
     text: "There are three logical operators in JavaScript:",
     bulletPointItems: "|| = OR. && = AND. ! = NOT.",
+    image: "",
   },
   {
     title: "con-operations",
     text:
       "The condition (before the ?) is evaluated as a boolean. If the condition is true it returns the first expression before the colon. Otherwise it returns the condition after the colon.",
+    image: "",
   },
   {
     title: "string-methods",
@@ -84,19 +99,29 @@ const definitions = [
     slice() Returns a substring based on the “start” and “end” parameters.  
     split() Splits a string according to the specified delimiter.
     `,
+    image: "",
   },
   {
     title: "classes",
     text:
       "ES6 syntactic sugar that allows us to program in a more object-orientated way.  It allows us to define a constructor together with its prototype methods.",
+    image: "",
   },
 ];
 
 listContainer.addEventListener("click", function (e) {
   const display = document.getElementById("display-container");
+
   const definitionText = definitions
     .map((item) => {
       if (item.title === e.target.id) return item.text;
+    })
+    .join("");
+
+  const codeImage = definitions
+    .map((item) => {
+      if (item.title === e.target.id)
+        return '<img class ="images"src="' + item.image + '">';
     })
     .join("");
 
@@ -109,7 +134,11 @@ listContainer.addEventListener("click", function (e) {
   const bulletPointText = displayTextAsList(listText);
 
   display.innerHTML =
-    "<div class='def-text'>" + definitionText + "</div>" + bulletPointText;
+    "<div class='def-text'>" +
+    definitionText +
+    "</div>" +
+    bulletPointText +
+    codeImage;
 });
 
 function displayTextAsList(listText) {

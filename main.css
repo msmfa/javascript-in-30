@@ -27,6 +27,9 @@ ul li {
 .def-text {
   margin: 0.8em;
 }
+.images {
+  width: 100%;
+}
 
 #display-container {
   font-size: 1.4em;
