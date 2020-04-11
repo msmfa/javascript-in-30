@@ -61,6 +61,16 @@ const definitions = [
     bulletPointItems:
       "+ Addition. - Subtraction. * Multiply. / Divide. % Modulus. ++ Increment. -- Decrement.",
   },
+  {
+    title: "comparisons",
+    bulletPointItems:
+      "== Equal to. === Equal to Value and Type. != Not Equal. !== Not Equal in Value or Type. > Greater. < Smaller.",
+  },
+  {
+    title: "logical-opp",
+    text: "There are three logical operators in JavaScript:",
+    bulletPointItems: "|| = OR. && = AND. ! = NOT.",
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {
