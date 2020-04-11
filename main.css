@@ -34,7 +34,8 @@ ul li {
   position: fixed;
   text-align: center;
   width: 40vw;
-  bottom: 45vh;
+  border: 1px solid red;
+  margin-top: -2em;
 }
 
 #display-container a {
@@ -44,6 +45,7 @@ ul li {
 
 .flex-container {
   display: flex;
+  align-items: center;
 }
 
 .list-container {
