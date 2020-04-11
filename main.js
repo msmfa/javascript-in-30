@@ -9,7 +9,7 @@ const definitions = [
   },
   {
     title: "data-types",
-    text: "There are six basic data types in JavaScript.",
+    text: "There are six basic data types in JavaScript:",
     bulletPointItems: "String. Number. Boolean. Array. Object. Function.",
   },
   {
@@ -53,7 +53,7 @@ const definitions = [
   },
   {
     title: "array-methods",
-    bulletPointItems: `forEach -  loop over array's items. map() - new array by calling the provided function in every element. filter() - new array with only elements that pass the condition. 
+    bulletPointItems: `forEach() -  loop over array's items. map() - new array by calling the provided function in every element. filter() - new array with only elements that pass the condition. 
     `,
   },
 ];
@@ -74,12 +74,14 @@ listContainer.addEventListener("click", function (e) {
 
   const bulletPointText = displayTextAsList(listText);
 
-  display.innerHTML = definitionText + bulletPointText;
+  display.innerHTML =
+    "<div class='def-text'>" + definitionText + "</div>" + bulletPointText;
 });
+
 function displayTextAsList(listText) {
   return listText
     .split(".")
     .slice(0, -1)
-    .map((item) => "<li>" + item + "</li>")
+    .map((item) => "<li class='list'>" + item + "</li>")
     .join("");
 }

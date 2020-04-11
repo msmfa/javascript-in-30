@@ -14,10 +14,18 @@ ul li {
   list-style-type: none;
   color: rgb(63, 63, 63);
 }
-
+.list {
+  list-style-type: none;
+  padding: 0.3em;
+  font-size: 0.8em;
+}
 .list-container li:hover {
   color: rgb(101, 180, 226);
   cursor: pointer;
+}
+
+.def-text {
+  margin: 0.8em;
 }
 
 #display-container {
