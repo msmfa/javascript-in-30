@@ -85,6 +85,11 @@ const definitions = [
     split() Splits a string according to the specified delimiter.
     `,
   },
+  {
+    title: "classes",
+    text:
+      "ES6 syntactic sugar that allows us to program in a more object-orientated way.  It allows us to define a constructor together with its prototype methods.",
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {
