@@ -15,6 +15,7 @@ const definitions = [
     title: "scope",
     text:
       "Scope refers to the current context of code, which determines the accessibility of variables to JavaScript. The two types of scope are local and global",
+    imgFile: "",
   },
 ];
 
