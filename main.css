@@ -1,53 +1,52 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "San Francisco";
+  margin: 0;
+  padding: 0;
+  font-family: "San Francisco";
 }
 
 @font-face {
-    font-family: "San Francisco";
-    font-weight: 400;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
 
 ul li {
-    list-style-type: none;
-    color: rgb(63, 63, 63);
-
+  list-style-type: none;
+  color: rgb(63, 63, 63);
 }
 
 .list-container li:hover {
-    color: rgb(101, 180, 226);
-    cursor: pointer;
+  color: rgb(101, 180, 226);
+  cursor: pointer;
 }
 
 #display-container {
-    font-size: 1.4em;
-    margin-left: 45vw;
-    position: fixed;
-    text-align: center;
-    width: 40vw;
-    bottom: 45vh;
+  font-size: 1.4em;
+  margin-left: 45vw;
+  position: fixed;
+  text-align: center;
+  width: 40vw;
+  bottom: 45vh;
 }
 
 #display-container a {
-    color: rgb(240, 158, 8);
-    text-decoration: none;
+  color: rgb(240, 158, 8);
+  text-decoration: none;
 }
 
 .flex-container {
-    display: flex;
+  display: flex;
 }
 
 .list-container {
-    border-right: 1px solid rgb(202, 202, 202);
-    background-color: rgb(243, 243, 243);
-    padding: 1rem;
-    width: 30vw;
-    font-size: .85em;
+  border-right: 1px solid rgb(202, 202, 202);
+  background-color: rgb(243, 243, 243);
+  padding: 1rem;
+  width: 30vw;
+  font-size: 0.85em;
 }
 
 .subtitles {
-    color: rgb(61, 61, 61);
-    margin-bottom: .3rem;
+  color: rgb(61, 61, 61);
+  margin-bottom: 0.3rem;
 }

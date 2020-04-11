@@ -17,6 +17,13 @@ const definitions = [
       "Scope refers to the current context of code, which determines the accessibility of variables to JavaScript. The two types of scope are local and global",
     imgFile: "",
   },
+  {
+    title: "functions",
+    text: `A function is a set of instructions for Javascript to implement. It consists of the function keyword, followed by: 
+      - The name of the function
+      - A list of parameters to the function
+      - The statements that define the function,`,
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {
