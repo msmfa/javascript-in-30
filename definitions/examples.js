@@ -8,6 +8,8 @@ const square = function (number) {
   return number * number;
 };
 
-while (condition) {
-  //code to be executed
+const firstNAme = "John"; //Global Scope
+
+function foo() {
+  const surname = "Smith"; //Function Scope
 }
