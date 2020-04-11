@@ -1,6 +1,6 @@
 - ~~Add formatting to objects displaying list types~~
+- ~~Align items (flexbox)~~
 - Add CONTRIBUTING SECTION
 - Implement unit tests to check length of strings(jest)
 - Add images to support certain descriptions
-- Align items (flexbox)
 - Add inline styles to Display for better readability

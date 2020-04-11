@@ -3,10 +3,10 @@
 - Variables [X]
 - Data types [X]
 - Functions [X]
-- Comparisons
-- Operators
-- Conditional Operations
-- Logical Operations
+- Comparisons [X]
+- Operators [X]
+- Conditional Operations [X]
+- Logical Operations [X]
 - For loops [X]
 - While Loops [X]
 - Switch Statements [X]
@@ -14,8 +14,8 @@
 - Functional Expressions [X]
 - Array Methods [X]
 - String Methods
-- Scope
-- Classes (ES6)
+- Scope [X]
+- Classes (ES6) [X]
 
 ## Advanced
 
