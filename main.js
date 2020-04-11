@@ -43,6 +43,13 @@ const definitions = [
     Arrow functions do not have a "this" context. 
     `,
   },
+  {
+    title: "functional-expressions",
+    text: `Function expressions load only when the interpreter reaches that line of code. 
+    They're not hoisted, allowing them to retain a copy of the local variables from 
+    the scope where they were defined.
+    `,
+  },
 ];
 
 listContainer.addEventListener("click", function (e) {
