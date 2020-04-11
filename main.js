@@ -8,12 +8,7 @@ const definitions = [
       "Variables are containers that hold reusable data. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
     image: "IMG/var2.png",
   },
-  {
-    title: "data-types",
-    text: "There are six basic data types in JavaScript:",
-    bulletPointItems: "String. Number. Boolean. Array. Object. Function.",
-    image: "",
-  },
+
   {
     title: "scope",
     text:
