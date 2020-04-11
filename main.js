@@ -56,7 +56,7 @@ const definitions = [
     They're not hoisted, allowing them to retain a copy of the local variables from 
     the scope where they were defined. They do not polute the global scope.
     `,
-    image: "",
+    image: "IMG/funcexp.png",
   },
   {
     title: "array-methods",
