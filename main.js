@@ -1,6 +1,7 @@
 const listContainer = document.querySelector(".list-container");
 
 const definitions = [
+  //Items displayed in a bullet point style must be inluded in the bullet point property
   {
     title: "variables",
     text:
@@ -8,8 +9,8 @@ const definitions = [
   },
   {
     title: "data-types",
-    text:
-      "There are six basic data types in JavaScript. String, Number, Boolean, Array, Object, Function. The first three are primitive data types meaning they store only one value",
+    text: "There are six basic data types in JavaScript.",
+    bulletPointItems: "String. Number. Boolean. Array. Object. Function.",
   },
   {
     title: "scope",
@@ -19,10 +20,10 @@ const definitions = [
   },
   {
     title: "functions",
-    text: `A function is a set of instructions for Javascript to implement. It consists of the function keyword, followed by: 
-      - The name of the function
-      - A list of parameters to the function
-      - The statements that define the function,`,
+    text:
+      "A function is a set of instructions for Javascript to implement. It consists of the function keyword, followed by:",
+    bulletPointItems:
+      "The name of the function. A list of parameters to the function. The statements that define the function.",
   },
   {
     title: "for-loops",
@@ -52,18 +53,33 @@ const definitions = [
   },
   {
     title: "array-methods",
-    text: `forEach -  loop over array's items, map() - new array by calling the provided function in every element, filter() - new array with only elements that pass the condition, reduce(), sort(), includes()
+    bulletPointItems: `forEach -  loop over array's items. map() - new array by calling the provided function in every element. filter() - new array with only elements that pass the condition. 
     `,
   },
 ];
 
 listContainer.addEventListener("click", function (e) {
   const display = document.getElementById("display-container");
-  const userChoice = definitions
+  const definitionText = definitions
     .map((item) => {
       if (item.title === e.target.id) return item.text;
     })
     .join("");
-  //Avoids returning a string concated with a comma
-  display.textContent = userChoice;
+
+  const listText = definitions
+    .map((item) => {
+      if (item.title === e.target.id) return item.bulletPointItems;
+    })
+    .join("");
+
+  const bulletPointText = displayTextAsList(listText);
+
+  display.innerHTML = definitionText + bulletPointText;
 });
+function displayTextAsList(listText) {
+  return listText
+    .split(".")
+    .slice(0, -1)
+    .map((item) => "<li>" + item + "</li>")
+    .join("");
+}
