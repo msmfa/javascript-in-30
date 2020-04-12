@@ -5,13 +5,13 @@ const listContainer = document.querySelector(".list-container");
 listContainer.addEventListener("click", function (e) {
   const display = document.getElementById("display-container");
 
-  const definitionText = definitions
+  const mainText = definitions
     .map((item) => {
       if (item.title === e.target.id) return item.text;
     })
     .join("");
 
-  const codeImage = definitions
+  const exampleImage = definitions
     .map((item) => {
       if (item.title === e.target.id)
         return '<img class ="images"src="' + item.image + '">';
@@ -26,18 +26,17 @@ listContainer.addEventListener("click", function (e) {
 
   const bulletPointText = displayTextAsList(listText);
 
-  display.innerHTML =
-    "<div class='def-text'>" +
-    definitionText +
-    "</div>" +
-    bulletPointText +
-    codeImage;
+  displayContent(display, mainText, bulletPointText, exampleImage);
 });
+
+function displayContent(display, mainText, bulletPointText, exampleImage) {
+  display.innerHTML = `<div class='def-text'>${mainText}</div>${bulletPointText}${exampleImage}`;
+}
 
 function displayTextAsList(listText) {
   return listText
     .split(".")
     .slice(0, -1)
-    .map((item) => "<li class='list'>" + item + "</li>")
+    .map((item) => `<li class='list'>${item}</li>`)
     .join("");
 }

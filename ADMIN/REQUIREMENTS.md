@@ -15,3 +15,5 @@
 - Complete the text descrptions of the Advanced section
 - Add images to the advanced section
 - Add slight box-shadow to code segments
+- Potentially add on hover definitions of certain words
+- Potential add word highlighting in certain colour for clarity
