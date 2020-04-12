@@ -1,0 +1,23 @@
+{
+  "name": "testing-javascript",
+  "version": "1.0.0",
+  "description": "[Link to Live Demo](https://javascript-in-30-words.netlify.com/)",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msmfa/javascript-in-30.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msmfa/javascript-in-30/issues"
+  },
+  "homepage": "https://github.com/msmfa/javascript-in-30#readme",
+  "devDependencies": {
+    "jest": "^25.3.0"
+  }
+}

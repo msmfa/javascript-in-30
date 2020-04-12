@@ -3,34 +3,40 @@ export const definitions = [
   {
     title: "variables",
     text:
-      "Vairables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
+      "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
+    bulletPointItems: "",
     image: "IMG/variable.png",
   },
   {
     title: "scope",
     text:
       "Scope refers to the current context of code, which determines the accessibility of variables to JavaScript.",
+    bulletPointItems: "",
     image: "IMG/scope.png",
   },
   {
     title: "functions",
     text:
       "Functions in Javascript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
+    bulletPointItems: "",
     image: "IMG/function.png",
   },
   {
     title: "for-loops",
     text: `A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
+    bulletPointItems: "",
     image: "IMG/for.png",
   },
   {
     title: "while-loops",
     text: `A while loop loops through a block of code "while" the condition is true.`,
+    bulletPointItems: "",
     image: "IMG/whileloop.png",
   },
   {
     title: "switch-statements",
     text: `A switch statement is an alternative to multiple if statements. Switch statements are a more efficient way to code when testing multiple conditions.`,
+    bulletPointItems: "",
     image: "IMG/switch.png",
   },
   {
@@ -47,10 +53,12 @@ export const definitions = [
     They're not hoisted, allowing them to retain a copy of the local variables from 
     the scope where they were defined. They do not polute the global scope.
     `,
+    bulletPointItems: "",
     image: "IMG/funcexp.png",
   },
   {
     title: "array-methods",
+    text: "",
     bulletPointItems: `forEach() -  loop over array's items. map() - new array by calling the provided function in every element. filter() - new array with only elements that pass the condition. 
     `,
     image: "",
@@ -79,13 +87,13 @@ export const definitions = [
     title: "con-operations",
     text:
       "The condition is evaluated as a boolean. If the condition is true it returns the first expression, else it returns the second condition.",
+    bulletPointItems: "",
     image: "IMG/tern.png",
   },
   {
     title: "string-methods",
-    bulletPointItems: `concat() Combines strings.
-    indexOf()  returns index of character.
-    match() - matches based on REGEXP.
+    text: "",
+    bulletPointItems: `concat() Combines strings. indexOf()  returns index of character. match() - matches based on REGEXP.
     slice() Returns a substring based on the “start” and “end” parameters.  
     split() Splits a string according to the specified delimiter.
     `,
@@ -95,6 +103,7 @@ export const definitions = [
     title: "classes",
     text:
       "ES6 syntactic sugar that allows us to program in a more object-orientated way.  It allows us to define a constructor together with its prototype methods.",
+    bulletPointItems: "",
     image: "IMG/classes.png",
   },
 ];
