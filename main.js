@@ -47,7 +47,7 @@ const definitions = [
   },
   {
     title: "functional-expressions",
-    text: `Function expressions load only when the interpreter reaches that line of code. 
+    text: `Functional expressions load only when the interpreter reaches that line of code. 
     They're not hoisted, allowing them to retain a copy of the local variables from 
     the scope where they were defined. They do not polute the global scope.
     `,
