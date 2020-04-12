@@ -8,4 +8,6 @@ const square = function (number) {
   return number * number;
 };
 
-condition ? firstCondition : secondCondition;
+for (let i = 0; i < array.length; i++) {
+  console.log(array[i]);
+}

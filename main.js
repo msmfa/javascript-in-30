@@ -25,7 +25,7 @@ const definitions = [
   {
     title: "for-loops",
     text: `A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
-    image: "IMG/forloop.png",
+    image: "IMG/for.png",
   },
   {
     title: "while-loops",
