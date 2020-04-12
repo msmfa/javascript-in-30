@@ -10,4 +10,6 @@ Distilling complex ideas into simple notions is a key tenant of effective commun
 
 **Contributions are welcome and encouraged.**
 
+[Contributing guidelines](https://github.com/msmfa/javascript-in-30/blob/master/CONTRIBUTING.md)
+
 A side aim of this project is to allow other junior members of the community to learn how to contribute to open source projects. A goal of the project is to crowdsource the easiest to understand and most accurate definitions of various elements of Javascript.
