@@ -6,7 +6,7 @@ const definitions = [
     title: "variables",
     text:
       "Vairables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
-    image: "IMG/var2.png",
+    image: "IMG/variable.png",
   },
 
   {
@@ -82,8 +82,8 @@ const definitions = [
   {
     title: "con-operations",
     text:
-      "The condition is evaluated as a boolean. If the condition is true it returns the first expression before the colon. Otherwise it returns the condition after the colon.",
-    image: "IMG/ternarary.png",
+      "The condition is evaluated as a boolean. If the condition is true it returns the first expression, else it returns the second condition.",
+    image: "IMG/tern.png",
   },
   {
     title: "string-methods",
