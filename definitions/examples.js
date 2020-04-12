@@ -13,3 +13,6 @@ const firstNAme = "John"; //Global Scope
 function foo() {
   const surname = "Smith"; //Function Scope
 }
+
+
+

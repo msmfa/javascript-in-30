@@ -5,7 +5,7 @@ const definitions = [
   {
     title: "variables",
     text:
-      "Variables are containers that hold reusable data. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
+      "Vairables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
     image: "IMG/var2.png",
   },
 
