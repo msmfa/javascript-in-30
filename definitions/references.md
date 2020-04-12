@@ -1,6 +1,10 @@
 References/further reading:
 
-- Switch statements: https://love2dev.com/blog/javascript-switch-statement/
+- Switch statements:
+
+1. https://love2dev.com/blog/javascript-switch-statement/
+2. https://www.youtube.com/watch?v=a9Q765OAKT4
+
 - Arrow functions: https://javascript.info/arrow-functions
 - Functional-expressions:
 

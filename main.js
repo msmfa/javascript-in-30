@@ -34,8 +34,8 @@ const definitions = [
   },
   {
     title: "switch-statements",
-    text: `A switch statement is used as an alternative to multiple if .. else statements. Switch statements are a more efficient way to code when testing multiple conditions.`,
-    image: "",
+    text: `A switch statement is an alternative to multiple if statements. Switch statements are a more efficient way to code when testing multiple conditions.`,
+    image: "IMG/switch.png",
   },
   {
     title: "arrow-functions",
