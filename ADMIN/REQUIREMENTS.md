@@ -7,10 +7,10 @@
   Implement this once photos have been added for extra clarity as to what should change.~~
 - ~~Add CONTRIBUTING section~~
 - ~~UpdateREADME with contributing link~~
+- ~~Implement unit tests to check length of strings(jest)~~
 
 ---
 
-- Implement unit tests to check length of strings(jest)
 - Add inline styles to Display for better readability
 - Complete the text descrptions of the Advanced section
 - Add images to the advanced section
