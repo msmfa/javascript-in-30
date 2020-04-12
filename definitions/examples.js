@@ -8,9 +8,6 @@ const square = function (number) {
   return number * number;
 };
 
-class Rectangle {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-  }
-}
+helloWorld = () => "Hello World";
+
+hello = (val, val2) => "Hello " + val + val2;
