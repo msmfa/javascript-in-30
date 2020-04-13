@@ -40,3 +40,5 @@ function displayTextAsList(listText) {
     .map((item) => `<li class='list'>${item}</li>`)
     .join("");
 }
+
+console.log(listText);

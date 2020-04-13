@@ -11,7 +11,6 @@
 
 ---
 
-- Add inline styles to Display for better readability
 - Complete the text descrptions of the Advanced section
 - Add images to the advanced section
 - Add slight box-shadow to code segments
