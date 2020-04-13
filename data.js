@@ -106,4 +106,11 @@ export const definitions = [
     bulletPointItems: "",
     image: "IMG/classes.png",
   },
+  {
+    title: "the-call-stack",
+    text:
+      "A Call Stack is a data structure that stores and manages function invocations. A kind of 'To-do list' for Javascript that uses the Last In, First Out (LIFO) principle.  ",
+    bulletPointItems: "",
+    image: "",
+  },
 ];
