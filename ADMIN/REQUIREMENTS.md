@@ -12,7 +12,9 @@
 
 ---
 
-- Complete the text descrptions of the Advanced section
+- Complete the text descriptions of the Advanced section
 - Add images to the advanced section
 - Potentially add on hover definitions of certain words
 - Potential add word highlighting in certain colour for clarity
+- Loop over already defined sections and highlight any that need clarity. Potentially try and get some community feedback.
+- **Could implement an algorythm to detect loose writing? Passive writing checker etc.**
