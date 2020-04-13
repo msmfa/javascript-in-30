@@ -70,3 +70,8 @@ Hoisting
 Currying:
 
 - [First Answer on this stack overflow answer is very insightful as to their use factor](https://softwareengineering.stackexchange.com/questions/185585/what-is-the-advantage-of-currying)
+
+Memoization:
+
+- https://www.youtube.com/watch?v=R9NbXPuT0ro
+- [Memoisation in 3 minutes](https://codeburst.io/understanding-memoization-in-3-minutes-2e58daf33a19)

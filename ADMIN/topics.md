@@ -19,21 +19,22 @@
 
 ## Advanced
 
+- Nested Functions [X]
 - Recursion[X]
 - The Call Stack [X]
-- Nested Functions [X]
-- Closure [X]
 - The event loop [X]
+- Closure [X]
 - Hoisting [X]
 - IIFEs [X]
 - Currying [X]
+- Memoization
+- Pure functions
+- Polymorphism
+- Promises
 - Prototypal Inheritance
 - The Module Pattern
-- Memoization
-- Polymorphism
 - Asynchronous Javascript
 - 'This' keyword
-- Promises
 - Global Objects
 - Async and Await
 - Value vs Reference

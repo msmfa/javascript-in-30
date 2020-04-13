@@ -162,4 +162,11 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "currying",
+    text:
+      "Memoization is the programmatic practice of making recursive/iterative functions run faster by caching the values that the function returns after its initial execution.",
+    bulletPointItems: "",
+    image: "",
+  },
 ];
