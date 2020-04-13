@@ -1,4 +1,7 @@
 import { definitions } from "./data.js";
+import { numOver30 } from "./getStringLength.js";
+
+console.log(numOver30);
 
 const listContainer = document.querySelector(".list-container");
 
@@ -40,5 +43,3 @@ function displayTextAsList(listText) {
     .map((item) => `<li class='list'>${item}</li>`)
     .join("");
 }
-
-console.log(listText);

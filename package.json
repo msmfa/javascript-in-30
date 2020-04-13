@@ -16,8 +16,11 @@
   "bugs": {
     "url": "https://github.com/msmfa/javascript-in-30/issues"
   },
+  "type": "module",
   "homepage": "https://github.com/msmfa/javascript-in-30#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "babel-jest": "^25.3.0",
     "jest": "^25.3.0"
   }
 }
