@@ -27,7 +27,7 @@
 - Hoisting [X]
 - IIFEs [X]
 - Currying [X]
-- Memoization
+- Memoization [X]
 - Pure functions
 - Polymorphism
 - Promises

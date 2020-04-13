@@ -19,4 +19,5 @@
 - Potential add word highlighting in certain colour for clarity
 - Loop over already defined sections and highlight any that need clarity. Potentially try and get some community feedback.
 - Add event listener to Fundamentals to display homepage/dropdown
+- Could also add "in 60 words" tab that on click changes to 60?
 - **Could implement an algorythm to detect loose writing? Passive writing checker etc.**
