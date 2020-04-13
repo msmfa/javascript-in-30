@@ -149,7 +149,7 @@ export const definitions = [
     image: "",
   },
   {
-    title: "event-loop",
+    title: "hoisting",
     text:
       "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution.",
     bulletPointItems: "",

@@ -26,7 +26,7 @@
 - The event loop [X]
 - Hoisting [X]
 - IIFEs [X]
-- Currying
+- Currying [X]
 - Prototypal Inheritance
 - The Module Pattern
 - Memoization
