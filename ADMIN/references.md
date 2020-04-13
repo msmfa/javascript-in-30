@@ -2,6 +2,11 @@
 
 ### BASICS:
 
+- Functions:
+
+1. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
+   **Scroll down for nested function section which is clear and helpful**
+
 - Switch statements:
 
 1. https://love2dev.com/blog/javascript-switch-statement/
@@ -39,3 +44,8 @@
 - Recursion
 
 1. https://www.sitepoint.com/recursion-functional-javascript/
+
+- IIFE:
+
+1. https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+2. https://medium.com/@vvkchandra/essential-javascript-mastering-immediately-invoked-function-expressions-67791338ddc6

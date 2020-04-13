@@ -120,4 +120,18 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "nested-functions",
+    text:
+      "A function within another function. A nested function can 'inherit' the arguments and variables of its containing function. Put simply; the inner function contains the scope of the outer function.",
+    bulletPointItems: "",
+    image: "",
+  },
+  {
+    title: "IIFEs",
+    text:
+      "An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. Variables declared inside the IIFE have private scope. ",
+    bulletPointItems: "",
+    image: "",
+  },
 ];
