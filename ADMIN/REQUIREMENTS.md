@@ -17,4 +17,5 @@
 - Potentially add on hover definitions of certain words
 - Potential add word highlighting in certain colour for clarity
 - Loop over already defined sections and highlight any that need clarity. Potentially try and get some community feedback.
+- Add event listener to Fundamentals to display homepage
 - **Could implement an algorythm to detect loose writing? Passive writing checker etc.**
