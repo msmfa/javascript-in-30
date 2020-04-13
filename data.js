@@ -141,4 +141,11 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "event-loop",
+    text:
+      "The Event Loop monitors the Call Stack and the Callback Queue. If the Call Stack is empty, it pushes the first event from the queue to the Call Stack.",
+    bulletPointItems: "",
+    image: "",
+  },
 ];
