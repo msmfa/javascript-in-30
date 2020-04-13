@@ -1,4 +1,6 @@
-References/further reading:
+## References/further reading:
+
+### BASICS:
 
 - Switch statements:
 
@@ -22,3 +24,12 @@ References/further reading:
 
 - Ternarary Operator:
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+
+---
+
+### Advanced:
+
+- The Call stack:
+
+1. https://www.youtube.com/watch?v=W8AeMrVtFLY
+2. https://developer.mozilla.org/en-US/docs/Glossary/Call_stack
