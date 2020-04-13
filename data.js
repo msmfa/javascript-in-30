@@ -113,4 +113,11 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "recursion",
+    text:
+      "Recursion is a technique for iterating over an operation by having a function call itself repeatedly until it arrives at a result. Most loops can be rewritten recursively. ",
+    bulletPointItems: "",
+    image: "",
+  },
 ];

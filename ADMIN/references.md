@@ -35,3 +35,7 @@
 2. https://developer.mozilla.org/en-US/docs/Glossary/Call_stack
 3. https://dev.to/ogwurujohnson/demystifying-the-javascript-call-stack-1ppc
 4. https://www.freecodecamp.org/news/understanding-the-javascript-call-stack-861e41ae61d4/
+
+- Recursion
+
+1. https://www.sitepoint.com/recursion-functional-javascript/
