@@ -1,7 +1,4 @@
 import { definitions } from "./data.js";
-import { numOver30 } from "./getStringLength.js";
-
-console.log(numOver30);
 
 const listContainer = document.querySelector(".list-container");
 
