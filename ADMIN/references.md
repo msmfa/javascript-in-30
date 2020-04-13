@@ -49,3 +49,7 @@
 
 1. https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 2. https://medium.com/@vvkchandra/essential-javascript-mastering-immediately-invoked-function-expressions-67791338ddc6
+
+- Closures:
+
+1. https://www.youtube.com/watch?v=3a0I8ICR1Vg

@@ -134,4 +134,11 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "closure",
+    text:
+      "The combination of a function and the environment in which it was declared. In Javascript all functions form closures. A common use case is creating private functions. ",
+    bulletPointItems: "",
+    image: "",
+  },
 ];
