@@ -22,21 +22,21 @@
 - Recursion[X]
 - The Call Stack [X]
 - Nested Functions [X]
-- Global Objects
-- 'This' keyword
 - Closure [X]
-- Call
-- Apply
-- Bind
-- Prototypal Inheritance
-- IIFEs [X]
-- The module pattern
+- The event loop [X]
 - Hoisting [X]
+- IIFEs [X]
 - Currying
+- Prototypal Inheritance
+- The Module Pattern
 - Memoization
 - Polymorphism
 - Asynchronous Javascript
-- The event loop [X]
+- 'This' keyword
 - Promises
+- Global Objects
 - Async and Await
 - Value vs Reference
+- Call
+- Apply
+- Bind

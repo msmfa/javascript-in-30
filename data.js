@@ -155,4 +155,11 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "currying",
+    text:
+      "Currying is the process of transferring a function with many arguments into the same function with multiple arguments. Allowing you to partially apply functions and pass them to higher-order functions.",
+    bulletPointItems: "",
+    image: "",
+  },
 ];

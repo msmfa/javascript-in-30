@@ -66,3 +66,7 @@ Hoisting
 
 1. https://www.youtube.com/watch?v=ppMlvGMT2qE
 2. https://scotch.io/tutorials/understanding-hoisting-in-javascript
+
+Currying:
+
+1. [First Answer on this stack overflow answer is very insightful as to their use factor](https://softwareengineering.stackexchange.com/questions/185585/what-is-the-advantage-of-currying)
