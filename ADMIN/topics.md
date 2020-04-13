@@ -19,24 +19,24 @@
 
 ## Advanced
 
-- Recursion
-- The Call Stack
-- Nested Functions
+- Recursion[X]
+- The Call Stack [X]
+- Nested Functions [X]
 - Global Objects
 - 'This' keyword
-- Closure
+- Closure [X]
 - Call
 - Apply
 - Bind
 - Prototypal Inheritance
-- IIFEs
+- IIFEs [X]
 - The module pattern
-- Hoisting
+- Hoisting [X]
 - Currying
 - Memoization
 - Polymorphism
 - Asynchronous Javascript
-- The event loop
+- The event loop [X]
 - Promises
 - Async and Await
 - Value vs Reference
