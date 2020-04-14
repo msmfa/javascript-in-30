@@ -25,12 +25,12 @@ listContainer.addEventListener("click", function (e) {
     .join("");
 
   const bulletPointText = displayTextAsList(listText);
-
   displayContent(display, mainText, bulletPointText, exampleImage);
+  styleContent(listText);
 });
 
 function displayContent(display, mainText, bulletPointText, exampleImage) {
-  display.innerHTML = `<div class='def-text'>${mainText}</div>${bulletPointText}${exampleImage}`;
+  display.innerHTML = `<div class='def-text'>${mainText}</div><div class="bullet-text">${bulletPointText}</div>${exampleImage}`;
 }
 
 function displayTextAsList(listText) {
@@ -39,4 +39,8 @@ function displayTextAsList(listText) {
     .slice(0, -1)
     .map((item) => `<li class='list'>${item}</li>`)
     .join("");
+}
+
+function styleContent(listText) {
+  console.log(listText.split(" "));
 }

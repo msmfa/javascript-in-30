@@ -35,7 +35,7 @@
 - Global Objects [X]
 - Value vs Reference [X]
 - Polymorphism [X]
-- 'This' keyword
-- Call
-- Apply
-- Bind
+- 'This' keyword [X]
+- Call [X]
+- Apply [X]
+- Bind [X]

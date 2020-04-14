@@ -42,9 +42,9 @@ export const definitions = [
   {
     title: "arrow-functions",
     text: `A concise syntax for creating functions.
-    If we have only one argument, then parentheses around parameters can be omitted. 
+    If we have only one argument, then parentheses around parameters can be omitted. Arrow functions do not have a 'this' context.
     `,
-    bulletPointItems: "Arrow functions do not have a 'this' context.",
+    bulletPointItems: "",
     image: "IMG/arrow.png",
   },
   {
@@ -93,7 +93,7 @@ export const definitions = [
   {
     title: "string-methods",
     text: "",
-    bulletPointItems: `concat() Combines strings. indexOf()  returns index of character. match() - matches based on REGEXP.
+    bulletPointItems: `concat() Combines strings. indexOf()  returns index of character. match() matches based on REGEXP.
     slice() Returns a substring based on the “start” and “end” parameters.  
     split() Splits a string according to the specified delimiter.
     `,
