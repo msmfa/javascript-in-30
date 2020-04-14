@@ -169,4 +169,18 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "asynchronous-javascript",
+    text:
+      "Javascript is a single-threaded language. Meaning it performs one action at a time. Asynchronous Javascript is a way to perform multiple actions simultaneously using callbacks, promises, and async/await.",
+    bulletPointItems: "",
+    image: "",
+  },
+  {
+    title: "promises",
+    text:
+      "A promise is an object that may produce a value sometime in the future. Either a resolved value or a reason that it’s not resolved (e.g., a network error occurred). ",
+    bulletPointItems: "",
+    image: "",
+  },
 ];

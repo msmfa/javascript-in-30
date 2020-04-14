@@ -75,3 +75,14 @@ Memoization:
 
 - https://www.youtube.com/watch?v=R9NbXPuT0ro
 - [Memoisation in 3 minutes](https://codeburst.io/understanding-memoization-in-3-minutes-2e58daf33a19)
+
+Asynchronous Javascript:
+
+- [MDN - Asynchronous Programming in Javascript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)
+- [Understanding Async Javascript](https://blog.bitsrc.io/understanding-asynchronous-javascript-the-event-loop-74cd408419ff)
+
+Promises:
+
+- [This document helps clarify the different adjectives surrounding promises, by dividing them up into two categories: states and fates.](https://github.com/domenic/promises-unwrapping/blob/master/docs/states-and-fates.md)
+- [Javascript promises in 10 minutes](https://www.youtube.com/watch?v=DHvZLI7Db8E&t=368s)
+- [Promises explained by Eric Elliot](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
