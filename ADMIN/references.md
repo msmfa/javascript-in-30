@@ -86,3 +86,16 @@ Promises:
 - [This document helps clarify the different adjectives surrounding promises, by dividing them up into two categories: states and fates.](https://github.com/domenic/promises-unwrapping/blob/master/docs/states-and-fates.md)
 - [Javascript promises in 10 minutes](https://www.youtube.com/watch?v=DHvZLI7Db8E&t=368s)
 - [Promises explained by Eric Elliot](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
+
+Async/Await:
+
+- [Javascript Async Await](https://www.youtube.com/watch?v=V_Kr9OSfDeU&feature=youtu.be)
+- [Javascript.info](https://javascript.info/async-await)
+- [Wikipedia has quite a well defined overview of Async/Await](https://en.wikipedia.org/wiki/Async/await)
+
+Global Object:
+
+-[MDN]https://developer.mozilla.org/en-US/docs/Glossary/Global_object
+
+- [Javascript.info Article](https://javascript.info/global-object)
+  **The Javscript article on Global Objects has some errors, submit a pull request**

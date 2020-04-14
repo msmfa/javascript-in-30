@@ -12,6 +12,7 @@
 
 ---
 
+- This [Javascript.info Article](https://javascript.info/global-object) on the Global Object has errors. Submit Pull request.
 - Complete the text descriptions of the Advanced section
 - Add images to the advanced section
 - Loop over already defined sections and highlight any that need clarity. Potentially try and get some community feedback.
@@ -22,4 +23,5 @@
 - Could also add "in 60 words" tab that on click changes to 60?
 - Send a thank you tweet to Eric Elliot for supplying such thorough information on Javscript topics and be sure to mention his articles in references section
 - Promises section is still a bit abstract (Could do with a re-write)
+- Perhaps move 'this' to the basics section?
 - **Could implement an algorythm to detect loose writing? Passive writing checker etc.**

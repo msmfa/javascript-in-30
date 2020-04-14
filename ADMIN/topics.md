@@ -28,9 +28,9 @@
 - IIFEs [X]
 - Currying [X]
 - Memoization [X]
-- Asynchronous Javascript
+- Asynchronous Javascript [X]
+- Promises [X]
 - Async and Await
-- Promises
 - Call
 - Apply
 - Bind

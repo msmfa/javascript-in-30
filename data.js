@@ -183,4 +183,18 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "async-await",
+    text:
+      "Async/Await is syntactic sugar that makes promises easier to work with. It allows us to write asynchronous code that's similar in appearance to synchronous code. ",
+    bulletPointItems: "",
+    image: "",
+  },
+  {
+    title: "global-object",
+    text:
+      "A global object is an object that always exists in the global scope. In a browser, the Global Object is the 'Window' and in Node.js the object is Global.",
+    bulletPointItems: "",
+    image: "",
+  },
 ];
