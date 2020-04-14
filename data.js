@@ -218,4 +218,32 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "this",
+    text:
+      "The “this” keyword allows you to decide which object should be focal when invoking a function or a method; effectively allowing you to reuse functions with different contexts.",
+    bulletPointItems: "",
+    image: "",
+  },
+  {
+    title: "call",
+    text:
+      "With call you can write a method once, and then inherit it in another object, without having to rewrite the method for the new object.",
+    bulletPointItems: "",
+    image: "",
+  },
+  {
+    title: "apply",
+    text:
+      "The only difference between apply() and call() is that the second parameter of the apply() method accepts the arguments to the actual function as an array.",
+    bulletPointItems: "",
+    image: "",
+  },
+  {
+    title: "bind",
+    text:
+      "Similar to call and apply except bind() returns a function instead of a value. It sets the value of 'this' and returns a function. It does not invoke the function.",
+    bulletPointItems: "",
+    image: "",
+  },
 ];

@@ -115,3 +115,16 @@ Polymorphism:
 
 - [A very in depth paper by Luca Cardelli on "Data Abstraction % Polymorphism"](http://lucacardelli.name/Papers/OnUnderstanding.A4.pdf)
 - [A Great Stack Overflow answer on use cases](https://stackoverflow.com/questions/27642239/what-is-polymorphism-in-javascript)
+
+The 'this' Keyword:
+
+- [Understanding the this keyword; call, apply, bind](https://tylermcginnis.com/this-keyword-call-apply-bind-javascript/)
+- [Example based overview](https://www.codementor.io/@dariogarciamoya/understanding--this--in-javascript-du1084lyn?icn=post-8i1jca6jp&ici=post-du1084lyn)
+
+Call:
+
+- [Easy to understand Video on Call, Apply and bind](https://www.youtube.com/watch?v=75W8UPQ5l7k)
+
+Apply:
+
+- [Helpful breakdown of the three methods](https://www.codementor.io/@niladrisekhardutta/how-to-call-apply-and-bind-in-javascript-8i1jca6jp)
