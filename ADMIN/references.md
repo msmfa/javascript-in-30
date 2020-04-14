@@ -97,8 +97,16 @@ Global Object:
 
 - [MDN]https://developer.mozilla.org/en-US/docs/Glossary/Global_object
 - [Javascript.info Article](https://javascript.info/global-object)
-  **The Javscript article on Global Objects has some errors, submit a pull request**
+  **The Javascript article on Global Objects has some errors, submit a pull request**
 
 Value vs Reference:
 
--[Javascript value vs Reference - Programming with Mosh](https://www.youtube.com/watch?v=fD0t_DKREbE)
+- [Javascript value vs Reference - Programming with Mosh](https://www.youtube.com/watch?v=fD0t_DKREbE)
+- [Particularly good video on the difference and their practical implications for likely bugs](https://www.youtube.com/watch?v=-hBJz2PPIVE)
+
+Prototypal Inheritance:
+
+- [An article by Kevin Ennis that goes in depth into inheritance in Javascript](https://medium.com/@kevincennis/prototypal-inheritance-781bccc97edb)
+- [MDN Docs - Semi-useful examples given](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance)
+- [Propotypal Inheritance Visualised](https://dev.to/lydiahallie/javascript-visualized-prototypal-inheritance-47co)
+- [Interactive Examples from W3Schools](https://www.w3schools.com/js/js_object_prototypes.asp)

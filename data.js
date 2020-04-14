@@ -197,4 +197,18 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "value-vs-reference",
+    text:
+      "Pass by value means the actual value is passed on. Pass by reference means a number (where the value is stored in memory) is passed on. ",
+    bulletPointItems: "",
+    image: "",
+  },
+  {
+    title: "prototypal-inheritance",
+    text:
+      "Inheritance is simply one object trying to inherit properties and methods of another object. A prototype is simply an object with inbuilt methods that are attached to your object. ",
+    bulletPointItems: "",
+    image: "",
+  },
 ];

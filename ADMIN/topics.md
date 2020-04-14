@@ -30,13 +30,12 @@
 - Memoization [X]
 - Asynchronous Javascript [X]
 - Promises [X]
-- Async and Await
+- Async and Await [X]
 - Call
 - Apply
 - Bind
-- Global Objects
+- Global Objects [X]
 - Polymorphism
-- Prototypal Inheritance
+- Prototypal Inheritance [X]
 - 'This' keyword
-- The Module Pattern
-- Value vs Reference
+- Value vs Reference [X]
