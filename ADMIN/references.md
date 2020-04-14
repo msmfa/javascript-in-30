@@ -95,7 +95,10 @@ Async/Await:
 
 Global Object:
 
--[MDN]https://developer.mozilla.org/en-US/docs/Glossary/Global_object
-
+- [MDN]https://developer.mozilla.org/en-US/docs/Glossary/Global_object
 - [Javascript.info Article](https://javascript.info/global-object)
   **The Javscript article on Global Objects has some errors, submit a pull request**
+
+Value vs Reference:
+
+-[Javascript value vs Reference - Programming with Mosh](https://www.youtube.com/watch?v=fD0t_DKREbE)

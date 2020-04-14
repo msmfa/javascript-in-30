@@ -191,9 +191,9 @@ export const definitions = [
     image: "",
   },
   {
-    title: "global-object",
+    title: "global-objects",
     text:
-      "A global object is an object that always exists in the global scope. In a browser, the Global Object is the 'Window' and in Node.js the object is Global.",
+      "A Global Object is an object that always exists in the global scope. In a browser, the Global Object is the 'Window' and in Node.js the object is Global.",
     bulletPointItems: "",
     image: "",
   },
