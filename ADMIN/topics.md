@@ -31,11 +31,11 @@
 - Asynchronous Javascript [X]
 - Promises [X]
 - Async and Await [X]
+- Prototypal Inheritance [X]
+- Global Objects [X]
+- Value vs Reference [X]
+- Polymorphism [X]
+- 'This' keyword
 - Call
 - Apply
 - Bind
-- Global Objects [X]
-- Polymorphism
-- Prototypal Inheritance [X]
-- 'This' keyword
-- Value vs Reference [X]

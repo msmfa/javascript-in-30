@@ -110,3 +110,8 @@ Prototypal Inheritance:
 - [MDN Docs - Semi-useful examples given](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance)
 - [Propotypal Inheritance Visualised](https://dev.to/lydiahallie/javascript-visualized-prototypal-inheritance-47co)
 - [Interactive Examples from W3Schools](https://www.w3schools.com/js/js_object_prototypes.asp)
+
+Polymorphism:
+
+- [A very in depth paper by Luca Cardelli on "Data Abstraction % Polymorphism"](http://lucacardelli.name/Papers/OnUnderstanding.A4.pdf)
+- [A Great Stack Overflow answer on use cases](https://stackoverflow.com/questions/27642239/what-is-polymorphism-in-javascript)

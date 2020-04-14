@@ -211,4 +211,11 @@ export const definitions = [
     bulletPointItems: "",
     image: "",
   },
+  {
+    title: "polymorphism",
+    text:
+      "Polymorphism Is the practice of designing objects to share behaviors and to be able to override shared behaviors with specific ones. Polymorphism utilizes inheritance in order to make this happen.",
+    bulletPointItems: "",
+    image: "",
+  },
 ];
