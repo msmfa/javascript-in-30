@@ -28,16 +28,15 @@
 - IIFEs [X]
 - Currying [X]
 - Memoization [X]
-- Pure functions
-- Polymorphism
-- Promises
-- Prototypal Inheritance
-- The Module Pattern
 - Asynchronous Javascript
-- 'This' keyword
-- Global Objects
 - Async and Await
-- Value vs Reference
+- Promises
 - Call
 - Apply
 - Bind
+- Global Objects
+- Polymorphism
+- Prototypal Inheritance
+- 'This' keyword
+- The Module Pattern
+- Value vs Reference
