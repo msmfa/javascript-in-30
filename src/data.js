@@ -88,7 +88,7 @@ export const definitions = [
     text:
       "The condition is evaluated as a boolean. If the condition is true it returns the first expression, else it returns the second condition.",
     bulletPointItems: "",
-    image: "IMGtern.png",
+    image: "IMG/tern.png",
   },
   {
     title: "string-methods",
