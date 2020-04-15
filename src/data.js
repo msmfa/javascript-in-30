@@ -139,7 +139,7 @@ export const definitions = [
     text:
       "The combination of a function and the environment in which it was declared. In Javascript all functions form closures. A common use case is creating private functions. ",
     bulletPointItems: "",
-    image: "",
+    image: "IMG/closure.png",
   },
   {
     title: "event-loop",
@@ -188,7 +188,7 @@ export const definitions = [
     text:
       "Async/Await is syntactic sugar that makes promises easier to work with. It allows us to write asynchronous code that's similar in appearance to synchronous code. ",
     bulletPointItems: "",
-    image: "",
+    image: "IMG/async.png",
   },
   {
     title: "global-objects",
