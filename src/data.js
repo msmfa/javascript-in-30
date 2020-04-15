@@ -118,21 +118,21 @@ export const definitions = [
     text:
       "Recursion is a technique for iterating over an operation by having a function call itself repeatedly until it arrives at a result. Most loops can be rewritten recursively. ",
     bulletPointItems: "",
-    image: "",
+    image: "IMG/recursive.png",
   },
   {
     title: "nested-functions",
     text:
       "A function within another function. A nested function can 'inherit' the arguments and variables of its containing function. Put simply; the inner function contains the scope of the outer function.",
     bulletPointItems: "",
-    image: "",
+    image: "IMG/nestedfunc.png",
   },
   {
     title: "IIFEs",
     text:
       "An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. Variables declared inside the IIFE have private scope. ",
     bulletPointItems: "",
-    image: "",
+    image: "IMG/iife.png",
   },
   {
     title: "closure",
@@ -167,7 +167,7 @@ export const definitions = [
     text:
       "Memoization is the programmatic practice of making recursive/iterative functions run faster by caching the values that the function returns after its initial execution.",
     bulletPointItems: "",
-    image: "",
+    image: "IMG/memo.png",
   },
   {
     title: "asynchronous-javascript",

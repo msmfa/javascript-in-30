@@ -40,7 +40,3 @@ function displayTextAsList(listText) {
     .map((item) => `<li class='list'>${item}</li>`)
     .join("");
 }
-
-function styleContent(listText) {
-  console.log(listText.split(" "));
-}
