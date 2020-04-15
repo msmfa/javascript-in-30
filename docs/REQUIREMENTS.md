@@ -18,7 +18,6 @@
 
 - Add images to the advanced section
 - Post to discord and reddit to get feedback on improvements
-- Loop over already defined sections and highlight any that need clarity. Potentially try and get some community feedback.
 - Change colour of list item to be the same as the description
 - Potentially add on hover definitions of certain words
 - Potential add word highlighting in certain colour for clarity
