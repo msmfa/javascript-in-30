@@ -5,39 +5,39 @@ export const definitions = [
     text:
       "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
     bulletPointItems: "",
-    image: "/IMG/variable.png",
+    image: "IMG/variable.png",
   },
   {
     title: "scope",
     text:
       "Scope refers to the current context of code, which determines the accessibility of variables to JavaScript.",
     bulletPointItems: "",
-    image: "/IMG/scope.png",
+    image: "IMG/scope.png",
   },
   {
     title: "functions",
     text:
       "Functions in Javascript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
     bulletPointItems: "",
-    image: "/IMG/function.png",
+    image: "IMG/function.png",
   },
   {
     title: "for-loops",
     text: `A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.`,
     bulletPointItems: "",
-    image: "/IMG/for.png",
+    image: "IMG/for.png",
   },
   {
     title: "while-loops",
     text: `A while loop loops through a block of code "while" the condition is true.`,
     bulletPointItems: "",
-    image: "/IMG/whileloop.png",
+    image: "IMG/whileloop.png",
   },
   {
     title: "switch-statements",
     text: `A switch statement is an alternative to multiple if statements. Switch statements are a more efficient way to code when testing multiple conditions.`,
     bulletPointItems: "",
-    image: "/IMG/switch.png",
+    image: "IMG/switch.png",
   },
   {
     title: "arrow-functions",
@@ -45,7 +45,7 @@ export const definitions = [
     If we have only one argument, then parentheses around parameters can be omitted. Arrow functions do not have a 'this' context.
     `,
     bulletPointItems: "",
-    image: "/IMG/arrow.png",
+    image: "IMG/arrow.png",
   },
   {
     title: "functional-expressions",
@@ -54,7 +54,7 @@ export const definitions = [
     the scope where they were defined. They do not polute the global scope.
     `,
     bulletPointItems: "",
-    image: "/IMG/funcexp.png",
+    image: "IMG/funcexp.png",
   },
   {
     title: "array-methods",
@@ -88,7 +88,7 @@ export const definitions = [
     text:
       "The condition is evaluated as a boolean. If the condition is true it returns the first expression, else it returns the second condition.",
     bulletPointItems: "",
-    image: "/IMG/tern.png",
+    image: "IMGtern.png",
   },
   {
     title: "string-methods",
@@ -104,7 +104,7 @@ export const definitions = [
     text:
       "ES6 syntactic sugar that allows us to program in a more object-orientated way.  It allows us to define a constructor together with its prototype methods.",
     bulletPointItems: "",
-    image: "/IMG/classes.png",
+    image: "IMG/classes.png",
   },
   {
     title: "the-call-stack",
