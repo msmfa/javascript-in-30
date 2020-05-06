@@ -13,11 +13,11 @@
 - ~~Perhaps move 'this' to the basics section?~~
 - ~~This [Javascript.info Article](https://javascript.info/global-object) on the Global Object has errors. Submit Pull request.~~
 - ~~Make responsive~~
+- ~~Post to discord and reddit to get feedback on improvements~~
 
 ---
 
 - Add images to the advanced section
-- Post to discord and reddit to get feedback on improvements
 - Change colour of list item to be the same as the description
 - Potentially add on hover definitions of certain words
 - Potential add word highlighting in certain colour for clarity

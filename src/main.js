@@ -26,7 +26,6 @@ listContainer.addEventListener("click", function (e) {
 
   const bulletPointText = displayTextAsList(listText);
   displayContent(display, mainText, bulletPointText, exampleImage);
-  styleContent(listText);
 });
 
 function displayContent(display, mainText, bulletPointText, exampleImage) {
