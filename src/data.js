@@ -1,5 +1,7 @@
+/**
+ * The left hand values and their assosiated links and images
+ */
 export const definitions = [
-  //Items displayed in a bullet point style must be inluded in the bullet point property
   {
     title: "variables",
     text: "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",

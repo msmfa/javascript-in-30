@@ -1,7 +1,10 @@
+/* global styles */
+
 * {
   margin: 0;
   padding: 0;
   font-family: "San Francisco";
+  box-sizing: border-box;
 }
 
 @font-face {
@@ -10,23 +13,67 @@
   src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
 
+html,
+body {
+  height: 100%;
+}
+
 ul li {
   list-style-type: none;
   color: rgb(63, 63, 63);
 }
+
+a {
+  color: rgb(240, 158, 8);
+  text-decoration: none;
+}
+
+/* main app */
+
+.main {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.section-left {
+  flex: 1;
+  padding: 30px;
+  background-color: rgb(215, 215, 215);
+  height: 100%;
+}
+
+.section-left-subtitle {
+  color: rgb(61, 61, 61);
+  margin-bottom: 10px;
+}
+
+.section-left li:hover {
+  color: rgb(101, 180, 226);
+  cursor: pointer;
+}
+
+.section-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  height: 100%;
+}
+
 .list {
   list-style-type: none;
   padding: 0.3em;
   font-size: 0.8em;
 }
-.list-container li:hover {
-  color: rgb(101, 180, 226);
-  cursor: pointer;
-}
 
 .def-text {
   margin: 0.8em 5em;
 }
+
 .images {
   width: 80%;
   border-radius: 3px;
@@ -36,39 +83,6 @@ ul li {
   box-shadow: 6px 10px 11px 3px rgba(199, 199, 199, 1);
 }
 
-#display-container {
-  font-size: 1.4em;
-  text-align: center;
-  width: 62vw;
-  margin-top: -2em;
-  position: fixed;
-  margin-left: 33vw;
-  padding: 1em;
-}
-
-#display-container a {
-  color: rgb(240, 158, 8);
-  text-decoration: none;
-}
-
-.flex-container {
-  display: flex;
-  align-items: center;
-}
-
-.list-container {
-  border-right: 1px solid rgb(202, 202, 202);
-  background-color: rgb(243, 243, 243);
-  padding: 1rem;
-  width: 30vw;
-  font-size: 0.85em;
-}
-
-.subtitles {
-  color: rgb(61, 61, 61);
-  margin-bottom: 0.3rem;
-}
-
 @media only screen and (max-width: 875px) {
   .def-text {
     margin: 0.8em 1em;
@@ -76,5 +90,8 @@ ul li {
   .images {
     width: 95%;
     height: 20%;
+  }
+  .section-left {
+    padding: 10px;
   }
 }

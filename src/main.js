@@ -1,9 +1,11 @@
 import { definitions } from "./data.js";
 
-const listContainer = document.querySelector(".list-container");
+// the left hand side panel that contains the list of
+// links to be clicked
+const sectionLeft = document.querySelector(".section-left");
 
-listContainer.addEventListener("click", function (e) {
-  const display = document.getElementById("display-container");
+sectionLeft.addEventListener("click", function (e) {
+  const sectionRight = document.querySelector(".section-right");
 
   const mainText = definitions
     .map((item) => {
@@ -25,7 +27,7 @@ listContainer.addEventListener("click", function (e) {
     .join("");
 
   const bulletPointText = displayTextAsList(listText);
-  displayContent(display, mainText, bulletPointText, exampleImage);
+  displayContent(sectionRight, mainText, bulletPointText, exampleImage);
 });
 
 function displayContent(display, mainText, bulletPointText, exampleImage) {
