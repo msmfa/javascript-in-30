@@ -7,7 +7,13 @@ const sectionLeft = document.querySelector(".section-left");
  * in definitions
  */
 function renderHTML(DOMElement, text, bulletPointText, image) {
-  DOMElement.innerHTML = `<div class='def-text'>${text}</div><div class="bullet-text">${bulletPointText}</div>${image}`;
+  const HTMLText = `<p class='def-text'>${text}</p>`;
+  const HTMLBulletPoints = `<div class="bullet-text">${bulletPointText}</div>`;
+  const HTMLImage = image ? `<img class="image"src=${image}>` : null;
+
+  DOMElement.innerHTML = image
+    ? `${HTMLText}${HTMLBulletPoints}${HTMLImage}`
+    : `${HTMLText}${HTMLBulletPoints}`;
 }
 
 function renderBulletPointsAsList(bulletPoints) {
@@ -18,7 +24,7 @@ function renderBulletPointsAsList(bulletPoints) {
     .join("");
 }
 
-// when the user clicks on a link in the left panel update the DOM
+// When the user clicks on a link in the left panel update the DOM
 sectionLeft.addEventListener("click", function (e) {
   const sectionRight = document.querySelector(".section-right");
   const selectedValue = e.target.id;
@@ -28,8 +34,10 @@ sectionLeft.addEventListener("click", function (e) {
 
   const { image: imageUrl, text, bulletPointItems } = selectedDefinition;
 
-  const HTMLImage = `<img class ="images"src=${imageUrl}>`;
-  const HTMLBulletPoints = renderBulletPointsAsList(bulletPointItems);
-
-  renderHTML(sectionRight, text, HTMLBulletPoints, HTMLImage);
+  renderHTML(
+    sectionRight,
+    text,
+    renderBulletPointsAsList(bulletPointItems),
+    imageUrl ?? null
+  );
 });

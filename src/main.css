@@ -74,7 +74,7 @@ a {
   margin: 0.8em 5em;
 }
 
-.images {
+.image {
   width: 80%;
   border-radius: 3px;
   margin-top: 2em;
@@ -87,7 +87,7 @@ a {
   .def-text {
     margin: 0.8em 1em;
   }
-  .images {
+  .image {
     width: 95%;
     height: 20%;
   }
