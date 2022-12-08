@@ -24,7 +24,7 @@ ul li {
 }
 
 a {
-  color: rgb(240, 158, 8);
+  color: #f09e3f;
   text-decoration: none;
 }
 
@@ -49,7 +49,6 @@ a {
 }
 
 .section-left li:hover {
-  color: rgb(101, 180, 226);
   cursor: pointer;
 }
 

@@ -34,6 +34,16 @@ sectionLeft.addEventListener("click", function (e) {
 
   const { image: imageUrl, text, bulletPointItems } = selectedDefinition;
 
+  // When the user clicks on a list element set it's color to orange
+  // and set the rest to black
+  document.querySelectorAll(".section-left li").forEach((element) => {
+    if (element.id === selectedValue) {
+      element.style.color = "#F09E3F";
+    } else {
+      element.style.color = "black";
+    }
+  });
+
   renderHTML(
     sectionRight,
     text,
