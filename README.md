@@ -1,6 +1,6 @@
 # Javascript in less than 30 words
 
-[Link to Live Demo](https://javascript-in-30-words.netlify.app/)
+[Website](https://www.javascriptin30words.com/)
 
 This projects purpose is to serve as a pre-interview refresher.
 
@@ -37,6 +37,6 @@ Tests run all 35 examples, verify the definition word limit, check the rendered 
 
 ## Deploy
 
-The existing Netlify project deploys the `master` branch. `netlify.toml` sets the build command, publish directory, Node version, and canonical site origin (`SITE_URL`). Set `SITE_URL` to `https://www.javascriptin30words.com` once the domain is registered, connected in Netlify, and covered by HTTPS. Until then it intentionally points to the working Netlify address.
+The existing Netlify project deploys the `master` branch. `netlify.toml` sets the build command, publish directory, Node version, and canonical site origin (`SITE_URL`). The production origin is `https://www.javascriptin30words.com`; connect the registered domain in Netlify and verify HTTPS before publishing this configuration. For another host, override `SITE_URL` when building.
 
 No single-page-app fallback is needed: each route has its own `index.html`, and unknown URLs return the custom 404 page. `sitemap.xml` and `robots.txt` are generated with the selected canonical origin.

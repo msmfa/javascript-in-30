@@ -2,7 +2,7 @@ import { mkdir, rm, writeFile, copyFile } from 'node:fs/promises';
 import { definitions } from '../src/data.js';
 
 const output = new URL('../build/', import.meta.url);
-const requestedOrigin = new URL(process.env.SITE_URL || 'https://javascript-in-30-words.netlify.app');
+const requestedOrigin = new URL(process.env.SITE_URL || 'https://www.javascriptin30words.com');
 if (!['http:', 'https:'].includes(requestedOrigin.protocol)) throw new Error('SITE_URL must be an HTTP(S) URL.');
 const origin = requestedOrigin.origin;
 const brand = 'JavaScript in 30 Words';

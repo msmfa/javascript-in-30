@@ -9,7 +9,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (path) => readFileSync(new URL(`../build/${path}`, import.meta.url), 'utf8');
 const decode = (text) => text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
 execFileSync(process.execPath, ['scripts/build.mjs'], {cwd:root});
-const expectedOrigin = new URL(process.env.SITE_URL || 'https://javascript-in-30-words.netlify.app').origin;
+const expectedOrigin = new URL(process.env.SITE_URL || 'https://www.javascriptin30words.com').origin;
 
 test('all original topics have unique descriptive URLs', () => {
   const originalIds = ['variables','functions','functional-expressions','operators','comparisons','con-operations','logical-opp','for-loops','while-loops','switch-statements','arrow-functions','array-methods','string-methods','classes','scope','the-call-stack','event-loop','IIFEs','nested-functions','recursion','memoization','closure','hoisting','currying','value-vs-reference','asynchronous-javascript','promises','async-await','global-objects','this','call','apply','bind','prototypal-inheritance','polymorphism'];

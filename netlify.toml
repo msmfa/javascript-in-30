@@ -4,6 +4,6 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  SITE_URL = "https://javascript-in-30-words.netlify.app"
+  SITE_URL = "https://www.javascriptin30words.com"
 
 # Static directory routes resolve without a client-side router or fallback.
