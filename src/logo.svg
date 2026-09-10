@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>JavaScript in 30 words</title>
+  <rect x="1" y="1" width="62" height="62" rx="17" fill="#174fb4"/>
+  <path fill="none" stroke="#9cc8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="m24 20-11 12 11 12m16-24 11 12-11 12"/>
+</svg>
