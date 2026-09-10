@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { definitions } from '../src/data.js';
+import {indexNowKey} from '../src/search-config.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const read = (path) => readFileSync(new URL(`../build/${path}`, import.meta.url), 'utf8');
@@ -76,6 +77,29 @@ test('sitemap and homepage expose every concept to crawlers', () => {
     for (const item of concept.definitionItems || []) assert.ok(decode(html).includes(item));
   }
   assert.ok(read('robots.txt').includes(`Sitemap: ${expectedOrigin}/sitemap.xml`));
+});
+
+test('indexable pages have one heading, unique metadata, and accurate structured breadcrumbs',()=>{
+  const descriptions = new Set();
+  for (const path of ['/',...definitions.map(item=>`/${item.slug}/`)]) {
+    const html = read(path.slice(1)+'index.html');
+    assert.equal((html.match(/<h1\b/g) || []).length,1);
+    const description = decode(html.match(/<meta name="description" content="([^"]+)"/)[1]);
+    assert.ok(description.length > 30 && description.length <= 160);
+    descriptions.add(description);
+    assert.ok(!html.includes('content="noindex"'));
+    const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/)[1])['@graph'];
+    assert.equal(graph.find(item=>item['@type'] === 'WebPage').url,expectedOrigin+path);
+    assert.equal(graph.find(item=>item['@type'] === 'WebSite').name,'JavaScript in 30 Words');
+    if(path !== '/') {
+      const crumbs = graph.find(item=>item['@type'] === 'BreadcrumbList').itemListElement;
+      assert.deepEqual(crumbs.map(item=>item.item),[expectedOrigin+'/',expectedOrigin+path]);
+      assert.deepEqual(crumbs.map(item=>item.position),[1,2]);
+    }
+  }
+  assert.equal(descriptions.size,36);
+  assert.equal(read(indexNowKey+'.txt'),indexNowKey);
+  assert.match(read('_redirects'),/^https:\/\/javascript-in-30-words\.netlify\.app\/\*/);
 });
 
 test('every footer has unique Practice Pad campaign attribution and the contact address',()=>{

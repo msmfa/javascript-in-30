@@ -7,6 +7,7 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import { definitions } from '../src/data.js';
 import { securityHeaders } from './security.mjs';
 import { analyticsConfig } from '../src/analytics-config.js';
+import { indexNowKey } from '../src/search-config.js';
 
 hljs.registerLanguage('javascript', javascript);
 
@@ -21,6 +22,10 @@ const url = (path = '/') => origin + path;
 const pathFor = (concept) => `/${concept.slug}/`;
 const labelFor = (concept) => concept.id === 'this' ? 'this keyword' : concept.label;
 const summaryFor = (concept) => [concept.text, ...(concept.definitionItems || [])].filter(Boolean).join(' ');
+const searchDescription = (concept) => {
+  const text = `${concept.label} in JavaScript: ${concept.text || concept.explanation}`.replace(/\s+/g, ' ').trim();
+  return text.length <= 160 ? text : text.slice(0,157).replace(/\s+\S*$/, '') + '…';
+};
 const interfaceFont = await readFile(new URL('../src/fonts/manrope-latin-variable.woff2', import.meta.url));
 const interfaceFontPath = `/assets/manrope.${createHash('sha256').update(interfaceFont).digest('hex').slice(0,12)}.woff2`;
 const stylesheetSource = (await readFile(new URL('../src/main.css', import.meta.url), 'utf8')).replace('__UI_FONT_URL__', interfaceFontPath);
@@ -115,6 +120,17 @@ function shareMenu(title, path) {
 
 function document({ title, description, path, content, current, noindex = false }) {
   const pageTitle = `${title} | ${brand}`;
+  const structuredData = {
+    '@context':'https://schema.org',
+    '@graph':[
+      {'@type':'WebSite','@id':url('/#website'),url:url('/'),name:brand,inLanguage:'en'},
+      {'@type':'WebPage','@id':url(path),url:url(path),name:title,description,inLanguage:'en',isPartOf:{'@id':url('/#website')},...(current ? {breadcrumb:{'@id':url(path+'#breadcrumb')}} : {})},
+      ...(current ? [{'@type':'BreadcrumbList','@id':url(path+'#breadcrumb'),itemListElement:[
+        {'@type':'ListItem',position:1,name:'All concepts',item:url('/')},
+        {'@type':'ListItem',position:2,name:labelFor(current),item:url(path)},
+      ]}] : []),
+    ],
+  };
   const practiceURL = new URL('https://www.practice-pad.app/');
   practiceURL.search = new URLSearchParams({utm_source:'javascriptin30words', utm_medium:'referral', utm_campaign:'concept_to_practice', utm_content:`footer_${current?.slug || (noindex ? '404' : 'home')}`}).toString();
   return `<!doctype html>
@@ -130,7 +146,11 @@ function document({ title, description, path, content, current, noindex = false 
   <meta property="og:title" content="${escapeHTML(pageTitle)}">
   <meta property="og:description" content="${escapeHTML(description)}">
   <meta property="og:url" content="${url(path)}">
+  <meta property="og:image" content="${url(logoPath)}">
+  <meta property="og:image:alt" content="JavaScript in 30 Words logo">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="${url(logoPath)}">
+  ${noindex ? '' : `<script type="application/ld+json">${JSON.stringify(structuredData).replace(/</g, '\\u003c')}</script>`}
   <link rel="icon" href="${logoPath}" type="image/webp" sizes="64x64">
   <link rel="preload" href="${interfaceFontPath}" as="font" type="font/woff2" crossorigin>
   <style>${stylesheet.styles}</style>
@@ -174,7 +194,7 @@ function document({ title, description, path, content, current, noindex = false 
 
 function home() {
   return document({title:'JavaScript Concepts Explained Simply', description:`Refresh ${definitions.length} JavaScript concepts with definitions in 30 words or fewer, useful code examples, and clear explanations for interview preparation.`, path:'/', content:`
-    <header class="page-heading"><p class="eyebrow">Pre interview prep</p><p class="lead">JavaScript concepts in 30 words or fewer, with code to make them stick. Pick a topic to get started.</p></header>
+    <header class="page-heading"><h1 class="eyebrow">Pre interview prep</h1><p class="lead">JavaScript concepts in 30 words or fewer, with code to make them stick. Pick a topic to get started.</p></header>
     ${groups.map((group) => `<section class="topic-section"><h2>${group}</h2><div class="topic-grid">${definitions.filter((item) => item.group === group).map((item) => `<article class="topic-card"><h3><a href="${pathFor(item)}">${escapeHTML(labelFor(item))} <span aria-hidden="true">↗</span></a></h3>${renderDefinition(item, 'topic-definition')}</article>`).join('')}</div></section>`).join('')}
   `});
 }
@@ -184,7 +204,7 @@ function conceptPage(concept, index) {
   const next = definitions[index + 1];
   const previousArrow = '<svg class="concept-direction" aria-hidden="true" viewBox="0 0 20 20"><path d="M16 10H4m5-5-5 5 5 5"></path></svg>';
   const nextArrow = '<svg class="concept-direction" aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h12m-5-5 5 5-5 5"></path></svg>';
-  return document({title:concept.heading, description:summaryFor(concept), path:pathFor(concept), current:concept, content:`
+  return document({title:concept.heading, description:searchDescription(concept), path:pathFor(concept), current:concept, content:`
     <article class="concept">
       <header class="page-heading"><h1>${escapeHTML(concept.heading)}</h1>${renderDefinition(concept)}</header>
       <section class="example" aria-label="JavaScript code example"><pre tabindex="0" aria-label="JavaScript code example"><code class="hljs language-javascript">${hljs.highlight(concept.code, {language:'javascript'}).value}</code></pre>${concept.output.length ? `<div class="example-output"><input class="output-toggle" type="checkbox" id="output-${escapeHTML(concept.id)}"><label for="output-${escapeHTML(concept.id)}"><span class="output-heading"><span>Output</span><span class="output-action" aria-hidden="true"></span></span><span class="output-content"><samp>${escapeHTML(concept.output.join('\n'))}</samp></span></label></div>` : ''}</section>
@@ -218,5 +238,8 @@ for (const [index, concept] of definitions.entries()) {
 await writeFile(new URL('404.html', output), document({title:'Page Not Found', description:'Find a JavaScript concept in our quick reference.', path:'/404.html', noindex:true, content:'<div class="page-heading"><p class="eyebrow">404</p><h1>That page isn’t here.</h1><p class="lead">Find the explanation you need in the concept library.</p><a class="back-link" href="/">Browse all concepts →</a></div>'}));
 await writeFile(new URL('sitemap.xml', output), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', ...definitions.map(pathFor)].map((path) => `<url><loc>${url(path)}</loc></url>`).join('')}</urlset>\n`);
 await writeFile(new URL('robots.txt', output), `User-agent: *\nAllow: /\n\nSitemap: ${url('/sitemap.xml')}\n`);
+if (!/^[a-f0-9]{32}$/.test(indexNowKey)) throw new Error('Invalid IndexNow verification key.');
+await writeFile(new URL(`${indexNowKey}.txt`, output), indexNowKey);
+await writeFile(new URL('_redirects', output), `https://javascript-in-30-words.netlify.app/* ${origin}/:splat 301!\n`);
 await writeFile(new URL('_headers', output), `/*\n${Object.entries(securityHeaders).map(([key,value]) => `  ${key}: ${value}`).join('\n')}\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n`);
 console.log(`Built ${definitions.length} concept pages, the index, sitemap and 404 page for ${origin}.`);
