@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "test": "node --test test/site.test.mjs"
+    "test": "node --test test/*.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -21,10 +21,9 @@
   "type": "module",
   "homepage": "https://github.com/msmfa/javascript-in-30#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.9.5",
-    "babel-jest": "^25.3.0",
+    "clean-css": "5.3.3",
     "highlight.js": "11.12.0",
-    "jest": "^25.3.0"
+    "terser": "5.44.1"
   },
   "engines": {
     "node": ">=22"

@@ -1,11 +1,11 @@
-// Each definition is at most 30 words. Code examples are exercised by npm test.
+// Descriptions preserve the original site copy. Code examples are exercised by npm test.
 export const definitions = [
   {
     "id": "variables",
     "label": "Variables",
     "slug": "javascript-variables",
     "heading": "JavaScript Variables Explained Simply",
-    "text": "Variables are named bindings that hold values. Use let when reassignment is needed and const when the binding should stay fixed; both are block-scoped.",
+    "text": "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
     "code": "let lessonsCompleted = 2;\nlessonsCompleted = lessonsCompleted + 1;\n\nconst learner = { name: \"Ada\" };\nlearner.name = \"Grace\";\nconsole.log(lessonsCompleted);\nconsole.log(learner.name);",
     "output": [
       "3",
@@ -20,7 +20,7 @@ export const definitions = [
     "label": "Functions",
     "slug": "javascript-functions",
     "heading": "JavaScript Functions Explained Simply",
-    "text": "Functions are reusable blocks of code that can accept arguments, perform a task, and return a value.",
+    "text": "Functions in Javascript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
     "code": "function calculateTotal(price, quantity) {\n  return price * quantity;\n}\n\nconst total = calculateTotal(8, 3);\nconsole.log(total);\nconsole.log(calculateTotal(5, 2));",
     "output": [
       "24",
@@ -35,7 +35,7 @@ export const definitions = [
     "label": "Function Expressions",
     "slug": "javascript-function-expressions",
     "heading": "JavaScript Function Expressions Explained Simply",
-    "text": "A function expression creates a function inside an expression, often assigning it to a variable or passing it as an argument.",
+    "text": "Functional expressions load only when the interpreter reaches that line of code. They're not hoisted, allowing them to retain a copy of the local variables from the scope where they were defined. They do not polute the global scope.",
     "code": "const formatLesson = function (number, title) {\n  return number + \". \" + title;\n};\n\nconsole.log(formatLesson(1, \"Variables\"));\nconsole.log(formatLesson(2, \"Functions\"));",
     "output": [
       "1. Variables",
@@ -50,7 +50,7 @@ export const definitions = [
     "label": "Operators",
     "slug": "javascript-operators",
     "heading": "JavaScript Operators Explained Simply",
-    "text": "Operators act on values to produce results, including arithmetic, assignment, comparisons, and logical operations.",
+    "text": "",
     "code": "const price = 12;\nconst quantity = 3;\nlet total = price * quantity;\ntotal -= 5;\n\nconsole.log(total);\nconsole.log(2 + 3 * 4);\nconsole.log((2 + 3) * 4);",
     "output": [
       "31",
@@ -59,14 +59,23 @@ export const definitions = [
     ],
     "explanation": "Multiplication calculates the subtotal, and -= subtracts a discount and assigns the result. Multiplication normally happens before addition; parentheses let you choose a different grouping.",
     "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
-    "group": "Fundamentals"
+    "group": "Fundamentals",
+    "definitionItems": [
+      "+ Addition",
+      "- Subtraction",
+      "* Multiply",
+      "/ Divide",
+      "% Modulus",
+      "++ Increment",
+      "-- Decrement"
+    ]
   },
   {
     "id": "comparisons",
     "label": "Comparisons",
     "slug": "javascript-comparisons",
     "heading": "JavaScript Comparisons Explained Simply",
-    "text": "Comparison operators compare two values and return a boolean. Strict equality (===) avoids type conversion; loose equality (==) may convert types.",
+    "text": "",
     "code": "const enteredScore = \"30\";\nconst targetScore = 30;\n\nconsole.log(enteredScore === targetScore);\nconsole.log(enteredScore == targetScore);\nconsole.log(Number(enteredScore) === targetScore);\nconsole.log(targetScore >= 20);",
     "output": [
       "false",
@@ -76,14 +85,22 @@ export const definitions = [
     ],
     "explanation": "A string and a number are different types, so strict equality returns false. Converting the string explicitly makes the intended comparison clear; >= tests whether a value meets a threshold.",
     "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality",
-    "group": "Fundamentals"
+    "group": "Fundamentals",
+    "definitionItems": [
+      "== Equal to",
+      "=== Equal to Value and Type",
+      "!= Not Equal",
+      "!== Not Equal in Value or Type",
+      "> Greater",
+      "< Smaller"
+    ]
   },
   {
     "id": "con-operations",
     "label": "Conditional (Ternary) Operator",
     "slug": "javascript-conditional-operator",
     "heading": "JavaScript Conditional (Ternary) Operator Explained Simply",
-    "text": "The conditional operator chooses between two expressions based on a condition. It uses condition ? valueIfTrue : valueIfFalse.",
+    "text": "The condition is evaluated as a boolean. If the condition is true it returns the first expression, else it returns the second condition.",
     "code": "function progressMessage(completed, total) {\n  return completed === total ? \"All done!\" : \"Keep learning\";\n}\n\nconsole.log(progressMessage(3, 5));\nconsole.log(progressMessage(5, 5));",
     "output": [
       "Keep learning",
@@ -98,7 +115,7 @@ export const definitions = [
     "label": "Logical Operators",
     "slug": "javascript-logical-operators",
     "heading": "JavaScript Logical Operators Explained Simply",
-    "text": "Logical operators combine or choose values. && and || short-circuit and return operands, while ! converts a value to a boolean and negates it.",
+    "text": "There are three logical operators in JavaScript:",
     "code": "const nickname = \"\";\nconst isSignedIn = true;\nconst hasCompletedLesson = false;\n\nconsole.log(nickname || \"Guest\");\nconsole.log(isSignedIn && \"Welcome back\");\nconsole.log(!hasCompletedLesson);",
     "output": [
       "Guest",
@@ -107,14 +124,19 @@ export const definitions = [
     ],
     "explanation": "|| returns the first truthy operand, or the last operand if none is truthy; && returns the first falsy operand, or the last if all are truthy. Both skip evaluating later operands once the result is known, so their results need not be booleans.",
     "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators#logical_operators",
-    "group": "Fundamentals"
+    "group": "Fundamentals",
+    "definitionItems": [
+      "|| = OR",
+      "&& = AND",
+      "! = NOT"
+    ]
   },
   {
     "id": "for-loops",
     "label": "For Loops",
     "slug": "javascript-for-loops",
     "heading": "JavaScript For Loops Explained Simply",
-    "text": "A for loop repeats code using an optional initialization, condition, and update expression. The condition is checked before each iteration.",
+    "text": "A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.",
     "code": "const lessons = [\"Variables\", \"Functions\", \"Arrays\"];\n\nfor (let index = 0; index < lessons.length; index++) {\n  const number = index + 1;\n  console.log(number + \". \" + lessons[index]);\n}",
     "output": [
       "1. Variables",
@@ -130,7 +152,7 @@ export const definitions = [
     "label": "While Loops",
     "slug": "javascript-while-loops",
     "heading": "JavaScript While Loops Explained Simply",
-    "text": "A while loop repeats a statement while its condition is truthy, checking the condition before every iteration.",
+    "text": "A while loop loops through a block of code \"while\" the condition is true.",
     "code": "let questionsRemaining = 3;\n\nwhile (questionsRemaining > 0) {\n  console.log(\"Questions left: \" + questionsRemaining);\n  questionsRemaining--;\n}\nconsole.log(\"Quiz complete\");",
     "output": [
       "Questions left: 3",
@@ -147,7 +169,7 @@ export const definitions = [
     "label": "Switch Statements",
     "slug": "javascript-switch-statements",
     "heading": "JavaScript Switch Statements Explained Simply",
-    "text": "A switch statement matches an expression against case values using strict equality. Execution continues through subsequent cases unless a break or another exit stops it.",
+    "text": "A switch statement is an alternative to multiple if statements. Switch statements are a more efficient way to code when testing multiple conditions.",
     "code": "const difficulty = \"beginner\";\nlet nextLesson;\n\nswitch (difficulty) {\n  case \"beginner\":\n    nextLesson = \"Variables\";\n    break;\n  case \"intermediate\":\n    nextLesson = \"Closures\";\n    break;\n  default:\n    nextLesson = \"Choose a difficulty\";\n}\nconsole.log(nextLesson);",
     "output": [
       "Variables"
@@ -161,7 +183,7 @@ export const definitions = [
     "label": "Arrow Functions",
     "slug": "javascript-arrow-functions",
     "heading": "JavaScript Arrow Functions Explained Simply",
-    "text": "Arrow functions provide compact function syntax and capture this from their surrounding scope. They cannot be used as constructors.",
+    "text": "A concise syntax for creating functions. If we have only one argument, then parentheses around parameters can be omitted. Arrow functions do not have a 'this' context.",
     "code": "const learner = {\n  name: \"Ada\",\n  topics: [\"scope\", \"closures\"],\n  summaries() {\n    return this.topics.map(topic => this.name + \": \" + topic);\n  }\n};\n\nconsole.log(learner.summaries().join(\" | \"));",
     "output": [
       "Ada: scope | Ada: closures"
@@ -175,7 +197,7 @@ export const definitions = [
     "label": "Array Methods",
     "slug": "javascript-array-methods",
     "heading": "JavaScript Array Methods Explained Simply",
-    "text": "Array methods help transform, filter, search, combine, and iterate over arrays. Some create new arrays; others modify the original array.",
+    "text": "",
     "code": "const scores = [10, 25, 30];\nconst passing = scores.filter(score => score >= 20);\nconst labels = passing.map(score => score + \" points\");\n\nconsole.log(labels.join(\", \"));\nconsole.log(scores.join(\", \"));\nscores.push(15);\nconsole.log(scores.join(\", \"));",
     "output": [
       "25 points, 30 points",
@@ -184,14 +206,19 @@ export const definitions = [
     ],
     "explanation": "filter selects passing scores and map transforms them into labels, creating new arrays. push changes the original scores array, while join turns its values into a readable string.",
     "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
-    "group": "Fundamentals"
+    "group": "Fundamentals",
+    "definitionItems": [
+      "forEach() - loop over array's items",
+      "map() - new array by calling the provided function in every element",
+      "filter() - new array with only elements that pass the condition"
+    ]
   },
   {
     "id": "string-methods",
     "label": "String Methods",
     "slug": "javascript-string-methods",
     "heading": "JavaScript String Methods Explained Simply",
-    "text": "String methods inspect and transform text. Strings are immutable, so methods return results without changing the original string.",
+    "text": "",
     "code": "const enteredTopic = \"  JavaScript Closures  \";\nconst topic = enteredTopic.trim().toLowerCase();\n\nconsole.log(topic);\nconsole.log(topic.includes(\"closures\"));\nconsole.log(topic.replace(\" \", \"-\"));\nconsole.log(enteredTopic === \"  JavaScript Closures  \");",
     "output": [
       "javascript closures",
@@ -201,14 +228,21 @@ export const definitions = [
     ],
     "explanation": "trim removes surrounding whitespace and toLowerCase normalizes the text. includes checks for a substring, and replace creates another string; the original enteredTopic value stays unchanged.",
     "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "group": "Fundamentals"
+    "group": "Fundamentals",
+    "definitionItems": [
+      "concat() Combines strings",
+      "indexOf() returns index of character",
+      "match() matches based on REGEXP",
+      "slice() Returns a substring based on the “start” and “end” parameters",
+      "split() Splits a string according to the specified delimiter"
+    ]
   },
   {
     "id": "classes",
     "label": "Classes",
     "slug": "javascript-classes",
     "heading": "JavaScript Classes Explained Simply",
-    "text": "Classes are templates for creating objects with shared methods. They build on JavaScript's prototype system and can extend other classes.",
+    "text": "ES6 syntactic sugar that allows us to program in a more object-orientated way. It allows us to define a constructor together with its prototype methods.",
     "code": "class Lesson {\n  constructor(title) {\n    this.title = title;\n    this.completed = false;\n  }\n  complete() {\n    this.completed = true;\n    return this.title + \" complete\";\n  }\n}\n\nconst lesson = new Lesson(\"Closures\");\nconsole.log(lesson.complete());\nconsole.log(lesson.completed);",
     "output": [
       "Closures complete",
@@ -223,7 +257,7 @@ export const definitions = [
     "label": "Scope",
     "slug": "javascript-scope",
     "heading": "JavaScript Scope Explained Simply",
-    "text": "Scope determines where variables can be accessed. JavaScript has global, module, function, and block scopes; nested scopes can access variables in their surrounding scopes.",
+    "text": "Scope refers to the current context of code, which determines the accessibility of variables to JavaScript.",
     "code": "const course = \"JavaScript\";\n\nfunction showLesson() {\n  const topic = \"Scope\";\n  if (true) {\n    const message = course + \": \" + topic;\n    console.log(message);\n  }\n  console.log(typeof message);\n}\nshowLesson();\nconsole.log(typeof topic);",
     "output": [
       "JavaScript: Scope",
@@ -239,7 +273,7 @@ export const definitions = [
     "label": "The call stack",
     "slug": "javascript-call-stack",
     "heading": "JavaScript Call Stack Explained Simply",
-    "text": "The call stack tracks active function calls. Calling a function adds a frame; returning removes it, allowing the previous function to resume.",
+    "text": "A Call Stack is a data structure that stores and manages function invocations. A kind of 'To-do list' for Javascript that uses the Last In, First Out (LIFO) principle.",
     "code": "function save() {\n  console.log(\"Saving\");\n}\nfunction publish() {\n  console.log(\"Starting\");\n  save();\n  console.log(\"Published\");\n}\npublish();",
     "output": [
       "Starting",
@@ -255,7 +289,7 @@ export const definitions = [
     "label": "Event loop",
     "slug": "javascript-event-loop",
     "heading": "The JavaScript Event Loop Explained Simply",
-    "text": "The event loop coordinates queued work. Synchronous code finishes first; promise callbacks run as microtasks before the next timer callback can run.",
+    "text": "The Event Loop monitors the Call Stack and the Callback Queue. If the Call Stack is empty, it pushes the first event from the queue to the Call Stack.",
     "code": "console.log(\"Start\");\nsetTimeout(() => {\n  console.log(\"Timer\");\n}, 0);\nPromise.resolve().then(() => {\n  console.log(\"Promise\");\n});\nconsole.log(\"End\");",
     "output": [
       "Start",
@@ -272,7 +306,7 @@ export const definitions = [
     "label": "IIFEs",
     "slug": "javascript-iife",
     "heading": "JavaScript IIFEs Explained Simply",
-    "text": "An immediately invoked function expression runs as soon as it is created, providing a local scope for temporary variables and returning a result if needed.",
+    "text": "An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined. Variables declared inside the IIFE have private scope.",
     "code": "const greeting = (() => {\n  const name = \"Sam\";\n  return `Hello, ${name}!`;\n})();\nconsole.log(greeting);",
     "output": [
       "Hello, Sam!"
@@ -286,7 +320,7 @@ export const definitions = [
     "label": "Nested functions",
     "slug": "javascript-nested-functions",
     "heading": "JavaScript Nested Functions Explained Simply",
-    "text": "A nested function is defined inside another function. It can access variables in its enclosing scopes, letting related logic share local data.",
+    "text": "A function within another function. A nested function can 'inherit' the arguments and variables of its containing function. Put simply; the inner function contains the scope of the outer function.",
     "code": "function orderTotal(price, quantity) {\n  function subtotal() {\n    return price * quantity;\n  }\n  return subtotal() + 5;\n}\nconsole.log(orderTotal(12, 3));",
     "output": [
       "41"
@@ -300,7 +334,7 @@ export const definitions = [
     "label": "Recursion",
     "slug": "javascript-recursion",
     "heading": "JavaScript Recursion Explained Simply",
-    "text": "Recursion solves a problem by calling the same function with a smaller case. A base case stops the calls and lets results return.",
+    "text": "Recursion is a technique for iterating over an operation by having a function call itself repeatedly until it arrives at a result. Most loops can be rewritten recursively.",
     "code": "function factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}\nconsole.log(factorial(5));\nconsole.log(factorial(0));",
     "output": [
       "120",
@@ -315,7 +349,7 @@ export const definitions = [
     "label": "Memoization",
     "slug": "javascript-memoization",
     "heading": "JavaScript Memoization Explained Simply",
-    "text": "Memoization caches a function's result for an input, so repeated calls can reuse it. It works reliably when the same input always produces the same result.",
+    "text": "Memoization is the programmatic practice of making recursive/iterative functions run faster by caching the values that the function returns after its initial execution.",
     "code": "const cache = new Map();\nlet calculations = 0;\nfunction square(n) {\n  if (cache.has(n)) return cache.get(n);\n  calculations++;\n  const result = n * n;\n  cache.set(n, result);\n  return result;\n}\nconsole.log(square(8));\nconsole.log(square(8));\nconsole.log(calculations);",
     "output": [
       "64",
@@ -331,7 +365,7 @@ export const definitions = [
     "label": "Closures",
     "slug": "javascript-closures",
     "heading": "JavaScript Closures Explained Simply",
-    "text": "A closure combines a function with access to its surrounding lexical environment. That access remains available even after the outer function has returned.",
+    "text": "The combination of a function and the environment in which it was declared. In Javascript all functions form closures. A common use case is creating private functions.",
     "code": "function createCounter() {\n  let count = 0;\n  return function increment() {\n    count += 1;\n    return count;\n  };\n}\nconst next = createCounter();\nconsole.log(next());\nconsole.log(next());",
     "output": [
       "1",
@@ -346,7 +380,7 @@ export const definitions = [
     "label": "Hoisting",
     "slug": "javascript-hoisting",
     "heading": "JavaScript Hoisting Explained Simply",
-    "text": "Hoisting describes declaration behavior before execution reaches a declaration. Function declarations are callable early; var starts as undefined; let and const remain inaccessible until initialization.",
+    "text": "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their scope before code execution.",
     "code": "console.log(greet());\nconsole.log(score);\nfunction greet() {\n  return \"Hello!\";\n}\nvar score = 7;\nconsole.log(score);",
     "output": [
       "Hello!",
@@ -362,7 +396,7 @@ export const definitions = [
     "label": "Currying",
     "slug": "javascript-currying",
     "heading": "JavaScript Currying Explained Simply",
-    "text": "Currying transforms a function with multiple arguments into a sequence of functions that each accept one argument, letting you supply those arguments in separate calls.",
+    "text": "Currying is the process of transferring a function with many arguments into the same function with fewer arguments. Allowing you to partially apply functions and pass them to higher-order functions.",
     "code": "function multiply(a, b) {\n  return a * b;\n}\nconst curriedMultiply = a => b => multiply(a, b);\nconst double = curriedMultiply(2);\nconsole.log(curriedMultiply(3)(4));\nconsole.log(double(7));",
     "output": [
       "12",
@@ -377,7 +411,7 @@ export const definitions = [
     "label": "Value vs reference",
     "slug": "javascript-value-vs-reference",
     "heading": "JavaScript Value vs Reference Explained Simply",
-    "text": "JavaScript passes arguments by value. For objects, that value is a reference: functions can mutate the shared object, but reassigning a parameter does not replace the caller's variable.",
+    "text": "Pass by value means the actual value is passed on. Pass by reference means a number (where the value is stored in memory) is passed on.",
     "code": "function update(points, profile) {\n  points = 99;\n  profile.name = \"Mira\";\n  profile = { name: \"Someone else\" };\n}\nconst points = 10;\nconst profile = { name: \"Sam\" };\nupdate(points, profile);\nconsole.log(points);\nconsole.log(profile.name);",
     "output": [
       "10",
@@ -392,7 +426,7 @@ export const definitions = [
     "label": "Asynchronous JavaScript",
     "slug": "javascript-asynchronous-programming",
     "heading": "Asynchronous JavaScript Explained Simply",
-    "text": "Asynchronous programming lets JavaScript continue while an operation is pending, then handle its result later using callbacks, promises, or async and await.",
+    "text": "Javascript is a single-threaded language. Meaning it performs one action at a time. Asynchronous Javascript is a way to perform multiple actions simultaneously using callbacks, promises, and async/await.",
     "code": "function loadMessage(callback) {\n  setTimeout(() => callback(\"Message ready\"), 10);\n}\nconsole.log(\"Loading\");\nloadMessage((message) => {\n  console.log(message);\n});\nconsole.log(\"Other work continues\");",
     "output": [
       "Loading",
@@ -408,7 +442,7 @@ export const definitions = [
     "label": "Promises",
     "slug": "javascript-promises",
     "heading": "JavaScript Promises Explained Simply",
-    "text": "A promise represents an operation's eventual result. It starts pending, then becomes fulfilled with a value or rejected with a reason.",
+    "text": "A promise is an object that may produce a value sometime in the future. Either a resolved value or a reason that it’s not resolved (e.g., a network error occurred).",
     "code": "const price = Promise.resolve(20);\nprice\n  .then((amount) => amount * 2)\n  .then((total) => {\n    console.log(total);\n    throw new Error(\"Payment declined\");\n  })\n  .catch((error) => {\n    console.log(error.message);\n  });",
     "output": [
       "40",
@@ -423,7 +457,7 @@ export const definitions = [
     "label": "Async and await",
     "slug": "javascript-async-await",
     "heading": "JavaScript Async and Await Explained Simply",
-    "text": "Async functions return promises. Await pauses the surrounding async function until a promise settles, returning its value or throwing its rejection reason.",
+    "text": "Async/Await is syntactic sugar that makes promises easier to work with. It allows us to write asynchronous code that's similar in appearance to synchronous code.",
     "code": "async function showScore() {\n  console.log(\"Reading score\");\n  const score = await Promise.resolve(42);\n  console.log(score);\n  return \"Finished\";\n}\nshowScore()\n  .then((message) => console.log(message))\n  .catch((error) => console.log(error.message));\nconsole.log(\"Script continues\");",
     "output": [
       "Reading score",
@@ -440,7 +474,7 @@ export const definitions = [
     "label": "Global objects",
     "slug": "javascript-global-objects",
     "heading": "JavaScript Global Objects Explained Simply",
-    "text": "Standard global objects, including Math and JSON, provide built-in tools. The separate globalThis value offers a consistent way to access the global environment across platforms.",
+    "text": "A Global Object is an object that always exists in the global scope. In a browser, the Global Object is the 'Window' and in Node.js the object is Global.",
     "code": "const rounded = Math.round(4.6);\nconst encoded = JSON.stringify({ score: rounded });\nconsole.log(rounded);\nconsole.log(encoded);\nconsole.log(globalThis.Math === Math);\nconsole.log(globalThis.JSON === JSON);",
     "output": [
       "5",
@@ -457,7 +491,7 @@ export const definitions = [
     "label": "this",
     "slug": "javascript-this",
     "heading": "JavaScript this Keyword Explained Simply",
-    "text": "In regular functions, this depends on how the function is called. Arrow functions inherit this from their enclosing context instead of creating their own binding.",
+    "text": "The “this” keyword allows you to decide which object should be focal when invoking a function or a method; effectively allowing you to reuse functions with different contexts.",
     "code": "const user = {\n  name: \"Sam\",\n  getName() {\n    return this.name;\n  },\n  makeReader() {\n    return () => this.name;\n  }\n};\nconst reader = user.makeReader();\nconsole.log(user.getName());\nconsole.log(reader.call({ name: \"Mira\" }));",
     "output": [
       "Sam",
@@ -472,7 +506,7 @@ export const definitions = [
     "label": "call()",
     "slug": "javascript-call",
     "heading": "JavaScript call() Explained Simply",
-    "text": "The call method invokes a function immediately with a supplied this value and arguments listed individually. It can reuse a regular function with different objects.",
+    "text": "With call you can write a method once, and then inherit it in another object, without having to rewrite the method for the new object.",
     "code": "function introduce(greeting, punctuation) {\n  return `${greeting}, ${this.name}${punctuation}`;\n}\nconst user = { name: \"Sam\" };\nconsole.log(introduce.call(user, \"Hello\", \"!\"));",
     "output": [
       "Hello, Sam!"
@@ -486,7 +520,7 @@ export const definitions = [
     "label": "apply()",
     "slug": "javascript-apply",
     "heading": "JavaScript apply() Explained Simply",
-    "text": "The apply method invokes a function immediately with a supplied this value and arguments provided as an array or array-like object, rather than individually.",
+    "text": "The only difference between apply() and call() is that the second parameter of the apply() method accepts the arguments to the actual function as an array.",
     "code": "function describe(item, quantity) {\n  return `${this.name} ordered ${quantity} ${item}`;\n}\nconst customer = { name: \"Sam\" };\nconst order = [\"notebooks\", 3];\nconsole.log(describe.apply(customer, order));",
     "output": [
       "Sam ordered 3 notebooks"
@@ -500,7 +534,7 @@ export const definitions = [
     "label": "bind()",
     "slug": "javascript-bind",
     "heading": "JavaScript bind() Explained Simply",
-    "text": "The bind method creates a new function with a chosen this value and optional leading arguments. The new function runs later, when you call it.",
+    "text": "Similar to call and apply except bind() returns a function instead of a value. It sets the value of 'this' and returns a function. It does not invoke the function.",
     "code": "const cart = {\n  total: 24,\n  describe(currency) {\n    return `${currency}${this.total}`;\n  }\n};\nconst showTotal = cart.describe.bind(cart, \"£\");\nconsole.log(showTotal());",
     "output": [
       "£24"
@@ -514,7 +548,7 @@ export const definitions = [
     "label": "Prototypal inheritance",
     "slug": "javascript-prototypal-inheritance",
     "heading": "JavaScript Prototypal Inheritance Explained Simply",
-    "text": "JavaScript objects can inherit from other objects. When a property is missing, JavaScript searches the prototype chain until it finds a match or reaches null.",
+    "text": "Inheritance is simply one object trying to inherit properties and methods of another object. A prototype is simply an object with inbuilt methods that are attached to your object.",
     "code": "const animal = {\n  speak() { return this.name + \" makes a sound\"; }\n};\nconst pet = Object.create(animal);\npet.name = \"Pip\";\nconsole.log(pet.speak());\nconsole.log(Object.hasOwn(pet, \"name\"));\nconsole.log(Object.hasOwn(pet, \"speak\"));\nconsole.log(Object.getPrototypeOf(pet) === animal);",
     "output": [
       "Pip makes a sound",
@@ -531,7 +565,7 @@ export const definitions = [
     "label": "Polymorphism",
     "slug": "javascript-polymorphism",
     "heading": "JavaScript Polymorphism Explained Simply",
-    "text": "Polymorphism lets different objects respond to the same operation in their own way. Shared method names let calling code work with multiple implementations.",
+    "text": "Polymorphism Is the practice of designing objects to share behaviors and to be able to override shared behaviors with specific ones. Polymorphism utilizes inheritance in order to make this happen.",
     "code": "class Animal {\n  speak() { return \"A sound\"; }\n}\nclass Dog extends Animal {\n  speak() { return \"Woof\"; }\n}\nclass Cat extends Animal {\n  speak() { return \"Meow\"; }\n}\nfor (const animal of [new Dog(), new Cat()]) {\n  console.log(animal.speak());\n}",
     "output": [
       "Woof",
