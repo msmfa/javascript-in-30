@@ -177,7 +177,7 @@ function document({ title, description, path, content, current, noindex = false 
           <div><h2 id="practice-heading">Understand the concept. Write the code.</h2><p>Once you’ve mastered these concepts, take the next step: implement them in Practice Pad, a JavaScript interview practice app for Mac.</p></div>
           <a class="practice-link" data-analytics-event="practice_pad_click" href="${escapeHTML(practiceURL.href)}">Try Practice Pad <span aria-hidden="true">↗</span></a>
         </section>
-        <nav class="footer-links" aria-label="Footer"><a href="https://www.linkedin.com/in/michaelsydneymoore/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/msmfa/javascript-in-30">Contribute on GitHub <span aria-hidden="true">↗</span></a><a href="mailto:michael@codemoore.com" data-analytics-event="contact_click">Contact <span aria-hidden="true">↗</span></a>${shareMenu(pageTitle, path)}<button id="analytics-preferences" type="button" hidden>Privacy</button></nav>
+        <nav class="footer-links" aria-label="Footer"><a href="https://www.linkedin.com/in/michaelsydneymoore/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/msmfa/javascript-in-30">Contribute on GitHub <span aria-hidden="true">↗</span></a><a href="mailto:michael@codemoore.com" data-analytics-event="contact_click">Contact <span aria-hidden="true">↗</span></a>${shareMenu(pageTitle, path)}</nav>
       </div>
     </footer>
   </div>
