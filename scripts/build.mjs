@@ -161,7 +161,7 @@ function document({ title, description, path, content, current, noindex = false 
   <a class="skip-link" href="#main-content">Skip to content</a>
   <aside class="sidebar">
     <a class="brand" href="/"><img class="brand-mark" src="${logoPath}" width="32" height="32" alt=""><span>JavaScript <strong>in 30 words</strong></span></a>
-    <p class="brand-tagline">A refresher on Javascript concepts in less than 30 words</p>
+    <p class="brand-tagline">A refresher on JavaScript concepts in less than 30 words</p>
     <div class="sidebar-heading"><span>Concepts</span><span>${definitions.length}</span></div>
     <nav class="concept-nav" aria-label="Concepts">${navigation(current)}</nav>
   </aside>
