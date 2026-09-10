@@ -1,11 +1,11 @@
-// Descriptions preserve the original site copy. Code examples are exercised by npm test.
+// Descriptions preserve the original site copy with approved typo corrections. Code examples are exercised by npm test.
 export const definitions = [
   {
     "id": "variables",
     "label": "Variables",
     "slug": "javascript-variables",
     "heading": "JavaScript Variables Explained Simply",
-    "text": "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
+    "text": "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be reassigned",
     "code": "let lessonsCompleted = 2;\nlessonsCompleted = lessonsCompleted + 1;\n\nconst learner = { name: \"Ada\" };\nlearner.name = \"Grace\";\nconsole.log(lessonsCompleted);\nconsole.log(learner.name);",
     "output": [
       "3",
@@ -20,7 +20,7 @@ export const definitions = [
     "label": "Functions",
     "slug": "javascript-functions",
     "heading": "JavaScript Functions Explained Simply",
-    "text": "Functions in Javascript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
+    "text": "Functions in JavaScript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
     "code": "function calculateTotal(price, quantity) {\n  return price * quantity;\n}\n\nconst total = calculateTotal(8, 3);\nconsole.log(total);\nconsole.log(calculateTotal(5, 2));",
     "output": [
       "24",
@@ -35,7 +35,7 @@ export const definitions = [
     "label": "Function Expressions",
     "slug": "javascript-function-expressions",
     "heading": "JavaScript Function Expressions Explained Simply",
-    "text": "Functional expressions load only when the interpreter reaches that line of code. They're not hoisted, allowing them to retain a copy of the local variables from the scope where they were defined. They do not polute the global scope.",
+    "text": "Function expressions load only when the interpreter reaches that line of code. They're not hoisted, allowing them to retain a copy of the local variables from the scope where they were defined. They do not pollute the global scope.",
     "code": "const formatLesson = function (number, title) {\n  return number + \". \" + title;\n};\n\nconsole.log(formatLesson(1, \"Variables\"));\nconsole.log(formatLesson(2, \"Functions\"));",
     "output": [
       "1. Variables",
@@ -136,7 +136,7 @@ export const definitions = [
     "label": "For Loops",
     "slug": "javascript-for-loops",
     "heading": "JavaScript For Loops Explained Simply",
-    "text": "A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.",
+    "text": "A for loop creates a loop with three optional expressions, enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.",
     "code": "const lessons = [\"Variables\", \"Functions\", \"Arrays\"];\n\nfor (let index = 0; index < lessons.length; index++) {\n  const number = index + 1;\n  console.log(number + \". \" + lessons[index]);\n}",
     "output": [
       "1. Variables",
@@ -273,7 +273,7 @@ export const definitions = [
     "label": "The call stack",
     "slug": "javascript-call-stack",
     "heading": "JavaScript Call Stack Explained Simply",
-    "text": "A Call Stack is a data structure that stores and manages function invocations. A kind of 'To-do list' for Javascript that uses the Last In, First Out (LIFO) principle.",
+    "text": "A Call Stack is a data structure that stores and manages function invocations. A kind of 'To-do list' for JavaScript that uses the Last In, First Out (LIFO) principle.",
     "code": "function save() {\n  console.log(\"Saving\");\n}\nfunction publish() {\n  console.log(\"Starting\");\n  save();\n  console.log(\"Published\");\n}\npublish();",
     "output": [
       "Starting",
@@ -320,7 +320,7 @@ export const definitions = [
     "label": "Nested functions",
     "slug": "javascript-nested-functions",
     "heading": "JavaScript Nested Functions Explained Simply",
-    "text": "A function within another function. A nested function can 'inherit' the arguments and variables of its containing function. Put simply; the inner function contains the scope of the outer function.",
+    "text": "A function within another function. A nested function can 'inherit' the arguments and variables of its containing function. Put simply, the inner function contains the scope of the outer function.",
     "code": "function orderTotal(price, quantity) {\n  function subtotal() {\n    return price * quantity;\n  }\n  return subtotal() + 5;\n}\nconsole.log(orderTotal(12, 3));",
     "output": [
       "41"
@@ -365,7 +365,7 @@ export const definitions = [
     "label": "Closures",
     "slug": "javascript-closures",
     "heading": "JavaScript Closures Explained Simply",
-    "text": "The combination of a function and the environment in which it was declared. In Javascript all functions form closures. A common use case is creating private functions.",
+    "text": "The combination of a function and the environment in which it was declared. In JavaScript all functions form closures. A common use case is creating private functions.",
     "code": "function createCounter() {\n  let count = 0;\n  return function increment() {\n    count += 1;\n    return count;\n  };\n}\nconst next = createCounter();\nconsole.log(next());\nconsole.log(next());",
     "output": [
       "1",
@@ -426,7 +426,7 @@ export const definitions = [
     "label": "Asynchronous JavaScript",
     "slug": "javascript-asynchronous-programming",
     "heading": "Asynchronous JavaScript Explained Simply",
-    "text": "Javascript is a single-threaded language. Meaning it performs one action at a time. Asynchronous Javascript is a way to perform multiple actions simultaneously using callbacks, promises, and async/await.",
+    "text": "JavaScript is a single-threaded language. Meaning it performs one action at a time. Asynchronous JavaScript is a way to perform multiple actions simultaneously using callbacks, promises, and async/await.",
     "code": "function loadMessage(callback) {\n  setTimeout(() => callback(\"Message ready\"), 10);\n}\nconsole.log(\"Loading\");\nloadMessage((message) => {\n  console.log(message);\n});\nconsole.log(\"Other work continues\");",
     "output": [
       "Loading",
@@ -565,7 +565,7 @@ export const definitions = [
     "label": "Polymorphism",
     "slug": "javascript-polymorphism",
     "heading": "JavaScript Polymorphism Explained Simply",
-    "text": "Polymorphism Is the practice of designing objects to share behaviors and to be able to override shared behaviors with specific ones. Polymorphism utilizes inheritance in order to make this happen.",
+    "text": "Polymorphism is the practice of designing objects to share behaviors and to be able to override shared behaviors with specific ones. Polymorphism utilizes inheritance in order to make this happen.",
     "code": "class Animal {\n  speak() { return \"A sound\"; }\n}\nclass Dog extends Animal {\n  speak() { return \"Woof\"; }\n}\nclass Cat extends Animal {\n  speak() { return \"Meow\"; }\n}\nfor (const animal of [new Dog(), new Cat()]) {\n  console.log(animal.speak());\n}",
     "output": [
       "Woof",

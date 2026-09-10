@@ -24,10 +24,10 @@ test('all original topics have unique descriptive URLs', () => {
 });
 
 for (const concept of definitions) {
-  test(`${concept.label}: exact original description, readable HTML and correct runnable example`, () => {
+  test(`${concept.label}: approved description, readable HTML and correct runnable example`, () => {
     const original = originalById.get(concept.id);
     assert.ok(original, `Original description exists for ${concept.id}`);
-    // Exact source copy takes precedence over the original 30-word target.
+    // Source copy, including approved typo corrections, takes precedence over the original 30-word target.
     assert.equal(concept.text, normalize(original.text));
     const originalItems = original.bulletPointItems.split('.').slice(0,-1).map(normalize);
     assert.deepEqual(concept.definitionItems || [], originalItems);

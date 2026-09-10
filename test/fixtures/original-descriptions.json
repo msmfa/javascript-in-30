@@ -5,7 +5,7 @@
   "definitions": [
     {
       "id": "variables",
-      "text": "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be re-assigned",
+      "text": "Variables can be denoted with the keywords let or const. The accepted convention is to use const as much as possible, and let when the variable is likely to be reassigned",
       "bulletPointItems": ""
     },
     {
@@ -15,12 +15,12 @@
     },
     {
       "id": "functions",
-      "text": "Functions in Javascript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
+      "text": "Functions in JavaScript consist of the function keyword followed by the name of the function, a list of parameters and statements that define the function.",
       "bulletPointItems": ""
     },
     {
       "id": "for-loops",
-      "text": "A for loop creates a loop with three optional expressions; enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.",
+      "text": "A for loop creates a loop with three optional expressions, enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed within the loop.",
       "bulletPointItems": ""
     },
     {
@@ -40,7 +40,7 @@
     },
     {
       "id": "functional-expressions",
-      "text": "Functional expressions load only when the interpreter reaches that line of code. \n    They're not hoisted, allowing them to retain a copy of the local variables from \n    the scope where they were defined. They do not polute the global scope.\n    ",
+      "text": "Function expressions load only when the interpreter reaches that line of code. \n    They're not hoisted, allowing them to retain a copy of the local variables from \n    the scope where they were defined. They do not pollute the global scope.\n    ",
       "bulletPointItems": ""
     },
     {
@@ -80,7 +80,7 @@
     },
     {
       "id": "the-call-stack",
-      "text": "A Call Stack is a data structure that stores and manages function invocations. A kind of 'To-do list' for Javascript that uses the Last In, First Out (LIFO) principle.  ",
+      "text": "A Call Stack is a data structure that stores and manages function invocations. A kind of 'To-do list' for JavaScript that uses the Last In, First Out (LIFO) principle.  ",
       "bulletPointItems": ""
     },
     {
@@ -90,7 +90,7 @@
     },
     {
       "id": "nested-functions",
-      "text": "A function within another function. A nested function can 'inherit' the arguments and variables of its containing function. Put simply; the inner function contains the scope of the outer function.",
+      "text": "A function within another function. A nested function can 'inherit' the arguments and variables of its containing function. Put simply, the inner function contains the scope of the outer function.",
       "bulletPointItems": ""
     },
     {
@@ -100,7 +100,7 @@
     },
     {
       "id": "closure",
-      "text": "The combination of a function and the environment in which it was declared. In Javascript all functions form closures. A common use case is creating private functions. ",
+      "text": "The combination of a function and the environment in which it was declared. In JavaScript all functions form closures. A common use case is creating private functions. ",
       "bulletPointItems": ""
     },
     {
@@ -125,7 +125,7 @@
     },
     {
       "id": "asynchronous-javascript",
-      "text": "Javascript is a single-threaded language. Meaning it performs one action at a time. Asynchronous Javascript is a way to perform multiple actions simultaneously using callbacks, promises, and async/await.",
+      "text": "JavaScript is a single-threaded language. Meaning it performs one action at a time. Asynchronous JavaScript is a way to perform multiple actions simultaneously using callbacks, promises, and async/await.",
       "bulletPointItems": ""
     },
     {
@@ -155,7 +155,7 @@
     },
     {
       "id": "polymorphism",
-      "text": "Polymorphism Is the practice of designing objects to share behaviors and to be able to override shared behaviors with specific ones. Polymorphism utilizes inheritance in order to make this happen.",
+      "text": "Polymorphism is the practice of designing objects to share behaviors and to be able to override shared behaviors with specific ones. Polymorphism utilizes inheritance in order to make this happen.",
       "bulletPointItems": ""
     },
     {
