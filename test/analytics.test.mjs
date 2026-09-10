@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {startAnalytics,safePageURL,sanitizePosthogEvent,consentKey} from '../src/analytics.js';
 
 const settings = {googleMeasurementId:'G-TEST123',posthogProjectToken:'phc_test',posthogHost:'https://eu.i.posthog.com',productionHosts:['www.javascriptin30words.com']};
-function harness({hostname='www.javascriptin30words.com',choice=null,storageBlocked=false} = {}) {
+function harness({hostname='www.javascriptin30words.com',choice=null,storageBlocked=false,suppressConsentPrompt=false} = {}) {
   const scripts = [], events = new Map(), elements = new Map(), stored = new Map(choice ? [[consentKey,choice]] : []);
   for (const selector of ['#analytics-consent','#analytics-preferences','#analytics-allow','#analytics-decline','.output-toggle','[data-ai-panel]','[data-analytics-page]']) {
     elements.set(selector,{hidden:true,dataset:{analyticsPage:'/javascript-closures/',analyticsConcept:'javascript-closures'},addEventListener:(name,fn)=>events.set(selector+name,fn),focus(){}});
@@ -17,7 +17,7 @@ function harness({hostname='www.javascriptin30words.com',choice=null,storageBloc
     querySelector:selector=>elements.get(selector),title:'Closures | JavaScript in 30 Words',referrer:'https://search.example/results?q=private',cookie:'',
     createElement:()=>({}),head:{append:element=>scripts.push(element)},addEventListener:(name,fn)=>events.set('document'+name,fn),
   };
-  startAnalytics(win,doc,settings);
+  startAnalytics(win,doc,{...settings,suppressConsentPrompt});
   return {win,doc,scripts,stored,elements,events,click:selector=>events.get(selector+'click')()};
 }
 
@@ -54,6 +54,19 @@ test('no vendor requests or tracking before consent, or after declining',()=>{
   h.events.get('.output-togglechange')({target:{checked:true}});
   assert.equal(h.win.dataLayer,undefined);
   assert.equal(harness({choice:'denied'}).scripts.length,0);
+});
+
+test('temporary no-prompt mode initializes analytics while preserving opt-outs and preview exclusions',()=>{
+  const h = harness({suppressConsentPrompt:true});
+  assert.equal(h.scripts.length,2);
+  assert.equal(h.elements.get('#analytics-consent').hidden,true);
+  assert.equal(h.stored.get(consentKey),undefined,'Testing mode does not manufacture a saved consent choice');
+  assert.equal(harness({suppressConsentPrompt:true,choice:'denied'}).scripts.length,0);
+  assert.equal(harness({suppressConsentPrompt:true,hostname:'localhost'}).scripts.length,0);
+  h.click('#analytics-preferences');
+  assert.equal(h.elements.get('#analytics-consent').hidden,false,'Privacy controls remain available on demand');
+  h.click('#analytics-decline');
+  assert.equal(h.win['ga-disable-G-TEST123'],true);
 });
 
 test('consent loads both vendors once with one page view and explicit safe events',()=>{

@@ -49,6 +49,7 @@ export function startAnalytics(win = window, doc = document, settings = config) 
   const pending = [];
   try { consent = win.localStorage.getItem(consentKey); } catch { /* Memory-only choice when storage is unavailable. */ }
   if (!['granted','denied'].includes(consent)) consent = null;
+  if (!consent && settings.suppressConsentPrompt) consent = 'granted';
   const script = (src,onload) => {
     const element = doc.createElement('script');
     element.async = true;
