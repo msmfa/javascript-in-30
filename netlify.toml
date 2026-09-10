@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "22"
+  SITE_URL = "https://javascript-in-30-words.netlify.app"
+
+# Static directory routes resolve without a client-side router or fallback.

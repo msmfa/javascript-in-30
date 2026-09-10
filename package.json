@@ -1,10 +1,12 @@
 {
   "name": "testing-javascript",
   "version": "1.0.0",
-  "description": "[Link to Live Demo](https://javascript-in-30-words.netlify.com/)",
+  "description": "JavaScript concepts explained in 30 words or fewer, with useful code examples.",
   "main": "main.js",
   "scripts": {
-    "test": "jest"
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test test/site.test.mjs"
   },
   "repository": {
     "type": "git",
@@ -22,5 +24,8 @@
     "@babel/preset-env": "^7.9.5",
     "babel-jest": "^25.3.0",
     "jest": "^25.3.0"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }
