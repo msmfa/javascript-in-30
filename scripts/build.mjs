@@ -1,5 +1,9 @@
 import { mkdir, rm, writeFile, copyFile } from 'node:fs/promises';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
 import { definitions } from '../src/data.js';
+
+hljs.registerLanguage('javascript', javascript);
 
 const output = new URL('../build/', import.meta.url);
 const requestedOrigin = new URL(process.env.SITE_URL || 'https://www.javascriptin30words.com');
@@ -43,7 +47,13 @@ function document({ title, description, path, content, current, noindex = false 
   <div class="page">
     <header class="mobile-header"><a class="brand" href="/">JavaScript in <strong>30 words.</strong></a><details><summary>Browse all ${definitions.length} concepts</summary><nav aria-label="Concepts">${navigation(current)}</nav></details></header>
     <main id="main-content" tabindex="-1">${content}</main>
-    <footer class="site-footer"><a href="/">${brand}</a><a href="https://github.com/msmfa/javascript-in-30">Contribute on GitHub ↗</a></footer>
+    <footer class="site-footer">
+      <section class="footer-practice" aria-labelledby="practice-heading">
+        <div><h2 id="practice-heading">Understand the concept. Write the code.</h2><p>Once you’ve mastered these concepts, take the next step: implement them in Practice Pad, a JavaScript interview practice app for Mac.</p></div>
+        <a class="practice-link" href="https://www.practice-pad.app/">Try Practice Pad <span aria-hidden="true">↗</span></a>
+      </section>
+      <div class="footer-meta"><p><a href="/">${brand}</a> · Made by Michael Moore</p><nav class="footer-links" aria-label="Footer"><a href="https://www.linkedin.com/in/michaelsydneymoore/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/msmfa/javascript-in-30">GitHub <span aria-hidden="true">↗</span></a></nav></div>
+    </footer>
   </div>
 </body>
 </html>
@@ -64,7 +74,7 @@ function conceptPage(concept, index) {
     <article class="concept">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">All concepts</a><span aria-hidden="true"> / </span><span>${escapeHTML(concept.label)}</span></nav>
       <header class="page-heading"><p class="eyebrow">${concept.group}</p><h1>${escapeHTML(concept.heading)}</h1><p class="definition">${escapeHTML(concept.text)}</p></header>
-      <section class="example" aria-labelledby="example-heading"><div class="section-heading"><h2 id="example-heading">A useful example</h2><span>JavaScript</span></div><pre><code>${escapeHTML(concept.code)}</code></pre>${concept.output.length ? `<div class="example-output"><h3>Output</h3><pre><samp>${escapeHTML(concept.output.join('\n'))}</samp></pre></div>` : ''}</section>
+      <section class="example" aria-labelledby="example-heading"><div class="section-heading"><h2 id="example-heading">A useful example</h2><span>JavaScript</span></div><pre tabindex="0" aria-label="JavaScript code example"><code class="hljs language-javascript">${hljs.highlight(concept.code, {language:'javascript'}).value}</code></pre>${concept.output.length ? `<div class="example-output"><h3>Output</h3><pre><samp>${escapeHTML(concept.output.join('\n'))}</samp></pre></div>` : ''}</section>
       <section class="explanation"><h2>What to notice</h2><p>${escapeHTML(concept.explanation)}</p><a class="reference-link" href="${escapeHTML(concept.reference)}">Read more on MDN ↗</a></section>
       <nav class="next-concepts" aria-label="More concepts">${previous ? `<a href="${pathFor(previous)}"><span>← Previous</span>${escapeHTML(previous.label)}</a>` : '<span></span>'}${next ? `<a href="${pathFor(next)}"><span>Next →</span>${escapeHTML(next.label)}</a>` : '<a href="/"><span>Keep exploring →</span>All concepts</a>'}</nav>
     </article>

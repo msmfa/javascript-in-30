@@ -16,9 +16,10 @@ A side aim of this project is to allow other junior members of the community to 
 
 ## Run locally
 
-Use Node.js 22 or newer. Building and testing use Node's built-in modules; no dependency installation is required.
+Use Node.js 22 or newer. Install the dependencies before starting the local site.
 
 ```sh
+npm ci
 npm run dev
 ```
 
@@ -33,7 +34,7 @@ npm test
 npm run build
 ```
 
-Tests run all 35 examples, verify the definition word limit, check the rendered HTML and internal links, and validate the sitemap. The generated site is written to `build/`. The original image assets remain in `src/assets/`; code examples are now selectable text.
+Tests run all 35 examples, verify the definition word limit, check the rendered HTML and internal links, and validate the sitemap. The generated site is written to `build/`. The original image assets remain in `src/assets/`; code examples are selectable text, with JavaScript syntax highlighting generated at build time using highlight.js.
 
 ## Deploy
 

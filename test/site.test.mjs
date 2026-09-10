@@ -24,10 +24,10 @@ for (const concept of definitions) {
     assert.ok(count > 0 && count <= 30, `${count} words`);
     const html = read(`${concept.slug}/index.html`);
     const definition = html.match(/<p class="definition">([\s\S]*?)<\/p>/)?.[1];
-    const example = html.match(/<code>([\s\S]*?)<\/code>/)?.[1];
+    const example = html.match(/<code\b[^>]*>([\s\S]*?)<\/code>/)?.[1];
     assert.equal(decode(definition), concept.text);
-    assert.equal(decode(example), concept.code);
-    assert.ok(html.indexOf('class="definition"') < html.indexOf('<code>'));
+    assert.equal(decode(example.replace(/<[^>]+>/g, '')), concept.code);
+    assert.ok(html.indexOf('class="definition"') < html.indexOf('<code'));
     assert.equal(decode(html.match(/<h1>([\s\S]*?)<\/h1>/)?.[1]), concept.heading);
     assert.match(html, /<meta name="description" content="[^"]+">/);
     assert.ok(html.includes(`<link rel="canonical" href="${expectedOrigin}/${concept.slug}/">`));
