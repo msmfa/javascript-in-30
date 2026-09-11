@@ -70,6 +70,7 @@ test('sitemap and homepage expose every concept to crawlers', () => {
   const sitemap = read('sitemap.xml');
   const html = read('index.html');
   assert.equal((sitemap.match(/<loc>/g) || []).length, 36);
+  assert.equal((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length, 36, 'Every URL carries a crawlable lastmod');
   for (const concept of definitions) {
     assert.ok(sitemap.includes(`<loc>${expectedOrigin}/${concept.slug}/</loc>`));
     assert.ok(html.includes(`href="/${concept.slug}/"`));
