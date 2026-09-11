@@ -27,6 +27,9 @@ export function sanitizePosthogEvent(event) {
     '$lib','$lib_version','$browser','$browser_version','$os','$os_version','$device_type',
     '$screen_height','$screen_width','$viewport_height','$viewport_width','$timezone',
     '$host','$pathname','$title','$is_identified','$process_person_profile','page_path','page_title',
+    // How PostHog recognises that ingestion is proxied. It holds our own
+    // public origin, and without it the reverse proxy check never passes.
+    '$lib_custom_api_host',
     'concept','placement','destination',...campaignKeys,
     ...webVitalsMetrics.map(name => `$web_vitals_${name}_value`)]);
   const properties = Object.fromEntries(Object.entries(event.properties || {}).filter(([key,value]) => keep.has(key) && ['string','number','boolean'].includes(typeof value)));
