@@ -31,6 +31,9 @@ const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => (
 const url = (path = '/') => origin + path;
 const pathFor = (concept) => `/${concept.slug}/`;
 const labelFor = (concept) => concept.id === 'this' ? 'this keyword' : concept.label;
+// schema.org only defines Beginner and Expert for proficiencyLevel, which maps
+// onto the two groups the concepts are already sorted into.
+const proficiencyFor = (concept) => concept.group === 'Advanced' ? 'Expert' : 'Beginner';
 const summaryFor = (concept) => [concept.text, ...(concept.definitionItems || [])].filter(Boolean).join(' ');
 const searchDescription = (concept) => {
   const text = `${concept.label} in JavaScript: ${concept.text || concept.explanation}`.replace(/\s+/g, ' ').trim();
@@ -140,15 +143,34 @@ function shareMenu(title, path) {
 
 function document({ title, description, path, content, current, noindex = false }) {
   const pageTitle = `${title} | ${brand}`;
+  // WebSite/WebPage/BreadcrumbList only say where a page sits. DefinedTerm says
+  // what it holds: this URL is the definition of one named term, and the set on
+  // the home page is the glossary those 35 terms belong to. TechArticle carries
+  // the prose around the definition.
   const structuredData = {
     '@context':'https://schema.org',
     '@graph':[
       {'@type':'WebSite','@id':url('/#website'),url:url('/'),name:brand,inLanguage:'en'},
-      {'@type':'WebPage','@id':url(path),url:url(path),name:title,description,inLanguage:'en',isPartOf:{'@id':url('/#website')},...(current ? {breadcrumb:{'@id':url(path+'#breadcrumb')}} : {})},
+      {'@type':'WebPage','@id':url(path),url:url(path),name:title,description,inLanguage:'en',isPartOf:{'@id':url('/#website')},
+        ...(current ? {breadcrumb:{'@id':url(path+'#breadcrumb')},mainEntity:{'@id':url(path+'#article')}} : {}),
+        ...(!current && !noindex ? {mainEntity:{'@id':url('/#glossary')}} : {})},
       ...(current ? [{'@type':'BreadcrumbList','@id':url(path+'#breadcrumb'),itemListElement:[
         {'@type':'ListItem',position:1,name:'All concepts',item:url('/')},
         {'@type':'ListItem',position:2,name:labelFor(current),item:url(path)},
       ]}] : []),
+      ...(current ? [
+        {'@type':'TechArticle','@id':url(path+'#article'),url:url(path),headline:current.heading,description,
+          inLanguage:'en',isPartOf:{'@id':url('/#website')},about:{'@id':url(path+'#term')},
+          proficiencyLevel:proficiencyFor(current),dateModified:lastModified},
+        {'@type':'DefinedTerm','@id':url(path+'#term'),url:url(path),name:labelFor(current),
+          description:summaryFor(current),inDefinedTermSet:{'@id':url('/#glossary')},
+          // The MDN page for the same term, so the definition is tied to the
+          // reference every reader already trusts.
+          ...(current.reference ? {sameAs:current.reference} : {})},
+      ] : []),
+      ...(!current && !noindex ? [{'@type':'DefinedTermSet','@id':url('/#glossary'),url:url('/'),name:brand,
+        description,inLanguage:'en',
+        hasDefinedTerm:definitions.map((item) => ({'@id':url(pathFor(item)+'#term')}))}] : []),
     ],
   };
   const practiceURL = new URL('https://www.practice-pad.app/');
