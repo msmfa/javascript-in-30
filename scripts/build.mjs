@@ -51,6 +51,16 @@ const aiPanelPath = `/assets/ai-panel.${createHash('sha256').update(aiPanel).dig
 if (analyticsConfig.googleMeasurementId && !/^G-[A-Z0-9]+$/.test(analyticsConfig.googleMeasurementId)) throw new Error('Invalid public Google measurement ID.');
 if (analyticsConfig.posthogProjectToken && !/^phc_[A-Za-z0-9]+$/.test(analyticsConfig.posthogProjectToken)) throw new Error('Use a public PostHog project token, never a personal API key.');
 if (!['https://eu.i.posthog.com','https://us.i.posthog.com'].includes(analyticsConfig.posthogHost)) throw new Error('Invalid PostHog ingestion host.');
+if (!/^\/[a-z0-9-]{2,20}$/.test(analyticsConfig.posthogProxyPath)) throw new Error('PostHog proxy path must be a single lowercase path segment.');
+// The browser talks only to posthogProxyPath, so a missing or stale redirect
+// would silently 404 every event. Fail the build instead of the analytics.
+const netlifyConfig = await readFile(new URL('../netlify.toml', import.meta.url), 'utf8');
+const assetsHost = analyticsConfig.posthogHost.replace('.i.posthog.com','-assets.i.posthog.com');
+for (const [from, to] of [[`${analyticsConfig.posthogProxyPath}/static/*`, `${assetsHost}/static/:splat`],
+  [`${analyticsConfig.posthogProxyPath}/array/*`, `${assetsHost}/array/:splat`],
+  [`${analyticsConfig.posthogProxyPath}/*`, `${analyticsConfig.posthogHost}/:splat`]]) {
+  if (!netlifyConfig.includes(`from = "${from}"`) || !netlifyConfig.includes(`to = "${to}"`)) throw new Error(`netlify.toml is missing the PostHog proxy rule ${from} -> ${to}`);
+}
 const analyticsSource = (await readFile(new URL('../src/analytics.js', import.meta.url), 'utf8')).replace("import {analyticsConfig as config} from './analytics-config.js';", `const config = ${JSON.stringify(analyticsConfig)};`);
 const analytics = (await minify(analyticsSource, {module:true})).code;
 const analyticsPath = `/assets/analytics.${createHash('sha256').update(analytics).digest('hex').slice(0,12)}.js`;
