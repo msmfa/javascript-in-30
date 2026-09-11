@@ -103,6 +103,40 @@ test('indexable pages have one heading, unique metadata, and accurate structured
   assert.match(read('_redirects'),/^https:\/\/javascript-in-30-words\.netlify\.app\/\*/);
 });
 
+test('every concept declares itself a defined term inside the glossary the home page sets out',()=>{
+  const graphOf = (file)=>JSON.parse(read(file).match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/)[1])['@graph'];
+  const node = (graph,type)=>graph.find(item=>item['@type'] === type);
+
+  const glossary = node(graphOf('index.html'),'DefinedTermSet');
+  assert.equal(glossary['@id'],expectedOrigin+'/#glossary');
+  assert.equal(node(graphOf('index.html'),'WebPage').mainEntity['@id'],glossary['@id']);
+  assert.equal(glossary.hasDefinedTerm.length,definitions.length);
+
+  const declared = new Set(glossary.hasDefinedTerm.map(item=>item['@id']));
+  for (const concept of definitions) {
+    const path = `/${concept.slug}/`;
+    const graph = graphOf(concept.slug+'/index.html');
+    const term = node(graph,'DefinedTerm');
+    const article = node(graph,'TechArticle');
+
+    // The set on the home page and the term on the page must agree, or the
+    // glossary points at terms that never claim membership.
+    assert.ok(declared.has(term['@id']),`${concept.slug} is missing from the glossary`);
+    assert.equal(term['@id'],expectedOrigin+path+'#term');
+    assert.equal(term.inDefinedTermSet['@id'],glossary['@id']);
+    assert.equal(term.url,expectedOrigin+path);
+    assert.ok(term.description.length > 0);
+    if (concept.reference) assert.equal(term.sameAs,concept.reference);
+
+    assert.equal(article['@id'],expectedOrigin+path+'#article');
+    assert.equal(article.about['@id'],term['@id']);
+    assert.equal(article.headline,concept.heading);
+    assert.equal(node(graph,'WebPage').mainEntity['@id'],article['@id']);
+    assert.ok(['Beginner','Expert'].includes(article.proficiencyLevel));
+    assert.match(article.dateModified,/^\d{4}-\d{2}-\d{2}$/);
+  }
+});
+
 test('every footer has unique Practice Pad campaign attribution and the contact address',()=>{
   const contents = new Set();
   for (const file of ['index.html',...definitions.map(item=>`${item.slug}/index.html`)]) {
