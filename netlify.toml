@@ -7,3 +7,26 @@
   SITE_URL = "https://www.javascriptin30words.com"
 
 # Static directory routes resolve without a client-side router or fallback.
+
+# First-party proxy for PostHog, so tracking-protection lists that match the
+# vendor hostname cannot silently drop analytics traffic. Paths and upstream
+# hosts are checked against src/analytics-config.js at build time.
+# The absolute URL in `to` sets the upstream host; Netlify drops a `host` key.
+# The asset rules must stay above the catch-all: order decides the match.
+[[redirects]]
+  from = "/e30/static/*"
+  to = "https://eu-assets.i.posthog.com/static/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/e30/array/*"
+  to = "https://eu-assets.i.posthog.com/array/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/e30/*"
+  to = "https://eu.i.posthog.com/:splat"
+  status = 200
+  force = true

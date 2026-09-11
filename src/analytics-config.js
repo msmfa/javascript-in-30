@@ -6,5 +6,9 @@ export const analyticsConfig = {
   googleMeasurementId:'G-9W8VGXXL0G',
   posthogProjectToken:'phc_kYNSabXwPMuoR48Kmb6oUy7MfwPgBx88pWqHS3T8vpAn',
   posthogHost:'https://eu.i.posthog.com',
+  posthogUiHost:'https://eu.posthog.com',
+  // Same-origin path that netlify.toml proxies to posthogHost. Deliberately not
+  // a guessable word like "analytics", which blocker lists match on directly.
+  posthogProxyPath:'/e30',
   productionHosts:['www.javascriptin30words.com','javascriptin30words.com','javascript-in-30-words.netlify.app'],
 };

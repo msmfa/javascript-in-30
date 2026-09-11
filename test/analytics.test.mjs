@@ -2,14 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {startAnalytics,safePageURL,sanitizePosthogEvent,consentKey} from '../src/analytics.js';
 
-const settings = {googleMeasurementId:'G-TEST123',posthogProjectToken:'phc_test',posthogHost:'https://eu.i.posthog.com',productionHosts:['www.javascriptin30words.com']};
+const settings = {googleMeasurementId:'G-TEST123',posthogProjectToken:'phc_test',posthogHost:'https://eu.i.posthog.com',posthogUiHost:'https://eu.posthog.com',posthogProxyPath:'/e30',productionHosts:['www.javascriptin30words.com']};
 function harness({hostname='www.javascriptin30words.com',choice=null,storageBlocked=false,suppressConsentPrompt=false} = {}) {
   const scripts = [], events = new Map(), elements = new Map(), stored = new Map(choice ? [[consentKey,choice]] : []);
   for (const selector of ['#analytics-consent','#analytics-preferences','#analytics-allow','#analytics-decline','.output-toggle','[data-ai-panel]','[data-analytics-page]']) {
     elements.set(selector,{hidden:true,dataset:{analyticsPage:'/javascript-closures/',analyticsConcept:'javascript-closures'},addEventListener:(name,fn)=>events.set(selector+name,fn),focus(){}});
   }
   const win = {
-    location:{protocol:hostname === '127.0.0.1' ? 'http:' : 'https:',hostname,href:`https://${hostname}/javascript-closures/?api_key=private#secret`,reload(){win.reloaded=true;}},
+    location:{protocol:hostname === '127.0.0.1' ? 'http:' : 'https:',hostname,origin:`https://${hostname}`,href:`https://${hostname}/javascript-closures/?api_key=private#secret`,reload(){win.reloaded=true;}},
     localStorage:{getItem:key=>{if(storageBlocked) throw Error('blocked');return stored.get(key) ?? null;},setItem:(key,value)=>{if(storageBlocked) throw Error('blocked');stored.set(key,value);},get length(){return stored.size;},key:index=>[...stored.keys()][index],removeItem:key=>stored.delete(key)},
     addEventListener:(name,fn)=>events.set('window'+name,fn),
   };
@@ -30,9 +30,56 @@ test('analytics strips arbitrary query strings, fragments, and personal data',()
   assert.equal(event.properties.$set,undefined);
   assert.equal(event.properties.$current_url,'https://site.example/');
   assert.equal(event.properties.$referrer,'https://search.example');
+  assert.equal(event.properties.$referring_domain,'search.example');
   assert.equal(event.properties.token,'phc_test');
   assert.equal(sanitizePosthogEvent({event:'$snapshot',properties:{}}),null);
   assert.equal(sanitizePosthogEvent({event:'$autocapture',properties:{}}),null);
+});
+
+test('referrer attribution survives sanitizing so PostHog can group traffic by channel',()=>{
+  const direct = sanitizePosthogEvent({event:'$pageview',properties:{$referrer:'$direct',$referring_domain:'$direct'}});
+  assert.equal(direct.properties.$referrer,'$direct','Direct visits stay distinguishable from stripped ones');
+  assert.equal(direct.properties.$referring_domain,'$direct');
+  const search = sanitizePosthogEvent({event:'$pageview',properties:{$referrer:'https://www.google.com/search?q=private',$referring_domain:'www.google.com'}});
+  assert.equal(search.properties.$referrer,'https://www.google.com','Query strings never leave the browser');
+  assert.equal(search.properties.$referring_domain,'www.google.com');
+  const spoofed = sanitizePosthogEvent({event:'$pageview',properties:{$referrer:'https://github.com/msmfa',$referring_domain:'evil.example'}});
+  assert.equal(spoofed.properties.$referring_domain,'github.com','Domain is derived from the referrer, never copied');
+  const missing = sanitizePosthogEvent({event:'$pageview',properties:{}});
+  assert.equal(missing.properties.$referrer,'');
+  assert.equal(missing.properties.$referring_domain,'');
+  assert.ok(sanitizePosthogEvent({event:'$pageleave',properties:{}}),'Pageleave is needed for session duration and bounce rate');
+});
+
+test('web vitals are measured but their attribution payloads never leave the browser',()=>{
+  const h = harness({choice:'granted'});
+  const performance = h.win.posthog._i[0][1].capture_performance;
+  assert.equal(performance.web_vitals,true,'Core Web Vitals feed the PostHog performance charts');
+  assert.equal(performance.network_timing,false,'Resource timing is not needed and is not collected');
+  assert.equal(performance.web_vitals_attribution,false,'Attribution would record the DOM element behind each metric');
+  const event = sanitizePosthogEvent({event:'$web_vitals',properties:{
+    $web_vitals_LCP_value:2350.5,$web_vitals_CLS_value:0.02,$web_vitals_FCP_value:900,$web_vitals_INP_value:120,
+    $web_vitals_LCP_event:{name:'LCP',attribution:{element:'#hero > img',url:'https://site.example/?key=secret'}},
+    $current_url:'https://site.example/javascript-closures/?api_key=private',
+  }});
+  assert.equal(event.properties.$web_vitals_LCP_value,2350.5);
+  assert.equal(event.properties.$web_vitals_CLS_value,0.02);
+  assert.equal(event.properties.$web_vitals_FCP_value,900);
+  assert.equal(event.properties.$web_vitals_INP_value,120);
+  assert.equal(event.properties.$web_vitals_LCP_event,undefined,'The attribution object carries DOM selectors and URLs');
+  assert.equal(event.properties.$current_url,'https://site.example/javascript-closures/');
+  assert.deepEqual(performance.web_vitals_allowed_metrics.map(name=>`$web_vitals_${name}_value`).filter(key=>!(key in event.properties)),[],
+    'Every metric we request also survives sanitizing');
+});
+
+test('PostHog loads and ingests through the same origin so blockers cannot drop it',()=>{
+  const h = harness({choice:'granted'});
+  const options = h.win.posthog._i[0][1];
+  assert.equal(options.api_host,'https://www.javascriptin30words.com/e30');
+  assert.equal(options.ui_host,'https://eu.posthog.com','Links into PostHog still point at the real app');
+  const loader = h.scripts.map(element=>element.src).find(src=>src.includes('/e30/'));
+  assert.equal(loader,'https://www.javascriptin30words.com/e30/static/array.js');
+  assert.ok(!h.scripts.some(element=>element.src.includes('posthog.com')),'No request reveals the vendor hostname');
 });
 
 test('local and deploy preview visits never load analytics, even with remembered consent',()=>{
@@ -84,6 +131,7 @@ test('consent loads both vendors once with one page view and explicit safe event
   assert.equal(phOptions.autocapture,false);
   assert.equal(phOptions.disable_session_recording,true);
   assert.equal(phOptions.capture_exceptions,false);
+  assert.equal(phOptions.capture_pageleave,true);
   const captures = [];
   h.win.posthog = {capture:(...args)=>captures.push(args),opt_out_capturing(){}};
   phOptions.loaded(h.win.posthog);

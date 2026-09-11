@@ -1,8 +1,11 @@
 import {analyticsConfig as config} from './analytics-config.js';
 
 export const consentKey = 'js30.analytics-consent.v1';
-const allowedEvents = new Set(['$pageview','practice_pad_click','contact_click','output_revealed','ai_panel_opened']);
+const allowedEvents = new Set(['$pageview','$pageleave','$web_vitals','practice_pad_click','contact_click','output_revealed','ai_panel_opened']);
 const campaignKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+// Core Web Vitals PostHog charts. Declared once so the metrics we ask the
+// browser for and the properties we let through stay the same list.
+const webVitalsMetrics = ['LCP','CLS','FCP','INP'];
 
 export function safePageURL(value) {
   try {
@@ -24,10 +27,18 @@ export function sanitizePosthogEvent(event) {
     '$lib','$lib_version','$browser','$browser_version','$os','$os_version','$device_type',
     '$screen_height','$screen_width','$viewport_height','$viewport_width','$timezone',
     '$host','$pathname','$title','$is_identified','$process_person_profile','page_path','page_title',
-    'concept','placement','destination',...campaignKeys]);
+    'concept','placement','destination',...campaignKeys,
+    ...webVitalsMetrics.map(name => `$web_vitals_${name}_value`)]);
   const properties = Object.fromEntries(Object.entries(event.properties || {}).filter(([key,value]) => keep.has(key) && ['string','number','boolean'].includes(typeof value)));
   properties.$current_url = safePageURL(event.properties?.$current_url || '');
-  try { properties.$referrer = new URL(event.properties?.$referrer).origin; } catch { properties.$referrer = ''; }
+  const referrer = event.properties?.$referrer;
+  if (referrer === '$direct') { properties.$referrer = '$direct'; properties.$referring_domain = '$direct'; }
+  else try {
+    const source = new URL(referrer);
+    properties.$referrer = source.origin;
+    // Derived rather than copied so a spoofed property can never reach PostHog.
+    properties.$referring_domain = source.hostname;
+  } catch { properties.$referrer = ''; properties.$referring_domain = ''; }
   return {...event,properties};
 }
 
@@ -85,6 +96,9 @@ export function startAnalytics(win = window, doc = document, settings = config) 
       script(`https://www.googletagmanager.com/gtag/js?id=${settings.googleMeasurementId}`);
     }
     if (settings.posthogProjectToken) {
+      // A same-origin path rather than the PostHog domain: blocker lists match on
+      // the vendor hostname, and traffic they drop never reaches the reports.
+      const apiHost = win.location.origin + settings.posthogProxyPath;
       // The official snippet's initialization queue, loaded only after consent.
       const stub = [];
       stub._i = [];
@@ -93,9 +107,12 @@ export function startAnalytics(win = window, doc = document, settings = config) 
       stub.toString = () => 'posthog (stub)';
       win.posthog = stub;
       const options = {
-        api_host:settings.posthogHost,defaults:'2026-05-30',
-        autocapture:false,capture_pageview:false,capture_pageleave:false,
-        capture_dead_clicks:false,capture_heatmaps:false,capture_performance:false,
+        api_host:apiHost,ui_host:settings.posthogUiHost,defaults:'2026-05-30',
+        autocapture:false,capture_pageview:false,capture_pageleave:true,
+        // Web vitals only: no resource timing, and no attribution bundle, which
+        // would collect the DOM element behind each measurement.
+        capture_performance:{web_vitals:true,network_timing:false,web_vitals_attribution:false,web_vitals_allowed_metrics:webVitalsMetrics},
+        capture_dead_clicks:false,capture_heatmaps:false,
         capture_exceptions:false,disable_session_recording:true,disable_surveys:true,
         enable_recording_console_log:false,advanced_disable_feature_flags:true,
         person_profiles:'never',persistence:'localStorage',
@@ -107,7 +124,7 @@ export function startAnalytics(win = window, doc = document, settings = config) 
         },
       };
       stub._i.push([settings.posthogProjectToken,options,'posthog']);
-      script(`${settings.posthogHost.replace('.i.posthog.com','-assets.i.posthog.com')}/static/array.js`);
+      script(`${apiHost}/static/array.js`);
     }
     track('$pageview');
   };

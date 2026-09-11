@@ -1,5 +1,6 @@
 import { mkdir, rm, writeFile, readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import CleanCSS from 'clean-css';
 import { minify } from 'terser';
 import hljs from 'highlight.js/lib/core';
@@ -12,6 +13,15 @@ import { indexNowKey } from '../src/search-config.js';
 hljs.registerLanguage('javascript', javascript);
 
 const output = new URL('../build/', import.meta.url);
+// Crawlers only trust lastmod when it tracks real content changes, so it comes
+// from the last commit touching the copy rather than from the build clock.
+const lastModified = (() => {
+  try {
+    const committed = execFileSync('git', ['log', '-1', '--format=%cI', '--', 'src/data.js'], {cwd:new URL('../', import.meta.url), encoding:'utf8', stdio:['ignore','pipe','ignore']}).trim();
+    if (committed) return committed.slice(0,10);
+  } catch { /* Not a git checkout; fall back to today. */ }
+  return new Date().toISOString().slice(0,10);
+})();
 const requestedOrigin = new URL(process.env.SITE_URL || 'https://www.javascriptin30words.com');
 if (!['http:', 'https:'].includes(requestedOrigin.protocol)) throw new Error('SITE_URL must be an HTTP(S) URL.');
 const origin = requestedOrigin.origin;
@@ -41,6 +51,16 @@ const aiPanelPath = `/assets/ai-panel.${createHash('sha256').update(aiPanel).dig
 if (analyticsConfig.googleMeasurementId && !/^G-[A-Z0-9]+$/.test(analyticsConfig.googleMeasurementId)) throw new Error('Invalid public Google measurement ID.');
 if (analyticsConfig.posthogProjectToken && !/^phc_[A-Za-z0-9]+$/.test(analyticsConfig.posthogProjectToken)) throw new Error('Use a public PostHog project token, never a personal API key.');
 if (!['https://eu.i.posthog.com','https://us.i.posthog.com'].includes(analyticsConfig.posthogHost)) throw new Error('Invalid PostHog ingestion host.');
+if (!/^\/[a-z0-9-]{2,20}$/.test(analyticsConfig.posthogProxyPath)) throw new Error('PostHog proxy path must be a single lowercase path segment.');
+// The browser talks only to posthogProxyPath, so a missing or stale redirect
+// would silently 404 every event. Fail the build instead of the analytics.
+const netlifyConfig = await readFile(new URL('../netlify.toml', import.meta.url), 'utf8');
+const assetsHost = analyticsConfig.posthogHost.replace('.i.posthog.com','-assets.i.posthog.com');
+for (const [from, to] of [[`${analyticsConfig.posthogProxyPath}/static/*`, `${assetsHost}/static/:splat`],
+  [`${analyticsConfig.posthogProxyPath}/array/*`, `${assetsHost}/array/:splat`],
+  [`${analyticsConfig.posthogProxyPath}/*`, `${analyticsConfig.posthogHost}/:splat`]]) {
+  if (!netlifyConfig.includes(`from = "${from}"`) || !netlifyConfig.includes(`to = "${to}"`)) throw new Error(`netlify.toml is missing the PostHog proxy rule ${from} -> ${to}`);
+}
 const analyticsSource = (await readFile(new URL('../src/analytics.js', import.meta.url), 'utf8')).replace("import {analyticsConfig as config} from './analytics-config.js';", `const config = ${JSON.stringify(analyticsConfig)};`);
 const analytics = (await minify(analyticsSource, {module:true})).code;
 const analyticsPath = `/assets/analytics.${createHash('sha256').update(analytics).digest('hex').slice(0,12)}.js`;
@@ -236,7 +256,7 @@ for (const [index, concept] of definitions.entries()) {
   await writeFile(new URL('index.html', directory), conceptPage(concept,index));
 }
 await writeFile(new URL('404.html', output), document({title:'Page Not Found', description:'Find a JavaScript concept in our quick reference.', path:'/404.html', noindex:true, content:'<div class="page-heading"><p class="eyebrow">404</p><h1>That page isn’t here.</h1><p class="lead">Find the explanation you need in the concept library.</p><a class="back-link" href="/">Browse all concepts →</a></div>'}));
-await writeFile(new URL('sitemap.xml', output), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', ...definitions.map(pathFor)].map((path) => `<url><loc>${url(path)}</loc></url>`).join('')}</urlset>\n`);
+await writeFile(new URL('sitemap.xml', output), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', ...definitions.map(pathFor)].map((path) => `<url><loc>${url(path)}</loc><lastmod>${lastModified}</lastmod></url>`).join('')}</urlset>\n`);
 await writeFile(new URL('robots.txt', output), `User-agent: *\nAllow: /\n\nSitemap: ${url('/sitemap.xml')}\n`);
 if (!/^[a-f0-9]{32}$/.test(indexNowKey)) throw new Error('Invalid IndexNow verification key.');
 await writeFile(new URL(`${indexNowKey}.txt`, output), indexNowKey);
