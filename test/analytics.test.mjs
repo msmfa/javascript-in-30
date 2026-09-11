@@ -77,6 +77,8 @@ test('PostHog loads and ingests through the same origin so blockers cannot drop 
   const options = h.win.posthog._i[0][1];
   assert.equal(options.api_host,'https://www.javascriptin30words.com/e30');
   assert.equal(options.ui_host,'https://eu.posthog.com','Links into PostHog still point at the real app');
+  assert.ok(sanitizePosthogEvent({event:'$pageview',properties:{$lib_custom_api_host:'https://www.javascriptin30words.com/e30'}}).properties.$lib_custom_api_host,
+    'PostHog detects the proxy from this property, so it has to survive sanitizing');
   const loader = h.scripts.map(element=>element.src).find(src=>src.includes('/e30/'));
   assert.equal(loader,'https://www.javascriptin30words.com/e30/static/array.js');
   assert.ok(!h.scripts.some(element=>element.src.includes('posthog.com')),'No request reveals the vendor hostname');
