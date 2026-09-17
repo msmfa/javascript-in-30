@@ -43,6 +43,8 @@ const stylesheet = new CleanCSS({level:2, rebase:false}).minify(stylesheetSource
 if (stylesheet.errors.length) throw new Error(stylesheet.errors.join('\n'));
 const logo = await readFile(new URL('../src/logo.webp', import.meta.url));
 const logoPath = `/assets/logo.${createHash('sha256').update(logo).digest('hex').slice(0,12)}.webp`;
+const nav = (await minify(await readFile(new URL('../src/nav.js', import.meta.url), 'utf8'), {module:true})).code;
+const navPath = `/assets/nav.${createHash('sha256').update(nav).digest('hex').slice(0,12)}.js`;
 const aiClient = (await minify(await readFile(new URL('../src/ai-client.js', import.meta.url), 'utf8'), {module:true})).code;
 const aiClientPath = `/assets/ai-client.${createHash('sha256').update(aiClient).digest('hex').slice(0,12)}.js`;
 const aiPanelSource = (await readFile(new URL('../src/ai-panel.js', import.meta.url), 'utf8')).replace("'./ai-client.js'", JSON.stringify(aiClientPath));
@@ -175,18 +177,20 @@ function document({ title, description, path, content, current, noindex = false 
   <link rel="preload" href="${interfaceFontPath}" as="font" type="font/woff2" crossorigin>
   <style>${stylesheet.styles}</style>
   <script type="module" src="${analyticsPath}"></script>
+  <script type="module" src="${navPath}"></script>
   ${current ? `<script type="module" src="${aiPanelPath}"></script>` : ''}
 </head>
 <body data-analytics-page="${escapeHTML(path)}" data-analytics-concept="${escapeHTML(current?.slug || (noindex ? '404' : 'home'))}">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <aside class="sidebar">
+  <aside class="sidebar" id="concept-sidebar">
     <a class="brand" href="/"><img class="brand-mark" src="${logoPath}" width="32" height="32" alt=""><span>JavaScript <strong>in 30 words</strong></span></a>
     <p class="brand-tagline">A refresher on JavaScript concepts in less than 30 words</p>
     <div class="sidebar-heading"><span>Concepts</span><span>${definitions.length}</span></div>
     <nav class="concept-nav" aria-label="Concepts">${navigation(current)}</nav>
   </aside>
+  <div class="nav-backdrop" hidden></div>
   <div class="page">
-    <header class="mobile-header"><a class="brand" href="/"><img class="brand-mark" src="${logoPath}" width="32" height="32" alt=""><span>JavaScript <strong>in 30 words</strong></span></a><details class="mobile-navigation"><summary>Browse all ${definitions.length} concepts</summary><nav aria-label="Concepts">${navigation(current)}</nav></details></header>
+    <header class="mobile-header"><a class="brand" href="/"><img class="brand-mark" src="${logoPath}" width="32" height="32" alt=""><span>JavaScript <strong>in 30 words</strong></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="concept-sidebar">Browse all ${definitions.length} concepts</button></header>
     <div class="content-layout">
       ${current ? `<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">All concepts</a><span aria-hidden="true"> / </span><span>${escapeHTML(labelFor(current))}</span></nav>` : ''}
       <div class="scroll-region"><main id="main-content" tabindex="-1">${content}</main></div>
@@ -249,6 +253,7 @@ await writeFile(new URL('assets/Manrope-OFL.txt', output), await readFile(new UR
 await writeFile(new URL(aiClientPath.slice(1), output), aiClient);
 await writeFile(new URL(aiPanelPath.slice(1), output), aiPanel);
 await writeFile(new URL(analyticsPath.slice(1), output), analytics);
+await writeFile(new URL(navPath.slice(1), output), nav);
 await writeFile(new URL('index.html', output), home());
 for (const [index, concept] of definitions.entries()) {
   const directory = new URL(`${concept.slug}/`, output);
