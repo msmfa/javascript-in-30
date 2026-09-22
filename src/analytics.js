@@ -6,6 +6,10 @@ const campaignKeys = ['utm_source','utm_medium','utm_campaign','utm_content','ut
 // Core Web Vitals PostHog charts. Declared once so the metrics we ask the
 // browser for and the properties we let through stay the same list.
 const webVitalsMetrics = ['LCP','CLS','FCP','INP'];
+// How long the vendor bundles may wait for an idle moment after load before we
+// stop being polite and fetch them anyway. Long enough to clear the paint, short
+// enough that a quick bounce is still recorded.
+const idleDeadline = 1500;
 
 export function safePageURL(value) {
   try {
@@ -72,6 +76,23 @@ export function startAnalytics(win = window, doc = document, settings = config) 
     if (onload) element.onload = onload;
     doc.head.append(element);
   };
+  // The vendor bundles are a quarter of a megabyte of parse work, and nothing
+  // they do matters before the page is visible. Fetching them during the first
+  // paint is what stretches Largest Contentful Paint on a throttled phone. Both
+  // vendor queues are built synchronously in start(), so events recorded while
+  // this wait runs are replayed once the bundles arrive rather than dropped.
+  const afterPaint = (run) => {
+    let done = false;
+    const fire = () => { if (done) return; done = true; run(); };
+    const schedule = () => {
+      // Safari below 16.4 has no requestIdleCallback. Load has already fired by
+      // this point, so the next task is still clear of the paint we protect.
+      if (typeof win.requestIdleCallback === 'function') win.requestIdleCallback(fire,{timeout:idleDeadline});
+      else win.setTimeout(fire,0);
+    };
+    if (doc.readyState === 'complete') schedule();
+    else win.addEventListener('load',schedule,{once:true});
+  };
   const track = (event,details = {}) => {
     if (consent !== 'granted' || !allowedEvents.has(event)) return;
     const props = {...page,...details};
@@ -84,6 +105,9 @@ export function startAnalytics(win = window, doc = document, settings = config) 
   const start = () => {
     if (started || consent !== 'granted') return;
     started = true;
+    // Collected rather than injected on the spot: the shims and queues below
+    // must exist immediately, the downloads they feed must not.
+    const loaders = [];
     if (settings.googleMeasurementId) {
       win.dataLayer = win.dataLayer || [];
       win.gtag = function() { win.dataLayer.push(arguments); };
@@ -96,7 +120,7 @@ export function startAnalytics(win = window, doc = document, settings = config) 
         page_location:safePageURL(win.location.href),page_referrer:referrer,
         cookie_flags:'SameSite=Lax;Secure',cookie_expires:60 * 60 * 24 * 180,
       });
-      script(`https://www.googletagmanager.com/gtag/js?id=${settings.googleMeasurementId}`);
+      loaders.push(() => script(`https://www.googletagmanager.com/gtag/js?id=${settings.googleMeasurementId}`));
     }
     if (settings.posthogProjectToken) {
       // A same-origin path rather than the PostHog domain: blocker lists match on
@@ -127,8 +151,11 @@ export function startAnalytics(win = window, doc = document, settings = config) 
         },
       };
       stub._i.push([settings.posthogProjectToken,options,'posthog']);
-      script(`${apiHost}/static/array.js`);
+      loaders.push(() => script(`${apiHost}/static/array.js`));
     }
+    afterPaint(() => { for (const load of loaders) load(); });
+    // Queued synchronously so the view is recorded at the moment it happened,
+    // not at the moment the bundles finish arriving.
     track('$pageview');
   };
   const clearAnalyticsStorage = () => {
