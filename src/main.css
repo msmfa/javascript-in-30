@@ -998,8 +998,22 @@ code,samp {
   body {
     padding:8px
   }
+  /* Above .site-footer (z-index:50), below .skip-link (100) and the
+     consent banner (150), which must stay reachable over the drawer. */
   .sidebar {
-    display:none
+    z-index:91;
+    inset:8px auto 8px 8px;
+    display:none;
+    width:min(300px, 84vw)
+  }
+  body[data-nav-open] .sidebar {
+    display:flex
+  }
+  .nav-backdrop {
+    position:fixed;
+    z-index:90;
+    inset:0;
+    background:rgba(20,33,50,.38)
   }
   .page {
     --page-gutter:1.15rem;
@@ -1022,12 +1036,11 @@ code,samp {
     width:27px;
     height:27px
   }
-  .mobile-navigation {
-    margin-top:.85rem
-  }
-  .mobile-navigation>summary {
+  .nav-toggle {
     display:flex;
+    width:100%;
     min-height:38px;
+    margin-top:.85rem;
     align-items:center;
     padding:.45rem .7rem;
     color:#4f5b6d;
@@ -1035,18 +1048,11 @@ code,samp {
     border:1px solid var(--line);
     border-radius:9px;
     cursor:pointer;
+    font:inherit;
     font-size:.84rem;
-    list-style:none
+    text-align:left
   }
-  .mobile-navigation>summary::-webkit-details-marker {
-    display:none
-  }
-  .mobile-navigation>nav {
-    max-height:58svh;
-    padding-top:.55rem;
-    overflow-y:auto
-  }
-  .mobile-navigation .nav-group ul {
+  .sidebar .nav-group ul {
     margin-left:1rem
   }
   .content-layout {
