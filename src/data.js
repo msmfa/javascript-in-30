@@ -1,4 +1,4 @@
-// Descriptions preserve the original site copy with approved typo corrections. Code examples are exercised by npm test.
+// Original descriptions are preserved; new definitions stay under 30 words. Code examples are exercised by npm test.
 export const definitions = [
   {
     "id": "variables",
@@ -13,6 +13,37 @@ export const definitions = [
     ],
     "explanation": "The let binding receives a new number. The const binding still refers to the same object, but that object's name property can change: const prevents reassignment, not object mutation.",
     "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types",
+    "group": "Fundamentals"
+  },
+  {
+    "id": "arrays",
+    "label": "Arrays",
+    "slug": "javascript-arrays",
+    "heading": "JavaScript Arrays Explained Simply",
+    "text": "Arrays keep a list of values in order. Use an index to pick an item, starting at zero for the first one.",
+    "code": "const topics = [\"Variables\", \"Functions\"];\nconsole.log(topics[0]);\n\ntopics.push(\"Arrays\");\nconsole.log(topics.length);\nconsole.log(topics.join(\", \"));",
+    "output": [
+      "Variables",
+      "3",
+      "Variables, Functions, Arrays"
+    ],
+    "explanation": "Index zero gives us the first topic. push adds another topic at the end, and length tells us how many items the list holds.",
+    "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "group": "Fundamentals"
+  },
+  {
+    "id": "objects",
+    "label": "Objects",
+    "slug": "javascript-objects",
+    "heading": "JavaScript Objects Explained Simply",
+    "text": "Objects keep related information together as named properties. A learner object might hold a name, a score, and a method for updating that score.",
+    "code": "const learner = {\n  name: \"Ada\",\n  score: 0,\n  completeLesson() {\n    this.score += 1;\n  }\n};\n\nlearner.completeLesson();\nconsole.log(learner.name);\nconsole.log(learner.score);",
+    "output": [
+      "Ada",
+      "1"
+    ],
+    "explanation": "name and score are properties. completeLesson is a method: a function stored on the object. Calling it adds one to this learner's score.",
+    "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
     "group": "Fundamentals"
   },
   {
@@ -94,6 +125,20 @@ export const definitions = [
       "> Greater",
       "< Smaller"
     ]
+  },
+  {
+    "id": "if-else",
+    "label": "If and Else",
+    "slug": "javascript-if-else",
+    "heading": "JavaScript If Else Explained Simply",
+    "text": "An if statement checks a condition and runs code when it passes. Add else to say what should happen when it doesn't.",
+    "code": "const score = 8;\n\nif (score >= 7) {\n  console.log(\"You passed!\");\n} else {\n  console.log(\"Keep practising\");\n}",
+    "output": [
+      "You passed!"
+    ],
+    "explanation": "Eight is at least seven, so the first block runs. Try changing score to five to see the else block run instead.",
+    "reference": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else",
+    "group": "Fundamentals"
   },
   {
     "id": "con-operations",
@@ -266,6 +311,36 @@ export const definitions = [
     ],
     "explanation": "The inner block can read course and topic from surrounding scopes, but message stays inside its block and topic stays inside the function. Here typeof returns \"undefined\" for names that are out of scope; reading either name directly there would throw a ReferenceError.",
     "reference": "https://developer.mozilla.org/en-US/docs/Glossary/Scope",
+    "group": "Fundamentals"
+  },
+  {
+    "id": "dom",
+    "label": "DOM",
+    "slug": "javascript-dom",
+    "heading": "JavaScript DOM Explained Simply",
+    "text": "The Document Object Model (DOM) represents a web page as a tree. JavaScript uses it to find elements, change their content, or add new ones.",
+    "code": "// Run in a browser console.\nconst message = document.createElement(\"p\");\nmessage.textContent = \"Hello, JavaScript!\";\ndocument.body.append(message);\n\nconsole.log(message.textContent);",
+    "output": [
+      "Hello, JavaScript!"
+    ],
+    "explanation": "createElement makes a paragraph, textContent fills it with text, and append adds it to the page. The console prints the same message.",
+    "environment": "browser",
+    "reference": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model",
+    "group": "Fundamentals"
+  },
+  {
+    "id": "events",
+    "label": "Events",
+    "slug": "javascript-events",
+    "heading": "JavaScript Events Explained Simply",
+    "text": "Events tell your code something happened, like a click or a keypress. Add a listener to run a function whenever that event occurs.",
+    "code": "// Run in a browser console.\nconst button = document.createElement(\"button\");\nbutton.textContent = \"Complete lesson\";\nbutton.addEventListener(\"click\", () => {\n  console.log(\"Lesson complete\");\n});\ndocument.body.append(button);\n\nbutton.click();",
+    "output": [
+      "Lesson complete"
+    ],
+    "explanation": "addEventListener connects the click to a function. button.click() triggers it immediately; clicking the new button on the page runs it again.",
+    "environment": "browser",
+    "reference": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Events",
     "group": "Fundamentals"
   },
   {

@@ -31,6 +31,19 @@ Each concept page has a collapsible AI panel. Expand it, connect your OpenAI or 
 
 Your key stays in page memory and is never sent to our server — requests go straight from your browser to the provider. It clears when you leave or reload the page, unless you choose to remember it for that tab.
 
+The AI code downloads only when you open the panel, keeping the definitions and examples light.
+
+## Content and checks
+
+The site now covers 40 concepts. New definitions stay under 30 words, and every code example is tested.
+
+```sh
+npm test
+npm run build
+```
+
+See the [maintenance notes](docs/maintenance.md) for editing content and AI crawler access, and the [Lighthouse audit](docs/lighthouse-audit.md) for performance and SEO results.
+
 ---
 
 ## Ready to go further?

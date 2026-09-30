@@ -24,6 +24,7 @@
   "devDependencies": {
     "clean-css": "5.3.3",
     "highlight.js": "11.12.0",
+    "linkedom": "0.18.13",
     "terser": "5.44.1"
   },
   "engines": {
