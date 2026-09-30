@@ -442,18 +442,26 @@ main {
   font-size:.9rem;
   line-height:1.55
 }
-.breadcrumb {
+.page-toolbar {
   display:flex;
   flex:0 0 auto;
-  flex-wrap:wrap;
-  gap:.55rem;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
   width:calc(100% - 2 * var(--page-gutter));
   max-width:1280px;
   margin:0 auto;
-  padding:.45rem .8rem;
+  padding:.45rem .8rem
+}
+.breadcrumb {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.25rem .55rem;
+  min-width:0;
   color:#6b7480;
-  background:#fff;
-  font-size:.78rem
+  font-size:.78rem;
+  overflow-wrap:anywhere
 }
 .breadcrumb a {
   color:#647084;
@@ -833,7 +841,6 @@ code,samp {
 .site-footer {
   position:relative;
   z-index:50;
-  container-type:inline-size;
   display:block;
   flex:0 0 auto;
   width:100%;
@@ -846,50 +853,15 @@ code,samp {
   font-size:.78rem
 }
 .footer-inner {
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(160px,28%);
-  align-items:center;
-  gap:1.5rem;
   width:100%;
   max-width:1440px;
   margin:0 auto
 }
-.footer-practice {
-  display:flex;
-  flex-wrap:wrap;
-  min-width:0;
-  width:100%;
-  flex-direction:row;
-  align-items:center;
-  justify-content:space-between;
-  gap:1.25rem;
-  margin:0;
-  padding:.85rem 1rem;
-  background:linear-gradient(#f7faff,#f7faff) padding-box,var(--gradient-border) border-box;
-  border:1px solid transparent;
-  border-radius:15px;
-  box-shadow:0 8px 24px rgba(37,117,230,.04)
-}
-.footer-practice>div {
-  flex:1 1 260px;
-  min-width:0
-}
-.footer-practice h2 {
-  margin-bottom:.25rem;
-  color:var(--ink);
-  font-size:.93rem
-}
-.footer-practice p {
-  max-width:none;
-  margin:0;
-  color:#626e81;
-  font-size:.75rem;
-  line-height:1.4
-}
-.site-footer .practice-link {
+.practice-link {
   display:inline-flex;
   width:auto;
   flex-shrink:0;
+  margin-left:auto;
   min-height:42px;
   align-items:center;
   justify-content:center;
@@ -903,7 +875,7 @@ code,samp {
   font-weight:500;
   text-decoration:none
 }
-.site-footer .practice-link:hover {
+.practice-link:hover {
   color:#fff;
   background:var(--accent-dark)
 }
@@ -968,24 +940,6 @@ code,samp {
   background:var(--accent);
   border-radius:10px;
   text-decoration:none
-}
-@container(max-width:1100px) {
-  .footer-links {
-    flex-direction:column;
-    align-items:flex-end;
-    gap:.15rem
-  }
-}
-@container(max-width:760px) {
-  .footer-inner {
-    grid-template-columns:1fr;
-    gap:.35rem
-  }
-  .footer-links {
-    flex-direction:row;
-    align-items:center;
-    gap:0 .8rem
-  }
 }
 @media(max-width:960px) {
   .sidebar {
@@ -1093,8 +1047,13 @@ code,samp {
   .site-footer {
     margin-top:0
   }
-  .footer-practice {
-    padding:1.15rem
+  .page-toolbar {
+    gap:.65rem;
+    padding:.25rem 0
+  }
+  .practice-link {
+    padding:.55rem .7rem;
+    font-size:.78rem
   }
 }
 @media(max-width:430px) {

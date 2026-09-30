@@ -25,6 +25,8 @@ npm run dev
 
 Open the local address printed in the terminal. Each concept has its own URL (like `/javascript-closures/`) and works even with JavaScript disabled.
 
+The homepage opens Variables at `/javascript-variables/`. The full topic library remains available at `/concepts/` through the **All concepts** breadcrumb. **Try Practice Pad** sits in the top-right toolbar on every page.
+
 ## AI panel
 
 Each concept page has a collapsible AI panel. Expand it, connect your OpenAI or Anthropic API key, pick a model, and you can ask it to explain the concept simply, walk through the code, or quiz you on it.

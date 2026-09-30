@@ -46,7 +46,7 @@ An English-language reference covering ${definitions.length} JavaScript concepts
 
 ## Overview
 
-- [All JavaScript concepts](${url('/')}): Browse the complete reference.
+- [All JavaScript concepts](${url('/concepts/')}): Browse the complete reference.
 
 ${groups.map(group => `## ${group}\n\n${definitions.filter(item => item.group === group).map(item => `- [${escapeMarkdown(labelFor(item))}](${url(pathFor(item))}): ${escapeMarkdown(summaryFor(item))}`).join('\n')}`).join('\n\n')}
 `;
@@ -163,7 +163,7 @@ function document({ title, description, path, content, current, noindex = false 
   const pageTitle = `${title} | ${brand}`;
   // WebSite/WebPage/BreadcrumbList only say where a page sits. DefinedTerm says
   // what it holds: this URL is the definition of one named term, and the set on
-  // the home page is the glossary those terms belong to. TechArticle carries
+  // the concept library is the glossary those terms belong to. TechArticle carries
   // the prose around the definition.
   const structuredData = {
     '@context':'https://schema.org',
@@ -171,9 +171,9 @@ function document({ title, description, path, content, current, noindex = false 
       {'@type':'WebSite','@id':url('/#website'),url:url('/'),name:brand,inLanguage:'en'},
       {'@type':'WebPage','@id':url(path),url:url(path),name:title,description,inLanguage:'en',isPartOf:{'@id':url('/#website')},
         ...(current ? {breadcrumb:{'@id':url(path+'#breadcrumb')},mainEntity:{'@id':url(path+'#article')}} : {}),
-        ...(!current && !noindex ? {mainEntity:{'@id':url('/#glossary')}} : {})},
+        ...(!current && !noindex ? {mainEntity:{'@id':url('/concepts/#glossary')}} : {})},
       ...(current ? [{'@type':'BreadcrumbList','@id':url(path+'#breadcrumb'),itemListElement:[
-        {'@type':'ListItem',position:1,name:'All concepts',item:url('/')},
+        {'@type':'ListItem',position:1,name:'All concepts',item:url('/concepts/')},
         {'@type':'ListItem',position:2,name:labelFor(current),item:url(path)},
       ]}] : []),
       ...(current ? [
@@ -181,18 +181,18 @@ function document({ title, description, path, content, current, noindex = false 
           inLanguage:'en',isPartOf:{'@id':url('/#website')},about:{'@id':url(path+'#term')},
           proficiencyLevel:proficiencyFor(current),dateModified:lastModified},
         {'@type':'DefinedTerm','@id':url(path+'#term'),url:url(path),name:labelFor(current),
-          description:summaryFor(current),inDefinedTermSet:{'@id':url('/#glossary')},
+          description:summaryFor(current),inDefinedTermSet:{'@id':url('/concepts/#glossary')},
           // The MDN page for the same term, so the definition is tied to the
           // reference every reader already trusts.
           ...(current.reference ? {sameAs:current.reference} : {})},
       ] : []),
-      ...(!current && !noindex ? [{'@type':'DefinedTermSet','@id':url('/#glossary'),url:url('/'),name:brand,
+      ...(!current && !noindex ? [{'@type':'DefinedTermSet','@id':url('/concepts/#glossary'),url:url('/concepts/'),name:brand,
         description,inLanguage:'en',
         hasDefinedTerm:definitions.map((item) => ({'@id':url(pathFor(item)+'#term')}))}] : []),
     ],
   };
   const practiceURL = new URL('https://www.practice-pad.app/');
-  practiceURL.search = new URLSearchParams({utm_source:'javascriptin30words', utm_medium:'referral', utm_campaign:'concept_to_practice', utm_content:`footer_${current?.slug || (noindex ? '404' : 'home')}`}).toString();
+  practiceURL.search = new URLSearchParams({utm_source:'javascriptin30words', utm_medium:'referral', utm_campaign:'concept_to_practice', utm_content:`header_${current?.slug || (noindex ? '404' : 'concepts')}`}).toString();
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -218,7 +218,7 @@ function document({ title, description, path, content, current, noindex = false 
   <script type="module" src="${analyticsPath}"></script>
   ${current ? `<script type="module" src="${aiLoaderPath}"></script>` : ''}
 </head>
-<body data-analytics-page="${escapeHTML(path)}" data-analytics-concept="${escapeHTML(current?.slug || (noindex ? '404' : 'home'))}">
+<body data-analytics-page="${escapeHTML(path)}" data-analytics-concept="${escapeHTML(current?.slug || (noindex ? '404' : 'concepts'))}">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <aside class="sidebar">
     <a class="brand" href="/"><img class="brand-mark" src="${logoPath}" width="32" height="32" alt=""><span>JavaScript <strong>in 30 words</strong></span></a>
@@ -229,15 +229,14 @@ function document({ title, description, path, content, current, noindex = false 
   <div class="page">
     <header class="mobile-header"><a class="brand" href="/"><img class="brand-mark" src="${logoPath}" width="32" height="32" alt=""><span>JavaScript <strong>in 30 words</strong></span></a><details class="mobile-navigation"><summary>Browse all ${definitions.length} concepts</summary><nav aria-label="Concepts">${navigation(current)}</nav></details></header>
     <div class="content-layout">
-      ${current ? `<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">All concepts</a><span aria-hidden="true"> / </span><span>${escapeHTML(labelFor(current))}</span></nav>` : ''}
+      <div class="page-toolbar">
+        ${current ? `<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/concepts/">All concepts</a><span aria-hidden="true"> / </span><span>${escapeHTML(labelFor(current))}</span></nav>` : ''}
+        <a class="practice-link" data-analytics-event="practice_pad_click" href="${escapeHTML(practiceURL.href)}">Try Practice Pad <span aria-hidden="true">↗</span></a>
+      </div>
       <div class="scroll-region"><main id="main-content" tabindex="-1">${content}</main></div>
     </div>
     <footer class="site-footer">
       <div class="footer-inner">
-        <section class="footer-practice" aria-labelledby="practice-heading">
-          <div><h2 id="practice-heading">Understand the concept. Write the code.</h2><p>Once you’ve mastered these concepts, take the next step: implement them in Practice Pad, a JavaScript interview practice app for Mac.</p></div>
-          <a class="practice-link" data-analytics-event="practice_pad_click" href="${escapeHTML(practiceURL.href)}">Try Practice Pad <span aria-hidden="true">↗</span></a>
-        </section>
         <nav class="footer-links" aria-label="Footer"><a href="https://www.linkedin.com/in/michaelsydneymoore/">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/msmfa/javascript-in-30">Contribute on GitHub <span aria-hidden="true">↗</span></a><a href="mailto:michael@codemoore.com" data-analytics-event="contact_click">Contact <span aria-hidden="true">↗</span></a>${shareMenu(pageTitle, path)}</nav>
       </div>
     </footer>
@@ -253,8 +252,8 @@ function document({ title, description, path, content, current, noindex = false 
 `;
 }
 
-function home() {
-  return document({title:'JavaScript Concepts Explained Simply', description:`Learn JavaScript with ${definitions.length} short definitions and code examples. Start with variables, arrays, objects, and functions, or refresh your interview knowledge.`, path:'/', content:`
+function conceptsPage() {
+  return document({title:'JavaScript Concepts Explained Simply', description:`Learn JavaScript with ${definitions.length} short definitions and code examples. Start with variables, arrays, objects, and functions, or refresh your interview knowledge.`, path:'/concepts/', content:`
     <header class="page-heading"><h1 class="eyebrow">JavaScript concepts explained simply</h1><p class="lead">JavaScript concepts in 30 words or fewer, with code to make them stick. Pick a topic to get started.</p></header>
     ${groups.map((group) => `<section class="topic-section"><h2>${group}</h2><div class="topic-grid">${definitions.filter((item) => item.group === group).map((item) => `<article class="topic-card"><h3><a href="${pathFor(item)}">${escapeHTML(labelFor(item))} <span aria-hidden="true">↗</span></a></h3>${renderDefinition(item, 'topic-definition')}</article>`).join('')}</div></section>`).join('')}
   `});
@@ -271,7 +270,7 @@ function conceptPage(concept, index) {
       <section class="example" aria-label="JavaScript code example"><pre tabindex="0" aria-label="JavaScript code example"><code class="hljs language-javascript">${hljs.highlight(concept.code, {language:'javascript'}).value}</code></pre>${concept.output.length ? `<div class="example-output"><input class="output-toggle" type="checkbox" id="output-${escapeHTML(concept.id)}"><label for="output-${escapeHTML(concept.id)}"><span class="output-heading"><span>Output</span><span class="output-action" aria-hidden="true"></span></span><span class="output-content"><samp>${escapeHTML(concept.output.join('\n'))}</samp></span></label></div>` : ''}</section>
       <p class="concept-reference"><a class="reference-link" href="${escapeHTML(concept.reference)}">Read more about ${escapeHTML(labelFor(concept))} on MDN <span aria-hidden="true">↗</span></a></p>
       ${renderAIPanel(concept)}
-      <nav class="next-concepts" aria-label="More concepts">${previous ? `<a href="${pathFor(previous)}" aria-label="Previous concept: ${escapeHTML(labelFor(previous))}">${previousArrow}<span class="concept-name">${escapeHTML(labelFor(previous))}</span></a>` : '<span></span>'}${next ? `<a href="${pathFor(next)}" aria-label="Next concept: ${escapeHTML(labelFor(next))}"><span class="concept-name">${escapeHTML(labelFor(next))}</span>${nextArrow}</a>` : `<a href="/"><span class="concept-name">All concepts</span>${nextArrow}</a>`}</nav>
+      <nav class="next-concepts" aria-label="More concepts">${previous ? `<a href="${pathFor(previous)}" aria-label="Previous concept: ${escapeHTML(labelFor(previous))}">${previousArrow}<span class="concept-name">${escapeHTML(labelFor(previous))}</span></a>` : '<span></span>'}${next ? `<a href="${pathFor(next)}" aria-label="Next concept: ${escapeHTML(labelFor(next))}"><span class="concept-name">${escapeHTML(labelFor(next))}</span>${nextArrow}</a>` : `<a href="/concepts/"><span class="concept-name">All concepts</span>${nextArrow}</a>`}</nav>
     </article>
   `});
 }
@@ -292,18 +291,23 @@ await writeFile(new URL(aiClientPath.slice(1), output), aiClient);
 await writeFile(new URL(aiPanelPath.slice(1), output), aiPanel);
 await writeFile(new URL(aiLoaderPath.slice(1), output), aiLoader);
 await writeFile(new URL(analyticsPath.slice(1), output), analytics);
-await writeFile(new URL('index.html', output), home());
+// Keep Variables visible even on static hosts that do not apply Netlify redirects.
+const landingIndex = definitions.findIndex(concept => concept.id === 'variables');
+const landingConcept = definitions[landingIndex];
+await writeFile(new URL('index.html', output), conceptPage(landingConcept, landingIndex));
+await mkdir(new URL('concepts/', output), {recursive:true});
+await writeFile(new URL('concepts/index.html', output), conceptsPage());
 for (const [index, concept] of definitions.entries()) {
   const directory = new URL(`${concept.slug}/`, output);
   await mkdir(directory, {recursive:true});
   await writeFile(new URL('index.html', directory), conceptPage(concept,index));
 }
-await writeFile(new URL('404.html', output), document({title:'Page Not Found', description:'Find a JavaScript concept in our quick reference.', path:'/404.html', noindex:true, content:'<div class="page-heading"><p class="eyebrow">404</p><h1>That page isn’t here.</h1><p class="lead">Find the explanation you need in the concept library.</p><a class="back-link" href="/">Browse all concepts →</a></div>'}));
-await writeFile(new URL('sitemap.xml', output), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', ...definitions.map(pathFor)].map((path) => `<url><loc>${url(path)}</loc><lastmod>${lastModified}</lastmod></url>`).join('')}</urlset>\n`);
+await writeFile(new URL('404.html', output), document({title:'Page Not Found', description:'Find a JavaScript concept in our quick reference.', path:'/404.html', noindex:true, content:'<div class="page-heading"><p class="eyebrow">404</p><h1>That page isn’t here.</h1><p class="lead">Find the explanation you need in the concept library.</p><a class="back-link" href="/concepts/">Browse all concepts →</a></div>'}));
+await writeFile(new URL('sitemap.xml', output), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/concepts/', ...definitions.map(pathFor)].map((path) => `<url><loc>${url(path)}</loc><lastmod>${lastModified}</lastmod></url>`).join('')}</urlset>\n`);
 await writeFile(new URL('robots.txt', output), `User-agent: *\nAllow: /\n\nSitemap: ${url('/sitemap.xml')}\n`);
 await writeFile(new URL('llms.txt', output), llmIndex());
 if (!/^[a-f0-9]{32}$/.test(indexNowKey)) throw new Error('Invalid IndexNow verification key.');
 await writeFile(new URL(`${indexNowKey}.txt`, output), indexNowKey);
-await writeFile(new URL('_redirects', output), `https://javascript-in-30-words.netlify.app/* ${origin}/:splat 301!\n`);
+await writeFile(new URL('_redirects', output), `https://javascript-in-30-words.netlify.app/* ${origin}/:splat 301!\n/ ${pathFor(landingConcept)} 301!\n`);
 await writeFile(new URL('_headers', output), `/*\n${Object.entries(securityHeaders).map(([key,value]) => `  ${key}: ${value}`).join('\n')}\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n`);
 console.log(`Built ${definitions.length} concept pages, the index, sitemap and 404 page for ${origin}.`);

@@ -13,6 +13,10 @@ const server = createServer(async (request, response) => {
   try {
     const requestURL = new URL(request.url, 'http://localhost');
     const pathname = decodeURIComponent(requestURL.pathname);
+    if (pathname === '/') {
+      response.writeHead(301, {...securityHeaders, Location: `/javascript-variables/${requestURL.search}`}).end();
+      return;
+    }
     let file = resolve(root, `.${pathname}`);
     if (file !== root && !file.startsWith(root + sep)) {
       response.writeHead(403).end('Forbidden');

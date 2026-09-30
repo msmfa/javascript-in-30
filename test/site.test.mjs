@@ -73,7 +73,7 @@ for (const concept of definitions) {
 }
 
 test('all internal links resolve, with no SPA catch-all', () => {
-  for (const file of ['index.html','404.html',...definitions.map(item => `${item.slug}/index.html`)]) {
+  for (const file of ['index.html','concepts/index.html','404.html',...definitions.map(item => `${item.slug}/index.html`)]) {
     const html = read(file);
     for (const match of html.matchAll(/(?:href|src)="(\/[^"#]*)"/g)) {
       const pathname = match[1];
@@ -84,9 +84,17 @@ test('all internal links resolve, with no SPA catch-all', () => {
   assert.match(read('404.html'), /<meta name="robots" content="noindex">/);
 });
 
-test('sitemap and homepage expose every concept to crawlers', () => {
+test('homepage lands on Variables and the concept library remains available', () => {
+  assert.equal(read('index.html'), read('javascript-variables/index.html'));
+  assert.match(read('_redirects'), /^\/ \/javascript-variables\/ 301!$/m);
+  assert.match(read('javascript-variables/index.html'), /href="\/concepts\/">All concepts<\/a>/);
+});
+
+test('sitemap and concept library expose every concept to crawlers', () => {
   const sitemap = read('sitemap.xml');
-  const html = read('index.html');
+  const html = read('concepts/index.html');
+  assert.ok(sitemap.includes(`<loc>${expectedOrigin}/concepts/</loc>`));
+  assert.ok(!sitemap.includes(`<loc>${expectedOrigin}/</loc>`), 'The redirected homepage is not indexed separately');
   assert.equal((sitemap.match(/<loc>/g) || []).length, definitions.length + 1);
   assert.equal((sitemap.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length, definitions.length + 1, 'Every URL carries a crawlable lastmod');
   for (const concept of definitions) {
@@ -101,7 +109,7 @@ test('sitemap and homepage expose every concept to crawlers', () => {
 test('indexable pages have one heading, unique metadata, and accurate structured breadcrumbs',()=>{
   const descriptions = new Set();
   const titles = new Set();
-  for (const path of ['/',...definitions.map(item=>`/${item.slug}/`)]) {
+  for (const path of ['/concepts/',...definitions.map(item=>`/${item.slug}/`)]) {
     const html = read(path.slice(1)+'index.html');
     titles.add(decode(html.match(/<title>([^<]+)<\/title>/)[1]));
     assert.equal((html.match(/<h1\b/g) || []).length,1);
@@ -112,9 +120,9 @@ test('indexable pages have one heading, unique metadata, and accurate structured
     const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/)[1])['@graph'];
     assert.equal(graph.find(item=>item['@type'] === 'WebPage').url,expectedOrigin+path);
     assert.equal(graph.find(item=>item['@type'] === 'WebSite').name,'JavaScript in 30 Words');
-    if(path !== '/') {
+    if(path !== '/concepts/') {
       const crumbs = graph.find(item=>item['@type'] === 'BreadcrumbList').itemListElement;
-      assert.deepEqual(crumbs.map(item=>item.item),[expectedOrigin+'/',expectedOrigin+path]);
+      assert.deepEqual(crumbs.map(item=>item.item),[expectedOrigin+'/concepts/',expectedOrigin+path]);
       assert.deepEqual(crumbs.map(item=>item.position),[1,2]);
     }
   }
@@ -128,9 +136,9 @@ test('the LLM topic index covers every canonical page and is discoverable from H
   const index = read('llms.txt');
   assert.match(index, /^# JavaScript in 30 Words\n\n> /);
   const links = [...index.matchAll(/^- \[[^\n]+\]\((https?:\/\/[^)]+)\):/gm)].map(match => match[1]);
-  assert.deepEqual(new Set(links), new Set([expectedOrigin+'/', ...definitions.map(item => `${expectedOrigin}/${item.slug}/`)]));
+  assert.deepEqual(new Set(links), new Set([expectedOrigin+'/concepts/', ...definitions.map(item => `${expectedOrigin}/${item.slug}/`)]));
   assert.equal(links.length, definitions.length + 1, 'No duplicated or missing topic links');
-  for (const file of ['index.html', ...definitions.map(item => `${item.slug}/index.html`)]) {
+  for (const file of ['index.html', 'concepts/index.html', ...definitions.map(item => `${item.slug}/index.html`)]) {
     assert.match(read(file), /<link rel="describedby" href="\/llms.txt"/);
   }
   assert.ok(!read('404.html').includes('rel="describedby"'));
@@ -146,13 +154,13 @@ test('initial JavaScript stays small and lazy module imports resolve to built as
   assert.ok(read(clientPath.slice(1)).length > 0);
 });
 
-test('every concept declares itself a defined term inside the glossary the home page sets out',()=>{
+test('every concept declares itself a defined term inside the glossary the concept library sets out',()=>{
   const graphOf = (file)=>JSON.parse(read(file).match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/)[1])['@graph'];
   const node = (graph,type)=>graph.find(item=>item['@type'] === type);
 
-  const glossary = node(graphOf('index.html'),'DefinedTermSet');
-  assert.equal(glossary['@id'],expectedOrigin+'/#glossary');
-  assert.equal(node(graphOf('index.html'),'WebPage').mainEntity['@id'],glossary['@id']);
+  const glossary = node(graphOf('concepts/index.html'),'DefinedTermSet');
+  assert.equal(glossary['@id'],expectedOrigin+'/concepts/#glossary');
+  assert.equal(node(graphOf('concepts/index.html'),'WebPage').mainEntity['@id'],glossary['@id']);
   assert.equal(glossary.hasDefinedTerm.length,definitions.length);
 
   const declared = new Set(glossary.hasDefinedTerm.map(item=>item['@id']));
@@ -162,7 +170,7 @@ test('every concept declares itself a defined term inside the glossary the home 
     const term = node(graph,'DefinedTerm');
     const article = node(graph,'TechArticle');
 
-    // The set on the home page and the term on the page must agree, or the
+    // The set on the concept library and the term on the page must agree, or the
     // glossary points at terms that never claim membership.
     assert.ok(declared.has(term['@id']),`${concept.slug} is missing from the glossary`);
     assert.equal(term['@id'],expectedOrigin+path+'#term');
@@ -180,19 +188,24 @@ test('every concept declares itself a defined term inside the glossary the home 
   }
 });
 
-test('every footer has unique Practice Pad campaign attribution and the contact address',()=>{
+test('every page has one Practice Pad header link with unique campaign attribution and footer contact',()=>{
   const contents = new Set();
-  for (const file of ['index.html',...definitions.map(item=>`${item.slug}/index.html`)]) {
+  for (const file of ['concepts/index.html','404.html',...definitions.map(item=>`${item.slug}/index.html`)]) {
     const html = read(file);
+    assert.equal((html.match(/class="practice-link"/g) || []).length,1);
+    assert.ok(html.indexOf('class="practice-link"') < html.indexOf('<main'));
+    assert.ok(!html.includes('footer-practice'));
+    assert.ok(!html.includes('Understand the concept. Write the code.'));
     const href = decode(html.match(/class="practice-link"[^>]*href="([^"]+)"/)[1]);
     const link = new URL(href);
     assert.equal(link.origin,'https://www.practice-pad.app');
     assert.equal(link.searchParams.get('utm_source'),'javascriptin30words');
     assert.equal(link.searchParams.get('utm_medium'),'referral');
     assert.equal(link.searchParams.get('utm_campaign'),'concept_to_practice');
+    assert.match(link.searchParams.get('utm_content'),/^header_/);
     contents.add(link.searchParams.get('utm_content'));
     assert.ok(html.includes('href="mailto:michael@codemoore.com"'));
     assert.match(html,/<script type="module" src="\/assets\/analytics\.[a-f0-9]+\.js"><\/script>/);
   }
-  assert.equal(contents.size,definitions.length + 1);
+  assert.equal(contents.size,definitions.length + 2);
 });
