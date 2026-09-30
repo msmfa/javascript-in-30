@@ -1,0 +1,30 @@
+{
+  "authoredAt": "2026-09-30",
+  "definitions": [
+    {
+      "id": "arrays",
+      "text": "Arrays keep a list of values in order. Use an index to pick an item, starting at zero for the first one.",
+      "bulletPointItems": ""
+    },
+    {
+      "id": "objects",
+      "text": "Objects keep related information together as named properties. A learner object might hold a name, a score, and a method for updating that score.",
+      "bulletPointItems": ""
+    },
+    {
+      "id": "if-else",
+      "text": "An if statement checks a condition and runs code when it passes. Add else to say what should happen when it doesn't.",
+      "bulletPointItems": ""
+    },
+    {
+      "id": "dom",
+      "text": "The Document Object Model (DOM) represents a web page as a tree. JavaScript uses it to find elements, change their content, or add new ones.",
+      "bulletPointItems": ""
+    },
+    {
+      "id": "events",
+      "text": "Events tell your code something happened, like a click or a keypress. Add a listener to run a function whenever that event occurs.",
+      "bulletPointItems": ""
+    }
+  ]
+}

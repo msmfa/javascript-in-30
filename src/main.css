@@ -776,6 +776,14 @@ code,samp {
   font-weight:500;
   text-decoration:none
 }
+.concept-reference {
+  margin:.85rem 0 0
+}
+.concept-reference a {
+  display:inline-block;
+  padding:.3rem 0;
+  text-decoration:underline
+}
 .next-concepts {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));

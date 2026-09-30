@@ -35,6 +35,21 @@ const labelFor = (concept) => concept.id === 'this' ? 'this keyword' : concept.l
 // onto the two groups the concepts are already sorted into.
 const proficiencyFor = (concept) => concept.group === 'Advanced' ? 'Expert' : 'Beginner';
 const summaryFor = (concept) => [concept.text, ...(concept.definitionItems || [])].filter(Boolean).join(' ');
+const escapeMarkdown = (value) => String(value).replace(/([\\`*_[\]<>])/g, '\\$1');
+// Optional agent discovery aid, generated from the same copy as the HTML.
+// Access permissions remain in robots.txt; this file makes no ranking promises.
+const llmIndex = () => `# ${brand}
+
+> Short JavaScript definitions and code examples for beginners and interview preparation.
+
+An English-language reference covering ${definitions.length} JavaScript concepts. Each linked HTML page contains the definition, a selectable code example, expected output, and an MDN reference. This content is readable without JavaScript or an AI connection.
+
+## Overview
+
+- [All JavaScript concepts](${url('/')}): Browse the complete reference.
+
+${groups.map(group => `## ${group}\n\n${definitions.filter(item => item.group === group).map(item => `- [${escapeMarkdown(labelFor(item))}](${url(pathFor(item))}): ${escapeMarkdown(summaryFor(item))}`).join('\n')}`).join('\n\n')}
+`;
 const searchDescription = (concept) => {
   const text = `${concept.label} in JavaScript: ${concept.text || concept.explanation}`.replace(/\s+/g, ' ').trim();
   return text.length <= 160 ? text : text.slice(0,157).replace(/\s+\S*$/, '') + '…';
@@ -51,6 +66,9 @@ const aiClientPath = `/assets/ai-client.${createHash('sha256').update(aiClient).
 const aiPanelSource = (await readFile(new URL('../src/ai-panel.js', import.meta.url), 'utf8')).replace("'./ai-client.js'", JSON.stringify(aiClientPath));
 const aiPanel = (await minify(aiPanelSource, {module:true})).code;
 const aiPanelPath = `/assets/ai-panel.${createHash('sha256').update(aiPanel).digest('hex').slice(0,12)}.js`;
+const aiLoaderSource = (await readFile(new URL('../src/ai-loader.js', import.meta.url), 'utf8')).replace("'./ai-panel.js'", JSON.stringify(aiPanelPath));
+const aiLoader = (await minify(aiLoaderSource, {module:true})).code;
+const aiLoaderPath = `/assets/ai-loader.${createHash('sha256').update(aiLoader).digest('hex').slice(0,12)}.js`;
 if (analyticsConfig.googleMeasurementId && !/^G-[A-Z0-9]+$/.test(analyticsConfig.googleMeasurementId)) throw new Error('Invalid public Google measurement ID.');
 if (analyticsConfig.posthogProjectToken && !/^phc_[A-Za-z0-9]+$/.test(analyticsConfig.posthogProjectToken)) throw new Error('Use a public PostHog project token, never a personal API key.');
 if (!['https://eu.i.posthog.com','https://us.i.posthog.com'].includes(analyticsConfig.posthogHost)) throw new Error('Invalid PostHog ingestion host.');
@@ -73,7 +91,7 @@ function renderAIPanel(concept) {
   return `<details class="ai-panel" data-ai-panel data-ai-context="${escapeHTML(JSON.stringify(context))}">
     <summary class="ai-panel-toggle"><h2 id="ai-panel-title"><span aria-hidden="true">✦</span> AI panel</h2><svg aria-hidden="true" viewBox="0 0 20 20"><path d="m6 8 4 4 4-4"></path></svg></summary>
     <div class="ai-panel-content">
-    <div class="ai-panel-heading"><p>Ask AI to clarify the parts you don’t fully understand, or go more in depth with <a href="${escapeHTML(concept.reference)}">MDN documentation</a>.</p><button class="ai-button" id="ai-connect" type="button" disabled>Connect your API key</button></div>
+    <div class="ai-panel-heading"><p>Ask AI to clarify the parts you don’t fully understand.</p><button class="ai-button" id="ai-connect" type="button" disabled>Connect your API key</button></div>
     <div class="ai-prompts" aria-label="Suggested questions">
       <button type="button" disabled data-ai-prompt="Explain this concept in simple terms, with an everyday analogy.">Explain simply</button>
       <button type="button" disabled data-ai-prompt="Walk me through the code example above, step by step, and explain its output.">Walk through the code</button>
@@ -145,7 +163,7 @@ function document({ title, description, path, content, current, noindex = false 
   const pageTitle = `${title} | ${brand}`;
   // WebSite/WebPage/BreadcrumbList only say where a page sits. DefinedTerm says
   // what it holds: this URL is the definition of one named term, and the set on
-  // the home page is the glossary those 35 terms belong to. TechArticle carries
+  // the home page is the glossary those terms belong to. TechArticle carries
   // the prose around the definition.
   const structuredData = {
     '@context':'https://schema.org',
@@ -183,6 +201,7 @@ function document({ title, description, path, content, current, noindex = false 
   <title>${escapeHTML(pageTitle)}</title>
   <meta name="description" content="${escapeHTML(description)}">
   ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${url(path)}">`}
+  ${noindex ? '' : '<link rel="describedby" href="/llms.txt" type="text/plain" title="JavaScript topic index">'}
   <meta property="og:type" content="${current ? 'article' : 'website'}">
   <meta property="og:site_name" content="${brand}">
   <meta property="og:title" content="${escapeHTML(pageTitle)}">
@@ -197,7 +216,7 @@ function document({ title, description, path, content, current, noindex = false 
   <link rel="preload" href="${interfaceFontPath}" as="font" type="font/woff2" crossorigin>
   <style>${stylesheet.styles}</style>
   <script type="module" src="${analyticsPath}"></script>
-  ${current ? `<script type="module" src="${aiPanelPath}"></script>` : ''}
+  ${current ? `<script type="module" src="${aiLoaderPath}"></script>` : ''}
 </head>
 <body data-analytics-page="${escapeHTML(path)}" data-analytics-concept="${escapeHTML(current?.slug || (noindex ? '404' : 'home'))}">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -235,8 +254,8 @@ function document({ title, description, path, content, current, noindex = false 
 }
 
 function home() {
-  return document({title:'JavaScript Concepts Explained Simply', description:`Refresh ${definitions.length} JavaScript concepts with definitions in 30 words or fewer, useful code examples, and clear explanations for interview preparation.`, path:'/', content:`
-    <header class="page-heading"><h1 class="eyebrow">Pre interview prep</h1><p class="lead">JavaScript concepts in 30 words or fewer, with code to make them stick. Pick a topic to get started.</p></header>
+  return document({title:'JavaScript Concepts Explained Simply', description:`Learn JavaScript with ${definitions.length} short definitions and code examples. Start with variables, arrays, objects, and functions, or refresh your interview knowledge.`, path:'/', content:`
+    <header class="page-heading"><h1 class="eyebrow">JavaScript concepts explained simply</h1><p class="lead">JavaScript concepts in 30 words or fewer, with code to make them stick. Pick a topic to get started.</p></header>
     ${groups.map((group) => `<section class="topic-section"><h2>${group}</h2><div class="topic-grid">${definitions.filter((item) => item.group === group).map((item) => `<article class="topic-card"><h3><a href="${pathFor(item)}">${escapeHTML(labelFor(item))} <span aria-hidden="true">↗</span></a></h3>${renderDefinition(item, 'topic-definition')}</article>`).join('')}</div></section>`).join('')}
   `});
 }
@@ -250,6 +269,7 @@ function conceptPage(concept, index) {
     <article class="concept">
       <header class="page-heading"><h1>${escapeHTML(concept.heading)}</h1>${renderDefinition(concept)}</header>
       <section class="example" aria-label="JavaScript code example"><pre tabindex="0" aria-label="JavaScript code example"><code class="hljs language-javascript">${hljs.highlight(concept.code, {language:'javascript'}).value}</code></pre>${concept.output.length ? `<div class="example-output"><input class="output-toggle" type="checkbox" id="output-${escapeHTML(concept.id)}"><label for="output-${escapeHTML(concept.id)}"><span class="output-heading"><span>Output</span><span class="output-action" aria-hidden="true"></span></span><span class="output-content"><samp>${escapeHTML(concept.output.join('\n'))}</samp></span></label></div>` : ''}</section>
+      <p class="concept-reference"><a class="reference-link" href="${escapeHTML(concept.reference)}">Read more about ${escapeHTML(labelFor(concept))} on MDN <span aria-hidden="true">↗</span></a></p>
       ${renderAIPanel(concept)}
       <nav class="next-concepts" aria-label="More concepts">${previous ? `<a href="${pathFor(previous)}" aria-label="Previous concept: ${escapeHTML(labelFor(previous))}">${previousArrow}<span class="concept-name">${escapeHTML(labelFor(previous))}</span></a>` : '<span></span>'}${next ? `<a href="${pathFor(next)}" aria-label="Next concept: ${escapeHTML(labelFor(next))}"><span class="concept-name">${escapeHTML(labelFor(next))}</span>${nextArrow}</a>` : `<a href="/"><span class="concept-name">All concepts</span>${nextArrow}</a>`}</nav>
     </article>
@@ -270,6 +290,7 @@ await writeFile(new URL(interfaceFontPath.slice(1), output), interfaceFont);
 await writeFile(new URL('assets/Manrope-OFL.txt', output), await readFile(new URL('../src/fonts/OFL.txt', import.meta.url)));
 await writeFile(new URL(aiClientPath.slice(1), output), aiClient);
 await writeFile(new URL(aiPanelPath.slice(1), output), aiPanel);
+await writeFile(new URL(aiLoaderPath.slice(1), output), aiLoader);
 await writeFile(new URL(analyticsPath.slice(1), output), analytics);
 await writeFile(new URL('index.html', output), home());
 for (const [index, concept] of definitions.entries()) {
@@ -280,6 +301,7 @@ for (const [index, concept] of definitions.entries()) {
 await writeFile(new URL('404.html', output), document({title:'Page Not Found', description:'Find a JavaScript concept in our quick reference.', path:'/404.html', noindex:true, content:'<div class="page-heading"><p class="eyebrow">404</p><h1>That page isn’t here.</h1><p class="lead">Find the explanation you need in the concept library.</p><a class="back-link" href="/">Browse all concepts →</a></div>'}));
 await writeFile(new URL('sitemap.xml', output), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['/', ...definitions.map(pathFor)].map((path) => `<url><loc>${url(path)}</loc><lastmod>${lastModified}</lastmod></url>`).join('')}</urlset>\n`);
 await writeFile(new URL('robots.txt', output), `User-agent: *\nAllow: /\n\nSitemap: ${url('/sitemap.xml')}\n`);
+await writeFile(new URL('llms.txt', output), llmIndex());
 if (!/^[a-f0-9]{32}$/.test(indexNowKey)) throw new Error('Invalid IndexNow verification key.');
 await writeFile(new URL(`${indexNowKey}.txt`, output), indexNowKey);
 await writeFile(new URL('_redirects', output), `https://javascript-in-30-words.netlify.app/* ${origin}/:splat 301!\n`);
